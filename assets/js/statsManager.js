@@ -38,3 +38,10 @@ function modifySociety(amount) {
 function getSociety() {
     return stats.society;
 }
+
+function updateStatsVisually() {
+    document.getElementById("environment").innerHTML = "ENV: " + stats.environment;
+    document.getElementById("resources").innerHTML = "RSC: " + stats.resources;
+    document.getElementById("economy").innerHTML = "ECO: " + stats.economy;
+    document.getElementById("society").innerHTML = "SOC: " + stats.society;
+}

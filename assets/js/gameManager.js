@@ -1,0 +1,2 @@
+updateStatsVisually();
+playRandomEvent();

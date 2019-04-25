@@ -4,24 +4,31 @@
 
 let rawEvents = [
     {
-        "question": "question 1?",
-        "choice1": "choice 1-1",
-        "choice2": "choice 1-2",
-        "economy": 1,
-        "society": 1,
-        "environment": 1,
-        "resources": 1
+        "question": "Ban straws?",
+        "choice1": "Yeah Boi",
+        "choice2": "Nah Fam",
+        "economy1": -5,
+        "society1": 0,
+        "environment1": 5,
+        "resources1": 0,
+        "economy2": 10,
+        "society2": 0,
+        "environment2": -5,
+        "resources2": 0
     },
     {
-        "question": "question 2?",
-        "choice1": "choice 2-1",
-        "choice2": "choice 2-2",
-        "economy": -1,
-        "society": -1,
-        "environment": -1,
-        "resources": -1
-    }
-];
+        "question": "Build solar panels?",
+        "choice1": "Do it",
+        "choice2": "Pass",
+        "economy1": 0,
+        "society1": 5,
+        "environment1": 10,
+        "resources1": -5,
+        "economy2": 5,
+        "society2": 0,
+        "environment2": -5,
+        "resources2": 0
+    }];
 
 function playRandomEvent() {
     let event = rawEvents[getRandomInt(0, rawEvents.length)];
@@ -33,21 +40,28 @@ function playRandomEvent() {
     btn1.innerHTML = event.choice1;
     btn2.innerHTML = event.choice2;
     btn1.onclick = function() {
-        playConsequence(event);
+        playConsequence1(event);
         playRandomEvent();
     };
     btn2.onclick = function() {
-        playConsequence(event);
+        playConsequence2(event);
+        updateStatsVisually();
         playRandomEvent();
     };
 }
 
-function playConsequence(event) {
-    modifyEconomy(event.economy);
-    modifyEnvironment(event.environment);
-    modifyResources(event.resources);
-    modifySociety(event.society);
-    updateStatsVisually();
+function playConsequence1(event) {
+    modifyEconomy(event.economy1);
+    modifyEnvironment(event.environment1);
+    modifyResources(event.resources1);
+    modifySociety(event.society1);
+}
+
+function playConsequence2(event) {
+    modifyEconomy(event.economy2);
+    modifyEnvironment(event.environment2);
+    modifyResources(event.resources2);
+    modifySociety(event.society2);
 }
 
 function getRandomInt(min, max) {

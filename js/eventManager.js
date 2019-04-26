@@ -93,10 +93,10 @@ function hoverRight(event) {
         document.getElementById("economyChange").innerHTML = "↓";
     }
     if (event.society1 > 0) {
-        document.getElementById("economyChange").innerHTML = "↑";
+        document.getElementById("societyChange").innerHTML = "↑";
     }
     else if (event.society1 < 0) {
-        document.getElementById("economyChange").innerHTML = "↓";
+        document.getElementById("societyChange").innerHTML = "↓";
     }
 }
 
@@ -121,10 +121,10 @@ function hoverLeft(event) {
         document.getElementById("economyChange").innerHTML = "↓";
     }
     if (event.society2 > 0) {
-        document.getElementById("economyChange").innerHTML = "↑";
+        document.getElementById("societyChange").innerHTML = "↑";
     }
     else if (event.society2 < 0) {
-        document.getElementById("economyChange").innerHTML = "↓";
+        document.getElementById("societyChange").innerHTML = "↓";
     }
 }
 

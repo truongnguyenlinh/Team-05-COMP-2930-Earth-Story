@@ -1,2 +1,2 @@
 updateStatsVisually();
-playRandomEvent();
+initializeEvents();

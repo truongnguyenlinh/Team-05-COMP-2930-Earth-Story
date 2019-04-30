@@ -1,47 +1,16 @@
-// $.getJSON("./asset/json/events.json", function(json) {
-//     console.log(json); // this will show the info it in firebug console
-// });
+let rawEvents;
 
-let rawEvents = [
-    {
-        "question": "Eat beef?",
-        "choice1": "Yum",
-        "choice2": "Eh",
-        "economy1": 0,
-        "society1": 15,
-        "environment1": -15,
-        "resources1": -5,
-        "economy2": -5,
-        "society2": 0,
-        "environment2": 15,
-        "resources2": 0
-    },
-    {
-        "question": "Ban straws?",
-        "choice1": "Yeah Boi",
-        "choice2": "Nah Fam",
-        "economy1": -5,
-        "society1": 0,
-        "environment1": 5,
-        "resources1": 0,
-        "economy2": 10,
-        "society2": 0,
-        "environment2": -5,
-        "resources2": 0
-    },
-    {
-        "question": "Build solar panels?",
-        "choice1": "Do it",
-        "choice2": "Pass",
-        "economy1": 0,
-        "society1": 5,
-        "environment1": 10,
-        "resources1": -5,
-        "economy2": 5,
-        "society2": 0,
-        "environment2": -5,
-        "resources2": 0
-    }];
+
+// Async call to events.json. Data is written onto the global variable rawEvent, and the first random event is called.
+function initializeEvents() {
+    console.log("LOADING EVENTS"); // TODO: CONVERT TO REAL LOADING SCREEN
+    $.getJSON("./assets/json/events.json", function(json) {
+        rawEvents = json;
+        console.log("LOADED EVENTS SUCCESSFULLY!");
+        playRandomEvent();
+    });
+}
+
 
 function playRandomEvent() {
     let event = rawEvents[getRandomInt(0, rawEvents.length)];
@@ -72,6 +41,7 @@ function playRandomEvent() {
     };
 }
 
+
 function hoverRight(event) {
     resetChangeIndicators();
     if (event.environment1 > 0) {
@@ -99,6 +69,7 @@ function hoverRight(event) {
         document.getElementById("societyChange").innerHTML = "↓";
     }
 }
+
 
 function hoverLeft(event) {
     resetChangeIndicators();
@@ -128,12 +99,14 @@ function hoverLeft(event) {
     }
 }
 
+
 function resetChangeIndicators() {
     document.getElementById("environmentChange").innerHTML = "_";
     document.getElementById("resourcesChange").innerHTML = "_";
     document.getElementById("economyChange").innerHTML = "_";
     document.getElementById("societyChange").innerHTML = "_";
 }
+
 
 function swipeRight(event) {
     playConsequence1(event);
@@ -142,12 +115,14 @@ function swipeRight(event) {
     resetChangeIndicators();
 }
 
+
 function swipeLeft(event) {
     playConsequence2(event);
     updateStatsVisually();
     playRandomEvent();
     resetChangeIndicators();
 }
+
 
 function playConsequence1(event) {
     modifyEconomy(event.economy1);
@@ -156,12 +131,14 @@ function playConsequence1(event) {
     modifySociety(event.society1);
 }
 
+
 function playConsequence2(event) {
     modifyEconomy(event.economy2);
     modifyEnvironment(event.environment2);
     modifyResources(event.resources2);
     modifySociety(event.society2);
 }
+
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);

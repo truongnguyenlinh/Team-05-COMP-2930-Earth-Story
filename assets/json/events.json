@@ -1,20 +1,41 @@
 ﻿[
   {
-    "question": "question 1?",
-    "choice1": "choice 1",
-    "choice2": "choice 2",
-    "economy": 1,
-    "society": 1,
-    "environment": 1,
-    "resources": 1
+    "question": "Eat beef?",
+    "choice1": "Yum",
+    "choice2": "Eh",
+    "economy1": 0,
+    "society1": 15,
+    "environment1": -15,
+    "resources1": -5,
+    "economy2": -5,
+    "society2": 0,
+    "environment2": 15,
+    "resources2": 0
   },
   {
-    "question": "question 2?",
-    "choice1": "choice 1",
-    "choice2": "choice 2",
-    "economy": -1,
-    "society": -1,
-    "environment": -1,
-    "resources": -1
+    "question": "Ban straws?",
+    "choice1": "Yeah Boi",
+    "choice2": "Nah Fam",
+    "economy1": -5,
+    "society1": 0,
+    "environment1": 5,
+    "resources1": 0,
+    "economy2": 10,
+    "society2": 0,
+    "environment2": -5,
+    "resources2": 0
+  },
+  {
+    "question": "Build solar panels?",
+    "choice1": "Do it",
+    "choice2": "Pass",
+    "economy1": 0,
+    "society1": 5,
+    "environment1": 10,
+    "resources1": -5,
+    "economy2": 5,
+    "society2": 0,
+    "environment2": -5,
+    "resources2": 0
   }
 ]

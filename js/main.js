@@ -4,12 +4,12 @@ class playGame extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("dog", "/assets/images/dog.png");
-        this.load.image("earth", "/assets/images/earth.png");
-        this.load.image("timeline", "/assets/images/timeline.png");
-        this.load.image("background", "/assets/images/background.png");
-        this.load.image("star", "/assets/images/star.png");
-        this.load.image("fill", "/assets/images/fill.png");
+        this.load.image("dog", "./assets/images/dog.png");
+        this.load.image("earth", "./assets/images/earth.png");
+        this.load.image("timeline", "./assets/images/timeline.png");
+        this.load.image("background", "./assets/images/background.png");
+        this.load.image("star", "./assets/images/star.png");
+        this.load.image("fill", "./assets/images/fill.png");
     }
 
     create() {

@@ -4,7 +4,7 @@ class playGame extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("dog", "./assets/images/dog.png");
+        this.load.image("card", "./assets/images/card.png");
         this.load.image("earth", "./assets/images/earth.png");
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
@@ -22,7 +22,7 @@ class playGame extends Phaser.Scene {
         this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
         this.earth.displayWidth = this.canvasgame.width * 0.8;
         this.earth.displayHeight = this.earth.displayWidth;
-        this.player = this.add.image(game.config.width / 2, this.canvasgame.height / 2, "dog").setInteractive();
+        this.card = this.add.image(game.config.width / 2, this.canvasgame.height, "card").setInteractive();
         this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
 
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
@@ -46,21 +46,21 @@ class playGame extends Phaser.Scene {
         if(swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if(swipeNormal.x > 0.8) {
                 // right
-                $(this.player).animate({x: this.canvasgame.width, speed: "slow"});
+                $(this.card).animate({x: this.canvasgame.width, speed: "slow"});
                 this.moveStar();
             }
             if(swipeNormal.x < -0.8) {
                 // left
-                $(this.player).animate({x: 0});
+                $(this.card).animate({x: 0});
                 this.moveStar();
             }
             if(swipeNormal.y > 0.8) {
                 // down
-                $(this.player).animate({y: this.canvasgame.height / 2});
+                $(this.card).animate({y: this.canvasgame.height});
             }
             if(swipeNormal.y < -0.8) {
                 // up
-                $(this.player).animate({y: 0});
+                $(this.card).animate({y: this.canvasgame.height / 2});
             }
         }
     }

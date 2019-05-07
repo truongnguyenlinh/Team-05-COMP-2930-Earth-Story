@@ -4,6 +4,7 @@ class playGame extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image("card", "./assets/images/card.png");
         this.load.image("earth", "./assets/images/earth.png");
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
@@ -26,6 +27,7 @@ class playGame extends Phaser.Scene {
         this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
         this.earth.displayWidth = this.canvasgame.width * 0.8;
         this.earth.displayHeight = this.earth.displayWidth;
+
         this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
         this.card.setScale(2);
         this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
@@ -112,7 +114,6 @@ class playGame extends Phaser.Scene {
                 // right
                 $(this.card).animate({x: this.canvasgame.width, speed: "slow"});
                 $(this.question).animate({x: this.canvasgame.width, speed: "slow"});
-
                 this.moveStar();
                 this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
 
@@ -166,7 +167,6 @@ class playGame extends Phaser.Scene {
                 // left
                 $(this.card).animate({x: 0});
                 $(this.question).animate({x: 0});
-
                 this.moveStar();
                 this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
 

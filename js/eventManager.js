@@ -12,7 +12,17 @@ function initializeEvents() {
 
 
 function getRandomEvent() {
-    return rawEvents[getRandomInt(0, rawEvents.length)];
+    let randomEvent = rawEvents[getRandomInt(0, rawEvents.length)];
+    console.log(randomEvent["question"]);
+    return randomEvent;
+}
+
+
+function applyConsequence(consequence) {
+    modifyEnvironment(consequence["environment"]);
+    modifySociety(consequence["society"]);
+    modifyEconomy(consequence["economy"]);
+    modifyResources(consequence["resources"]);
 }
 
 

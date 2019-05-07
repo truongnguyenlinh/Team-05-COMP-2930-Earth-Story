@@ -1,2 +1,0 @@
-updateStatsVisually();
-initializeEvents();

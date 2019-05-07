@@ -7,7 +7,7 @@ class playGame extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image("card", "./assets/images/card.png");
+        // this.load.image("card", "./assets/images/card.png");
         this.load.image("earth", "./assets/images/earth.png");
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
@@ -35,7 +35,7 @@ class playGame extends Phaser.Scene {
 
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
-
+        this.cards = this.createCard();
 
     }
 
@@ -51,7 +51,7 @@ class playGame extends Phaser.Scene {
 //         this.cardText = this.add.text(-100,0, "Questions go here", style);
         //container for the card
         this.container = this.add.container(game.config.width / 2, this.canvasgame.height).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
-        this.container.add([this.card, this.question]);
+        this.container.add([this.card, this.question, this.info]);
 
 
 

@@ -65,25 +65,17 @@ class playGame extends Phaser.Scene {
     }
 
 
-    create() {
-        this.canvas1 = document.getElementsByTagName("canvas");
-        this.canvas1[0].setAttribute("id", "canvasGame");
-        this.canvasgame = document.getElementById("canvasGame");
-
-        this.background = this.add.image(0, 0, "background").setOrigin(0,0);
-        this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
-        this.earth.displayWidth = this.canvasgame.width * 0.8;
-        this.earth.displayHeight = this.earth.displayWidth;
-        this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
-
-        this.star = this.add.image(150, this.canvasgame.height - 170, "star").setScale(.25);
-        this.input.on("pointerup", this.endSwipe, this);
-      
-        this.setupIcons();
-      
-        this.cards = this.createCard();
-        
-    }
+    // create() {
+    //
+    //     // this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
+    //
+    //     // this.star = this.add.image(150, this.canvasgame.height - 170, "star").setScale(.25);
+    //     // this.input.on("pointerup", this.endSwipe, this);
+    //
+    //
+    //     this.cards = this.createCard();
+    //
+    // }
 
     create() {
         this.canvas1 = document.getElementsByTagName("canvas");
@@ -99,6 +91,7 @@ class playGame extends Phaser.Scene {
 
         // this.star = this.add.image(150, this.canvasGame.height - 170, "star").setScale(.25);
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
+        this.setupIcons();
 
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
@@ -124,8 +117,6 @@ class playGame extends Phaser.Scene {
 
 
     moveStar() {
-
-
         console.log(this.star.width);
         console.log(this.containerTimeline.first.x, this.timeline.width);
         if (this.containerTimeline.first.x  > this.containerTimeline.width / 2) {

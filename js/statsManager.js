@@ -11,7 +11,6 @@ Number.prototype.clamp = function(min, max) {
 
 function modifyEnvironment(amount) {
     stats.environment = (stats.environment += amount).clamp(minStat, maxStat);
-    gameInstance.updateIcons();
 }
 
 
@@ -22,7 +21,6 @@ function getEnvironment() {
 
 function modifyResources(amount) {
     stats.resources = (stats.resources += amount).clamp(minStat, maxStat);
-    gameInstance.updateIcons();
 }
 
 
@@ -33,7 +31,6 @@ function getResources() {
 
 function modifyEconomy(amount) {
     stats.economy = (stats.economy += amount).clamp(minStat, maxStat);
-    gameInstance.updateIcons();
 }
 
 
@@ -44,10 +41,17 @@ function getEconomy() {
 
 function modifySociety(amount) {
     stats.society = (stats.society += amount).clamp(minStat, maxStat);
-    gameInstance.updateIcons();
 }
 
 
 function getSociety() {
     return stats.society;
+}
+
+
+function updateStatsVisually() {
+    document.getElementById("environment").innerHTML = "ENV: " + stats.environment;
+    document.getElementById("resources").innerHTML = "RSC: " + stats.resources;
+    document.getElementById("economy").innerHTML = "ECO: " + stats.economy;
+    document.getElementById("society").innerHTML = "SOC: " + stats.society;
 }

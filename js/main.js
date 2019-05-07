@@ -10,6 +10,11 @@ class playGame extends Phaser.Scene {
         this.load.image("background", "./assets/images/background.png");
         this.load.image("star", "./assets/images/star.png");
         this.load.image("fill", "./assets/images/fill.png");
+
+        this.load.image("eco", "./assets/images/icons/eco.png");
+        this.load.image("env", "./assets/images/icons/env.png");
+        this.load.image("res", "./assets/images/icons/res.png");
+        this.load.image("soc", "./assets/images/icons/soc.png");
     }
 
     create() {
@@ -27,6 +32,8 @@ class playGame extends Phaser.Scene {
 
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
+
+        this.setupIcon();
     }
 
     moveStar() {
@@ -63,5 +70,32 @@ class playGame extends Phaser.Scene {
                 $(this.card).animate({y: this.canvasgame.height / 2});
             }
         }
+    }
+
+    setupIcon() {
+        this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
+        this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
+        this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
+        this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+
+        this.envMask = this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
+        this.envMask.tint = 0x808080;
+        this.socMask = this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
+        this.socMask.tint = 0x808080;
+        this.ecoMask = this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
+        this.ecoMask.tint = 0x808080;
+        this.resMask = this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+        this.resMask.tint = 0x808080;
+
+        // Only for testing
+        this.cropIcon(this.envMask, 0.7);
+        this.cropIcon(this.socMask, 0.3);
+        this.cropIcon(this.ecoMask, 0.5);
+        this.cropIcon(this.resMask, 0.6);
+    }
+
+
+    cropIcon(icon, percent) {
+        icon.setCrop(0, icon.height - icon.height * percent, 1000, 1000);
     }
 }

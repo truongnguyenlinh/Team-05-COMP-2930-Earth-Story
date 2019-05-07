@@ -17,7 +17,6 @@ class playGame extends Phaser.Scene {
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasgame = document.getElementById("canvasGame");
 
-        this.fill = this.add.image(100, 300, "fill");
         this.background = this.add.image(0, 0, "background").setOrigin(0,0);
         this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
         this.earth.displayWidth = this.canvasgame.width * 0.8;
@@ -69,7 +68,7 @@ class playGame extends Phaser.Scene {
 class BootScene extends Phaser.Scene {
     preload() {
         this.load.image("logo", "./assets/images/logo.png");
-        this.load.image("bg", "./assets/images/background1.jpg");
+        this.load.image("bg", "./assets/images/background.png");
     }
 
     create() {
@@ -82,14 +81,16 @@ class BootScene extends Phaser.Scene {
         this.logo.displayWidth = this.canvasgame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
-        this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35, "Click here to start game", { fill: "#000000" });
+        this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
+            "Click here to start game", { fill: "#FFFFFF" });
         this.button.setInteractive().setOrigin(0.5, 0);
         this.button.on("pointerdown", function() {
             this.scene.add("PlayGame", playGame, true);
             this.scene.setVisible(false);
         }, this);
 
-        this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25, "Click here to start tutorial", { fill: "#000000" });
+        this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25,
+            "Click here to start tutorial", { fill: "#FFFFFF" });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
     }
 }

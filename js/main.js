@@ -76,21 +76,25 @@ class BootScene extends Phaser.Scene {
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasgame = document.getElementById("canvasGame");
 
-        this.bg = this.add.image(0, 0, "bg").setOrigin(0,0);
-        this.logo = this.add.image(this.canvasgame.width / 2, this.canvasgame.height / 2, "logo");
-        this.logo.displayWidth = this.canvasgame.width * 0.8;
+        this.bg = this.add.image(0, 0, "bg").setOrigin(0, 0);
+        this.logo = this.add.image(this.canvasgame.width / 2, this.canvasgame.height / 2.5, "logo");
+        this.logo.displayWidth = this.canvasgame.width * 0.9;
         this.logo.displayHeight = this.logo.displayWidth;
 
         this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
-            "Click here to start game", { fill: "#FFFFFF" });
-        this.button.setInteractive().setOrigin(0.5, 0);
-        this.button.on("pointerdown", function() {
-            this.scene.add("PlayGame", playGame, true);
-            this.scene.setVisible(false);
-        }, this);
+            "Play", {fill: "#FFFFFF", fontSize: "4em"});
+        this.button.setInteractive().setOrigin(0.5, 0)
+            .on("pointerdown", function () {
+                this.scene.add("PlayGame", playGame, true);
+                this.scene.setVisible(false);
+            }, this);
 
         this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25,
-            "Click here to start tutorial", { fill: "#FFFFFF" });
+            "Tutorial", {fill: "#FFFFFF", fontSize: "4em"});
         this.tutorial.setInteractive().setOrigin(0.5, 0);
+
+        this.options = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.15,
+            "Options", {fill: "#FFFFFF", fontSize: "4em"});
+        this.options.setInteractive().setOrigin(0.5, 0);
     }
 }

@@ -36,34 +36,6 @@ class playGame extends Phaser.Scene {
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
-
-    }
-
-    createCard() {
-        this.question = this.add.text(-50, 0, 'Will you eat beef?',
-            { fontSize: '50px', fill: '#000' });
-        this.info = this.add.text(-50, 0, 'Beef has highest CO2 footprint',
-            { fontSize: '50px', fill: '#000' });
-        this.info.visible = false;
-        let style = {color:'#000000', align:"left",boundsAlignH: "left"};
-        this.card = this.add.image(0, 0 , "card", 0).setInteractive();
-        this.card.setScale(2);
-//         this.cardText = this.add.text(-100,0, "Questions go here", style);
-        //container for the card
-        this.container = this.add.container(game.config.width / 2, this.canvasgame.height).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
-        this.container.add([this.card, this.question, this.info]);
-
-
-
-
-
-        // this.info.scaleX = 1.2;
-        // this.info.scaleY = 0;
-        // this.cardText = ["question", 'data']
-        // this.data = [this.question, this.info];
-        // this.text = this.data[0];
-
-
         this.card.on('pointerdown', function(pointer, localX, localY, event){
             var tween = this.tweens.add({
                 targets: [this.card, this.question],
@@ -101,9 +73,28 @@ class playGame extends Phaser.Scene {
                     yoyo: false,
                     duration: 200,
                 });
-                }, this.card, this);
+            }, this.card, this);
 
         }, this);
+
+    }
+
+    createCard() {
+        this.question = this.add.text(-50, 0, 'Will you eat beef?',
+            { fontSize: '50px', fill: '#000' });
+        this.info = this.add.text(-50, 0, 'Beef has highest CO2 footprint',
+            { fontSize: '50px', fill: '#000' });
+        this.info.visible = false;
+        let style = {color:'#000000', align:"left",boundsAlignH: "left"};
+        this.card = this.add.image(0, 0 , "card", 0).setInteractive();
+        this.card.setScale(2);
+//         this.cardText = this.add.text(-100,0, "Questions go here", style);
+        //container for the card
+        this.container = this.add.container(game.config.width / 2, this.canvasgame.height / 2).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
+        this.container.add([this.card, this.question, this.info]);
+
+
+
 
 
     }
@@ -128,7 +119,7 @@ class playGame extends Phaser.Scene {
             if(swipeNormal.x > 0.8) {
                 // right
 
-                $(this.container).animate({x: this.canvasgame.width + 150, speed: "slow"});
+                $(this.container).animate({x: this.canvasgame.width + 1500, speed: "slow"});
                 this.moveStar();
                 console.log("yes");
                 // this.container.destroy();
@@ -154,7 +145,7 @@ class playGame extends Phaser.Scene {
                 this.card.on('pointerdown', function(pointer, localX, localY, event){
                     var tween = this.tweens.add({
                         targets: [this.card, this.question],
-                        scaleX: 1.2,
+                        scaleX: 2.2,
                         scaleY: 0,
                         flipY: true,
                         yoyo: false,
@@ -173,7 +164,15 @@ class playGame extends Phaser.Scene {
                         // this.up = this.info;
                         // this.question.text = "hi";
                         var tween = this.tweens.add({
-                            targets: [this.card, this.question],
+                            targets: this.card,
+                            scaleX: 2,
+                            scaleY: 2,
+                            flipY: true,
+                            yoyo: false,
+                            duration: 200,
+                        });
+                        var tween = this.tweens.add({
+                            targets: this.question,
                             scaleX: 1,
                             scaleY: 1,
                             flipY: true,
@@ -189,7 +188,7 @@ class playGame extends Phaser.Scene {
             if(swipeNormal.x < -0.8) {
                 // left
 
-                $(this.container).animate({x: -150, speed: "slow"});
+                $(this.container).animate({x: -1500, speed: "slow"});
                 this.moveStar();
                 console.log("no")
                 this.createCard();
@@ -214,7 +213,7 @@ class playGame extends Phaser.Scene {
                 this.card.on('pointerdown', function(pointer, localX, localY, event){
                     var tween = this.tweens.add({
                         targets: [this.card, this.question],
-                        scaleX: 1.2,
+                        scaleX: 2.2,
                         scaleY: 0,
                         flipY: true,
                         yoyo: false,
@@ -233,7 +232,15 @@ class playGame extends Phaser.Scene {
                         // this.up = this.info;
                         // this.question.text = "hi";
                         var tween = this.tweens.add({
-                            targets: [this.card, this.question],
+                            targets: this.card,
+                            scaleX: 2,
+                            scaleY: 2,
+                            flipY: true,
+                            yoyo: false,
+                            duration: 200,
+                        });
+                        var tween = this.tweens.add({
+                            targets: this.question,
                             scaleX: 1,
                             scaleY: 1,
                             flipY: true,

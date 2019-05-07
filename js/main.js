@@ -20,7 +20,7 @@ class playGame extends Phaser.Scene {
     }
 
     flipCard(){
-      this.card.on('pointerdown', function(pointer, localX, localY, event){
+        this.card.on('pointerdown', function(pointer, localX, localY, event){
             var tween = this.tweens.add({
                 targets: [this.card, this.question],
                 scaleY: 2.2,
@@ -215,7 +215,7 @@ class BootScene extends Phaser.Scene {
         this.logo.displayHeight = this.logo.displayWidth;
 
         this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
-            "Click here to start game", { fill: "#FFFFFF" });
+            "Play", { fill: "#FFFFFF", fontSize: "3em" });
         this.button.setInteractive().setOrigin(0.5, 0);
         this.button.on("pointerdown", function() {
             this.scene.add("PlayGame", playGame, true);
@@ -223,7 +223,11 @@ class BootScene extends Phaser.Scene {
         }, this);
 
         this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25,
-            "Click here to start tutorial", { fill: "#FFFFFF" });
+            "Tutorial", { fill: "#FFFFFF", fontSize: "3em" });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
+
+        this.options = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.15,
+            "Options", { fill: "#FFFFFF", fontSize: "3em" });
+        this.options.setInteractive().setOrigin(0.5, 0);
     }
 }

@@ -1,3 +1,6 @@
+
+
+
 class playGame extends Phaser.Scene {
     constructor() {
         super("PlayGame");
@@ -22,11 +25,28 @@ class playGame extends Phaser.Scene {
         this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
         this.earth.displayWidth = this.canvasgame.width * 0.8;
         this.earth.displayHeight = this.earth.displayWidth;
-        this.card = this.add.image(game.config.width / 2, this.canvasgame.height, "card").setInteractive();
+
+        // //card styling
+        // let style = {color:'#000000', align:"left",boundsAlignH: "left"};
+        // this.card = this.add.image(0, 0, "card");
+        // this.cardText = this.add.text(-100,0, "Questions go here", style);
         this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
 
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
+        this.cards = this.createCard();
+        //container for the card
+        // this.container = this.add.container(game.config.width / 2, this.canvasgame.height).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
+        // this.container.add([this.card, this.cardText]);
+    }
+
+    createCard() {
+        let style = {color:'#000000', align:"left",boundsAlignH: "left"};
+        this.card = this.add.image(0, 0, "card");
+        this.cardText = this.add.text(-100,0, "Questions go here", style);
+        //container for the card
+        this.container = this.add.container(game.config.width / 2, this.canvasgame.height).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
+        this.container.add([this.card, this.cardText]);
     }
 
     moveStar() {
@@ -46,21 +66,27 @@ class playGame extends Phaser.Scene {
         if(swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if(swipeNormal.x > 0.8) {
                 // right
-                $(this.card).animate({x: this.canvasgame.width, speed: "slow"});
+                $(this.container).animate({x: this.canvasgame.width + 150, speed: "slow"});
                 this.moveStar();
+                console.log("yes");
+                // this.container.destroy();
+                this.createCard();
+
             }
             if(swipeNormal.x < -0.8) {
                 // left
-                $(this.card).animate({x: 0});
+                $(this.container).animate({x: -150, speed: "slow"});
                 this.moveStar();
+                console.log("no")
+                this.createCard();
             }
             if(swipeNormal.y > 0.8) {
                 // down
-                $(this.card).animate({y: this.canvasgame.height});
+                $(this.container).animate({y: this.canvasgame.height});
             }
             if(swipeNormal.y < -0.8) {
                 // up
-                $(this.card).animate({y: this.canvasgame.height / 2});
+                $(this.container).animate({y: this.canvasgame.height / 2});
             }
         }
     }

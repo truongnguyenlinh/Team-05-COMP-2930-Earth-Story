@@ -1,6 +1,9 @@
+let gameInstance = null;
+
 class playGame extends Phaser.Scene {
     constructor() {
         super("PlayGame");
+        gameInstance = this;
     }
 
     preload() {
@@ -9,7 +12,6 @@ class playGame extends Phaser.Scene {
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
         this.load.image("star", "./assets/images/star.png");
-        this.load.image("fill", "./assets/images/fill.png");
 
         this.load.image("eco", "./assets/images/icons/eco.png");
         this.load.image("env", "./assets/images/icons/env.png");
@@ -18,6 +20,8 @@ class playGame extends Phaser.Scene {
     }
 
     create() {
+        initializeEvents(); // Read and initialize events.json
+
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasgame = document.getElementById("canvasGame");
@@ -33,7 +37,7 @@ class playGame extends Phaser.Scene {
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
 
-        this.setupIcon();
+        this.setupIcons();
     }
 
     moveStar() {
@@ -72,12 +76,14 @@ class playGame extends Phaser.Scene {
         }
     }
 
-    setupIcon() {
+    setupIcons() {
+        // Under icons
         this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
         this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
         this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
         this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
 
+        // Over icons
         this.envMask = this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
         this.envMask.tint = 0x808080;
         this.socMask = this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
@@ -87,15 +93,18 @@ class playGame extends Phaser.Scene {
         this.resMask = this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
         this.resMask.tint = 0x808080;
 
-        // Only for testing
-        this.cropIcon(this.envMask, 0.7);
-        this.cropIcon(this.socMask, 0.3);
-        this.cropIcon(this.ecoMask, 0.5);
-        this.cropIcon(this.resMask, 0.6);
+        this.updateIcons();
+    }
+
+    updateIcons() {
+        this.cropIcon(this.envMask, getEnvironment());
+        this.cropIcon(this.socMask, getSociety());
+        this.cropIcon(this.ecoMask, getEconomy());
+        this.cropIcon(this.resMask, getResources());
     }
 
 
     cropIcon(icon, percent) {
-        icon.setCrop(0, icon.height - icon.height * percent, 1000, 1000);
+        icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }
 }

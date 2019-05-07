@@ -26,8 +26,6 @@ class playGame extends Phaser.Scene {
 
 
     create() {
-        initializeEvents(); // Read and initialize events.json
-
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasgame = document.getElementById("canvasGame");
@@ -313,6 +311,8 @@ class BootScene extends Phaser.Scene {
     }
 
     create() {
+        initializeEvents(); // Read and initialize events.json
+
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasgame = document.getElementById("canvasGame");

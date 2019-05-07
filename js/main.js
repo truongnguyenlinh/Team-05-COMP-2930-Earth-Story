@@ -1,3 +1,6 @@
+
+
+
 class playGame extends Phaser.Scene {
     constructor() {
         super("PlayGame");
@@ -28,20 +31,32 @@ class playGame extends Phaser.Scene {
         this.earth.displayWidth = this.canvasgame.width * 0.8;
         this.earth.displayHeight = this.earth.displayWidth;
 
-        this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
-        this.card.setScale(2);
         this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
 
         this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
 
 
+    }
 
-        this.question = this.add.text(30, this.canvasgame.height / 2, 'Will you eat beef?',
+    createCard() {
+        this.question = this.add.text(-50, 0, 'Will you eat beef?',
             { fontSize: '50px', fill: '#000' });
-        this.info = this.add.text(30, this.canvasgame.height / 2, 'Beef has highest CO2 footprint',
+        this.info = this.add.text(-50, 0, 'Beef has highest CO2 footprint',
             { fontSize: '50px', fill: '#000' });
         this.info.visible = false;
+        let style = {color:'#000000', align:"left",boundsAlignH: "left"};
+        this.card = this.add.image(0, 0 , "card", 0).setInteractive();
+        this.card.setScale(2);
+//         this.cardText = this.add.text(-100,0, "Questions go here", style);
+        //container for the card
+        this.container = this.add.container(game.config.width / 2, this.canvasgame.height).setSize(this.canvasgame.width * 0.5, this.canvasgame.width * 0.5).setInteractive();
+        this.container.add([this.card, this.question]);
+
+
+
+
+
         // this.info.scaleX = 1.2;
         // this.info.scaleY = 0;
         // this.cardText = ["question", 'data']
@@ -112,16 +127,23 @@ class playGame extends Phaser.Scene {
         if(swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if(swipeNormal.x > 0.8) {
                 // right
-                $(this.card).animate({x: this.canvasgame.width, speed: "slow"});
-                $(this.question).animate({x: this.canvasgame.width, speed: "slow"});
-                this.moveStar();
-                this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
 
-                this.question = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Will you eat beef?',
-                    { fontSize: '50px', fill: '#000' });
-                this.info = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Beef has highest CO2 footprint',
-                    { fontSize: '50px', fill: '#000' });
-                this.info.visible = false;
+                $(this.container).animate({x: this.canvasgame.width + 150, speed: "slow"});
+                this.moveStar();
+                console.log("yes");
+                // this.container.destroy();
+                this.createCard();
+
+//                 $(this.card).animate({x: this.canvasgame.width, speed: "slow"});
+//                 $(this.question).animate({x: this.canvasgame.width, speed: "slow"});
+//                 this.moveStar();
+//                 this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
+
+//                 this.question = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Will you eat beef?',
+//                     { fontSize: '50px', fill: '#000' });
+//                 this.info = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Beef has highest CO2 footprint',
+//                     { fontSize: '50px', fill: '#000' });
+//                 this.info.visible = false;
                 // this.info.scaleX = 1.2;
                 // this.info.scaleY = 0;
                 // this.cardText = ["question", 'data']
@@ -162,19 +184,26 @@ class playGame extends Phaser.Scene {
 
                 }, this);
 
+
             }
             if(swipeNormal.x < -0.8) {
                 // left
-                $(this.card).animate({x: 0});
-                $(this.question).animate({x: 0});
-                this.moveStar();
-                this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
 
-                this.question = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Will you eat beef?',
-                    { fontSize: '50px', fill: '#000' });
-                this.info = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Beef has highest CO2 footprint',
-                    { fontSize: '50px', fill: '#000' });
-                this.info.visible = false;
+                $(this.container).animate({x: -150, speed: "slow"});
+                this.moveStar();
+                console.log("no")
+                this.createCard();
+
+//                 $(this.card).animate({x: 0});
+//                 $(this.question).animate({x: 0});
+//                 this.moveStar();
+//                 this.card = this.add.image(game.config.width / 2, this.canvasgame.height / 2 , "card", 0).setInteractive();
+
+//                 this.question = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Will you eat beef?',
+//                     { fontSize: '50px', fill: '#000' });
+//                 this.info = this.add.text(game.config.width / 2, this.canvasgame.height / 2, 'Beef has highest CO2 footprint',
+//                     { fontSize: '50px', fill: '#000' });
+//                 this.info.visible = false;
                 // this.info.scaleX = 1.2;
                 // this.info.scaleY = 0;
                 // this.cardText = ["question", 'data']
@@ -218,11 +247,11 @@ class playGame extends Phaser.Scene {
             }
             if(swipeNormal.y > 0.8) {
                 // down
-                $(this.card).animate({y: this.canvasgame.height});
+                $(this.container).animate({y: this.canvasgame.height});
             }
             if(swipeNormal.y < -0.8) {
                 // up
-                $(this.card).animate({y: this.canvasgame.height / 2});
+                $(this.container).animate({y: this.canvasgame.height / 2});
             }
         }
 

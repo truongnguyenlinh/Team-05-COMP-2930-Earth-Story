@@ -17,7 +17,6 @@ class playGame extends Phaser.Scene {
         this.load.image("env", "./assets/images/icons/env.png");
         this.load.image("res", "./assets/images/icons/res.png");
         this.load.image("soc", "./assets/images/icons/soc.png");
-
         this.load.spritesheet('card',
             './assets/images/cards.png',
             { frameWidth: 243, frameHeight: 167 }
@@ -85,8 +84,8 @@ class playGame extends Phaser.Scene {
             }, this.card, this);
 
         }, this);
-
     }
+
 
     createCard() {
         this.question = this.add.text(-50, 0, 'Will you eat beef?',
@@ -105,7 +104,6 @@ class playGame extends Phaser.Scene {
     }
 
 
-
     moveStar() {
         if (this.star.x >= this.timeline.width + 100) {
             this.star.x = this.timeline.width + 100;
@@ -113,6 +111,7 @@ class playGame extends Phaser.Scene {
             this.star.x += 50;
         }
     }
+
 
     endSwipe(e) {
         let swipeTime = e.upTime - e.downTime;
@@ -270,9 +269,41 @@ class playGame extends Phaser.Scene {
         if (this.star.x === this.timeline.width){
             this.card.visible = false;
         }
-
     }
 
+
+    setupIcons() {
+        // Under icons
+        this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
+        this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
+        this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
+        this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+
+        // Over icons
+        this.envMask = this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
+        this.envMask.tint = 0x808080;
+        this.socMask = this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
+        this.socMask.tint = 0x808080;
+        this.ecoMask = this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
+        this.ecoMask.tint = 0x808080;
+        this.resMask = this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+        this.resMask.tint = 0x808080;
+
+        this.updateIcons();
+    }
+
+
+    updateIcons() {
+        this.cropIcon(this.envMask, getEnvironment());
+        this.cropIcon(this.socMask, getSociety());
+        this.cropIcon(this.ecoMask, getEconomy());
+        this.cropIcon(this.resMask, getResources());
+    }
+
+
+    cropIcon(icon, percent) {
+        icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
+    }
 }
 
 class BootScene extends Phaser.Scene {
@@ -302,38 +333,6 @@ class BootScene extends Phaser.Scene {
         this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25,
             "Click here to start tutorial", { fill: "#FFFFFF" });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
-    }
-
-    setupIcons() {
-        // Under icons
-        this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
-        this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
-        this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
-        this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
-
-        // Over icons
-        this.envMask = this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
-        this.envMask.tint = 0x808080;
-        this.socMask = this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
-        this.socMask.tint = 0x808080;
-        this.ecoMask = this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
-        this.ecoMask.tint = 0x808080;
-        this.resMask = this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
-        this.resMask.tint = 0x808080;
-
-        this.updateIcons();
-    }
-
-    updateIcons() {
-        this.cropIcon(this.envMask, getEnvironment());
-        this.cropIcon(this.socMask, getSociety());
-        this.cropIcon(this.ecoMask, getEconomy());
-        this.cropIcon(this.resMask, getResources());
-    }
-
-
-    cropIcon(icon, percent) {
-        icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }
 }
 

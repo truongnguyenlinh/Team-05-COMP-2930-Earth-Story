@@ -1,6 +1,4 @@
-
 let gameInstance = null;
-
 
 class playGame extends Phaser.Scene {
     constructor() {
@@ -14,6 +12,7 @@ class playGame extends Phaser.Scene {
         this.load.image("background", "./assets/images/background.png");
         this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 243, frameHeight: 167 });
         this.load.image("star", "./assets/images/star.png");
+
         this.load.image("eco", "./assets/images/icons/eco.png");
         this.load.image("env", "./assets/images/icons/env.png");
         this.load.image("res", "./assets/images/icons/res.png");
@@ -64,19 +63,6 @@ class playGame extends Phaser.Scene {
 
     }
 
-
-    // create() {
-    //
-    //     // this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
-    //
-    //     // this.star = this.add.image(150, this.canvasgame.height - 170, "star").setScale(.25);
-    //     // this.input.on("pointerup", this.endSwipe, this);
-    //
-    //
-    //     this.cards = this.createCard();
-    //
-    // }
-
     create() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -122,6 +108,7 @@ class playGame extends Phaser.Scene {
         if (this.containerTimeline.first.x  > this.containerTimeline.width / 2) {
             this.containerTimeline.first.x = this.containerTimeline.width / 2;
             // this.game = false;
+
         } else {
             this.containerTimeline.first.x  += this.containerTimeline.width/30;
         }
@@ -240,4 +227,3 @@ class BootScene extends Phaser.Scene {
         this.tutorial.setInteractive().setOrigin(0.5, 0);
     }
 }
-

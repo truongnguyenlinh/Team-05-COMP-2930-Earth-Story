@@ -22,16 +22,16 @@ class playGame extends Phaser.Scene {
         this.earth = this.add.image(game.config.width / 2 , this.canvasgame.height / 2, "earth");
         this.earth.displayWidth = this.canvasgame.width * 0.8;
         this.earth.displayHeight = this.earth.displayWidth;
-        this.card = this.add.image(game.config.width / 2, this.canvasgame.height, "card").setInteractive();
+        this.card = this.add.image(game.config.width / 2, this.canvasgame.height, "card");
         this.timeline = this.add.image(game.config.width / 2, this.canvasgame.height - 150, "timeline");
 
-        this.star = this.add.image(150, this.canvasgame.height - 160, "star").setScale(.25);
+        this.star = this.add.image(150, this.canvasgame.height - 170, "star").setScale(.25);
         this.input.on("pointerup", this.endSwipe, this);
     }
 
     moveStar() {
-        if (this.star.x >= this.timeline.width) {
-            this.star.x = this.timeline.width;
+        if (this.star.x >= this.timeline.width + 100) {
+            this.star.x = this.timeline.width + 100;
         } else {
             this.star.x += 50;
         }
@@ -42,7 +42,7 @@ class playGame extends Phaser.Scene {
         let swipe = new Phaser.Geom.Point(e.upX - e.downX, e.upY - e.downY);
         let swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
-        
+
         if(swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if(swipeNormal.x > 0.8) {
                 // right
@@ -63,5 +63,33 @@ class playGame extends Phaser.Scene {
                 $(this.card).animate({y: this.canvasgame.height / 2});
             }
         }
+    }
+}
+
+class BootScene extends Phaser.Scene {
+    preload() {
+        this.load.image("logo", "./assets/images/logo.png");
+        this.load.image("bg", "./assets/images/background1.jpg");
+    }
+
+    create() {
+        this.canvas1 = document.getElementsByTagName("canvas");
+        this.canvas1[0].setAttribute("id", "canvasGame");
+        this.canvasgame = document.getElementById("canvasGame");
+
+        this.bg = this.add.image(0, 0, "bg").setOrigin(0,0);
+        this.logo = this.add.image(this.canvasgame.width / 2, this.canvasgame.height / 2, "logo");
+        this.logo.displayWidth = this.canvasgame.width * 0.8;
+        this.logo.displayHeight = this.logo.displayWidth;
+
+        this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35, "Click here to start game", { fill: "#000000" });
+        this.button.setInteractive().setOrigin(0.5, 0);
+        this.button.on("pointerdown", function() {
+            this.scene.add("PlayGame", playGame, true);
+            this.scene.setVisible(false);
+        }, this);
+
+        this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25, "Click here to start tutorial", { fill: "#000000" });
+        this.tutorial.setInteractive().setOrigin(0.5, 0);
     }
 }

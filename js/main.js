@@ -179,7 +179,7 @@ class playGame extends Phaser.Scene {
             }
 
 
-        }
+        
     }
 
 

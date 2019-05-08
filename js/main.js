@@ -83,7 +83,6 @@ class playGame extends Phaser.Scene {
 
         this.setupIcons();
         this.createDefaultEarth();
-        this.updateEarth();
 
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
@@ -115,10 +114,14 @@ class playGame extends Phaser.Scene {
     }
 
     updateEarth() {
-        if (0 < getEnvironment() < 30) {
-            this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        if (getEnvironment() < 50) {
+            // this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
             this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-            this.earthContainer.add([this.earth_dirty_water_3]);
+            this.earthContainer.replace(this.earth_water, this.earth_dirty_water_3);
+            // this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3")
+            // this.earthContainer.add([this.earth_dirty_water_3, this.earth_dirty_land_3]);
+            console.log(getEnvironment());
+            console.log("less than 30");
         }
     }
 
@@ -204,6 +207,7 @@ class playGame extends Phaser.Scene {
                     // right
                     $(this.container).animate({x: this.canvasGame.width + 1500, speed: "slow"});
                     this.swipeX("yes");
+
                 }
                 if (swipeNormal.x < -0.8) {
                     // left
@@ -227,6 +231,7 @@ class playGame extends Phaser.Scene {
 
     swipeX(direction) {
         this.moveStar();
+        this.updateEarth();
         this.createCard();
         this.flip = this.flipCard();
         applyConsequence(this.currentEvent[direction]);

@@ -1,6 +1,7 @@
 ﻿[
   {
     "question": "Eat beef?",
+    "info": "Something something beef bad!",
     "yes": {
       "economy": 0,
       "society": 15,
@@ -16,6 +17,7 @@
   },
   {
     "question": "Ban straws?",
+    "info": "Something something straw bad!",
     "yes": {
       "economy": -5,
       "society": 0,
@@ -31,6 +33,7 @@
   },
   {
     "question": "Build solar panels?",
+    "info": "Something something solar good!",
     "yes": {
       "economy": 0,
       "society": 5,

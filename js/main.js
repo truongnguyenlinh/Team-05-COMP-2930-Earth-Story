@@ -38,6 +38,8 @@ class playGame extends Phaser.Scene {
 
         this.setupIcons();
 
+        this.hasSwiped = false;
+
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
         this.flip = this.flipCard();
@@ -142,10 +144,13 @@ class playGame extends Phaser.Scene {
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
-            if (swipeNormal.x > 0.8) {
+
+            if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
                 // right
-                $(this.container).animate({x: this.canvasGame.width + 1500, speed: "slow"});
-                this.time.delayedCall(1500, function (container) {
+                this.hasSwiped = true;
+
+                $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
+                this.time.delayedCall(500, function (container) {
                     if (this.container.x === this.canvasGame.width + 1500){
                         this.container.destroy();
 
@@ -153,19 +158,23 @@ class playGame extends Phaser.Scene {
                 }, this.container, this);
 
                 this.time.delayedCall(800, function (swipe) {
+                    this.hasSwiped = false;
+
                     this.swipeX("yes");
                 }, this.swipeX, this);
             }
-            if (swipeNormal.x < -0.8) {
+            if (swipeNormal.x < -0.8 && this.hasSwiped === false) {
                 // left
-                $(this.container).animate({x: -1500, speed: "slow"});
-                this.time.delayedCall(1500, function (container) {
+                this.hasSwiped = true;
+                $(this.container).animate({x: -1500, speed: 500});
+                this.time.delayedCall(500, function (container) {
                     if (this.container.x === -1500){
                         this.container.destroy();
 
                     }
                 }, this.container, this);
                 this.time.delayedCall(800, function (swipe) {
+                    this.hasSwiped = false;
                     this.swipeX("no");
                 }, this.swipeX, this);
             }

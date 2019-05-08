@@ -8,7 +8,54 @@ class playGame extends Phaser.Scene {
 
 
     preload() {
-        this.load.image("earth", "./assets/images/earth.png");
+        this.load.image("earth_water", "./assets/images/layers/earth_water.png");
+        this.load.image("earth_land", "./assets/images/layers/earth_land.png");
+        this.load.image("earth_dirty_water_1", "./assets/images/layers/earth_dirty_water_1.png");
+        this.load.image("earth_dirty_water_2", "./assets/images/layers/earth_dirty_water_2.png");
+        this.load.image("earth_dirty_water_3", "./assets/images/layers/earth_dirty_water_3.png");
+        this.load.image("earth_dirty_land_1", "./assets/images/layers/earth_dirty_land_1.png");
+        this.load.image("earth_dirty_land_2", "./assets/images/layers/earth_dirty_land_2.png");
+        this.load.image("earth_dirty_land_3", "./assets/images/layers/earth_dirty_land_3.png");
+
+        this.load.image("clean_mt", "./assets/images/layers/clean_mt.png");
+        this.load.image("default_mt", "./assets/images/layers/default_mt.png");
+        this.load.image("dirty_mt", "./assets/images/layers/dirty_mt.png");
+        this.load.image("clean_clouds", "./assets/images/layers/clean_clouds.png");
+        this.load.image("dirty_clouds", "./assets/images/layers/dirty_clouds.png");
+        this.load.image("bush_1", "./assets/images/layers/bush_1.png");
+        this.load.image("bush_2", "./assets/images/layers/bush_2.png");
+        this.load.image("tree_1", "./assets/images/layers/tree_1.png");
+        this.load.image("tree_2", "./assets/images/layers/tree_2.png");
+        this.load.image("tree_3", "./assets/images/layers/tree_3.png");
+        this.load.image("tree_4", "./assets/images/layers/tree_4.png");
+
+        this.load.image("cow_1", "./assets/images/layers/cow_1.png");
+        this.load.image("cow_2", "./assets/images/layers/cow_2.png");
+        this.load.image("pig_1", "./assets/images/layers/pig_1.png");
+        this.load.image("pig_2", "./assets/images/layers/pig_2.png");
+        this.load.image("fish_1", "./assets/images/layers/fish_1.png");
+        this.load.image("fish_2", "./assets/images/layers/fish_2.png");
+        this.load.image("salmon_1", "./assets/images/layers/salmon_1.png");
+        this.load.image("salmon_2", "./assets/images/layers/salmon_2.png");
+        this.load.image("shrimp_1", "./assets/images/layers/shrimp_1.png");
+        this.load.image("shrimp_2", "./assets/images/layers/shrimp_2.png");
+        this.load.image("tuna_1", "./assets/images/layers/tuna_1.png");
+        this.load.image("tuna_2", "./assets/images/layers/tuna_2.png");
+        this.load.image("whale_1", "./assets/images/layers/whale_1.png");
+        this.load.image("whale_2", "./assets/images/layers/whale_2.png");
+
+        this.load.image("factory_1", "./assets/images/layers/factory_1.png");
+        this.load.image("factory_2", "./assets/images/layers/factory_2.png");
+        this.load.image("house_1", "./assets/images/layers/house_1.png");
+        this.load.image("house_2", "./assets/images/layers/house_2.png");
+
+        this.load.image("solar_panel_1", "./assets/images/layers/solar_panel_1.png");
+        this.load.image("solar_panel_2", "./assets/images/layers/solar_panel_2.png");
+        this.load.image("wind_turbines_1", "./assets/images/layers/wind_turbines_1.png");
+        this.load.image("wind_turbines_2", "./assets/images/layers/wind_turbines_2.png");
+        this.load.image("wind_turbines_3", "./assets/images/layers/wind_turbines_3.png");
+
+
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
         this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 243, frameHeight: 167 });
@@ -19,16 +66,15 @@ class playGame extends Phaser.Scene {
         this.load.image("soc", "./assets/images/icons/soc.png");
     }
 
-
     create() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasGame = document.getElementById("canvasGame");
 
         this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-        this.earth = this.add.image(game.config.width / 2, this.canvasGame.height / 2, "earth");
-        this.earth.displayWidth = this.canvasGame.width * 0.8;
-        this.earth.displayHeight = this.earth.displayWidth;
+        // this.earth = this.add.image(game.config.width / 2, this.canvasGame.height / 2, "earth");
+        // this.earth.displayWidth = this.canvasGame.width * 0.8;
+        // this.earth.displayHeight = this.earth.displayWidth;
         this.timeline = this.add.image(0, 0, "timeline");
         // this.timeline = this.add.image(game.config.width / 2, this.canvasGame.height - 150, "timeline");
 
@@ -36,6 +82,8 @@ class playGame extends Phaser.Scene {
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
 
         this.setupIcons();
+        this.createDefaultEarth();
+        this.updateEarth();
 
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
@@ -43,6 +91,35 @@ class playGame extends Phaser.Scene {
         this.containerTimeline = this.add.container(game.config.width / 2, this.canvasGame.height * 0.8).setSize(this.timeline.width, this.timeline.height);
         this.containerTimeline.add([this.star, this.timeline]);
 
+    }
+
+    createDefaultEarth() {
+        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        this.earth_water = this.add.image(0, 0, "earth_water");
+        this.earth_land = this.add.image(0, 0, "earth_land");
+
+        this.bush_2 = this.add.image(0, 0, "bush_2");
+        this.tree_3 = this.add.image(0, 0, "tree_3");
+        this.tree_4 = this.add.image(0, 0, "tree_4");
+        this.clean_mt = this.add.image(0, 0, "clean_mt");
+        this.clean_clouds = this.add.image(0, 0, "clean_clouds");
+        this.fish_2 = this.add.image(0, 0, "fish_2");
+        this.whale_2 = this.add.image(0, 0, "whale_2");
+        this.salmon_2 = this.add.image(0, 0, "salmon_2");
+        this.tuna_2 = this.add.image(0, 0, "tuna_2");
+        this.cow_2 = this.add.image(0, 0, "cow_2");
+        this.pig_2 = this.add.image(0, 0, "pig_2");
+        this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
+        this.earthContainer.add([this.earth_water, this.earth_land, this.bush_2, this.tree_4, this.tree_3, this.clean_mt,
+            this.clean_clouds, this.fish_2, this.whale_2, this.salmon_2, this.tuna_2, this.cow_2, this.pig_2, this.shrimp_2]);
+    }
+
+    updateEarth() {
+        if (0 < getEnvironment() < 30) {
+            this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+            this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
+            this.earthContainer.add([this.earth_dirty_water_3]);
+        }
     }
 
     createCard() {
@@ -59,7 +136,6 @@ class playGame extends Phaser.Scene {
         this.container = this.add.container(game.config.width / 2, this.canvasGame.height / 2).setSize(this.canvasGame.width * 0.5, this.canvasGame.width * 0.5).setInteractive();
         this.container.add([this.card, this.question, this.info]);
     }
-
 
     moveStar() {
         console.log(this.star.width);

@@ -245,6 +245,7 @@ class BootScene extends Phaser.Scene {
         this.logo.displayWidth = this.canvasgame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
+        this.countSpin = 0;
         this.canSpin = true;
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
@@ -280,5 +281,10 @@ class BootScene extends Phaser.Scene {
                 }
             });
         }
+        this.countSpin += 1;
+        if (this.countSpin == 3) {
+            console.log("Send Nyan Cat!")
+        }
+
     }
 }

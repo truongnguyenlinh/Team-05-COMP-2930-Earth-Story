@@ -241,12 +241,13 @@ class BootScene extends Phaser.Scene {
         this.canvasgame = document.getElementById("canvasGame");
 
         this.bg = this.add.image(0, 0, "bg").setOrigin(0,0);
-        this.logo = this.add.sprite(this.canvasgame.width / 2, this.canvasgame.height / 2, "logo");
+        this.logo = this.add.image(this.canvasgame.width / 2, this.canvasgame.height / 2, "logo");
         this.logo.displayWidth = this.canvasgame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
         this.canSpin = true;
-        this.input.on("pointerdown", this.spinEarth, this);
+        this.logo.setInteractive();
+        this.logo.on("pointerdown", this.spinEarth, this);
 
         this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
             "Play", { fill: "#FFFFFF", fontSize: "3em" });

@@ -58,13 +58,14 @@ class playGame extends Phaser.Scene {
 
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("background", "./assets/images/background.png");
-        this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 243, frameHeight: 167 });
+        this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 167, frameHeight: 243 });
         this.load.image("star", "./assets/images/star.png");
         this.load.image("eco", "./assets/images/icons/eco.png");
         this.load.image("env", "./assets/images/icons/env.png");
         this.load.image("res", "./assets/images/icons/res.png");
         this.load.image("soc", "./assets/images/icons/soc.png");
     }
+
 
     create() {
         this.canvas1 = document.getElementsByTagName("canvas");
@@ -73,18 +74,21 @@ class playGame extends Phaser.Scene {
 
         this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
         this.timeline = this.add.image(0, 0, "timeline");
-        this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
+        this.star = this.add.image(-this.timeline.width / 2 * 0.9, 0, "star").setScale(.25);
+
+        this.containerTimeline = this.add.container(game.config.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
+        this.containerTimeline.add([this.star, this.timeline]);
+
 
         this.setupIcons();
+
+        this.hasSwiped = false;
 
         this.createEarth();
 
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
         this.flip = this.flipCard();
-        this.containerTimeline = this.add.container(game.config.width / 2, this.canvasGame.height * 0.8).setSize(this.timeline.width, this.timeline.height);
-        this.containerTimeline.add([this.star, this.timeline]);
-
     }
 
 
@@ -234,46 +238,68 @@ class playGame extends Phaser.Scene {
     }
 
     createCard() {
-        this.currentEvent = getRandomEvent();
-        this.question = this.add.text(-50, 0, this.currentEvent["question"],
-            { fontSize: '50px', fill: '#000' });
-        this.info = this.add.text(-50, 0, this.currentEvent["info"],
-            { fontSize: '50px', fill: '#000' });
-        this.info.visible = false;
-        let style = {color:'#000000', align:"left",boundsAlignH: "left"};
         this.card = this.add.image(0, 0 , "card", 0).setInteractive();
-        this.card.setScale(2);
+        this.card.setScale(3);
+        this.currentEvent = getRandomEvent();
+
+        let style = {
+            color:'#FF0000',
+            align:"center",
+            boundsAlignH: "center",
+            fontSize: '50px',
+            wordWrap: {
+                width: this.card.width * 3,
+                useAdvancedWrap: false }
+        };
+
+        this.question = this.add.text(0, 0, this.currentEvent["question"], style).setOrigin(0.5, 0.5);
+        this.info = this.add.text(0, 0, this.currentEvent["info"], style).setOrigin(0.5, 0.5);
+        this.info.visible = false;
         //container for the card
-        this.container = this.add.container(game.config.width / 2, this.canvasGame.height / 2).setSize(this.canvasGame.width * 0.5, this.canvasGame.width * 0.5).setInteractive();
+        this.container = this.add.container(game.config.width / 2, this.canvasGame.height / 2)
+            .setSize(this.canvasGame.width * 0.5, this.canvasGame.width * 0.5)
+            .setInteractive();
         this.container.add([this.card, this.question, this.info]);
+        if (this.containerTimeline.first.x === this.timeline.width  / 2 * 0.9) {
+            this.container.visible = false;
+        }
     }
 
+
     moveStar() {
-        console.log(this.star.width);
-        console.log(this.containerTimeline.first.x, this.timeline.width);
-        if (this.containerTimeline.first.x  > this.containerTimeline.width / 2) {
-            this.containerTimeline.first.x = this.containerTimeline.width / 2;
-            // this.game = false;
+        if (this.containerTimeline.first.x + this.containerTimeline.first.width * 0.25  > this.containerTimeline.width / 2) {
+            this.containerTimeline.first.x = this.containerTimeline.width / 2 * 0.9;
+            return true;
 
         } else {
-            this.containerTimeline.first.x  += this.containerTimeline.width/30;
+            this.containerTimeline.first.x  += this.containerTimeline.width / 30;
         }
     }
 
 
     flipCard(){
         this.card.on('pointerdown', function(pointer, localX, localY, event){
-            var tween = this.tweens.add({
-                targets: [this.card, this.question],
-                scaleY: 2.2,
+            this.cardTween = this.tweens.add({
+                targets: this.card,
+                scaleY: 3.2,
                 scaleX: 0,
                 flipX: true,
                 yoyo: false,
                 duration: 200,
             });
+
+            this.wordTween = this.tweens.add({
+                targets: [this.question, this.info],
+                scaleY: 1.2,
+                scaleX: 0,
+                flipX: true,
+                yoyo: false,
+                duration: 200,
+            });
+
+
             this.time.delayedCall(200, function(card){
                 this.card.setFrame(1 - this.card.frame.name);
-                // this.text = this.info
                 if (this.card.frame.name === 1){
                     this.info.visible = true;
                     this.question.visible = false;
@@ -281,18 +307,17 @@ class playGame extends Phaser.Scene {
                     this.info.visible = false;
                     this.question.visible = true;
                 }
-                // this.up = this.info;
-                // this.question.text = "hi";
-                var tween = this.tweens.add({
+
+                this.cardTween = this.tweens.add({
                     targets: this.card,
-                    scaleY: 2,
-                    scaleX: 2,
+                    scaleY: 3,
+                    scaleX: 3,
                     flipX: true,
                     yoyo: false,
                     duration: 200,
                 });
-                var tween = this.tweens.add({
-                    targets: this.question,
+                this.wordTween = this.tweens.add({
+                    targets: [this.question, this.info],
                     scaleY: 1,
                     scaleX: 1,
                     flipX: true,
@@ -310,40 +335,63 @@ class playGame extends Phaser.Scene {
         let swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
-            if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
-                if (swipeNormal.x > 0.8) {
-                    // right
-                    $(this.container).animate({x: this.canvasGame.width + 1500, speed: "slow"});
+        if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
+
+            if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
+                // right
+                this.hasSwiped = true;
+
+                $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
+                this.time.delayedCall(500, function (container) {
+                    if (this.container.x === this.canvasGame.width + 1500){
+                        this.container.destroy();
+
+                    }
+                }, this.container, this);
+
+                this.time.delayedCall(800, function (swipe) {
+                    this.hasSwiped = false;
+
                     this.swipeX("yes");
+                }, this.swipeX, this);
+            }
+            if (swipeNormal.x < -0.8 && this.hasSwiped === false) {
+                // left
+                this.hasSwiped = true;
+                $(this.container).animate({x: -1500, speed: 500});
+                this.time.delayedCall(500, function (container) {
+                    if (this.container.x === -1500){
+                        this.container.destroy();
 
-                }
-                if (swipeNormal.x < -0.8) {
-                    // left
-                    $(this.container).animate({x: -1500, speed: "slow"});
+                    }
+                }, this.container, this);
+                this.time.delayedCall(800, function (swipe) {
+                    this.hasSwiped = false;
                     this.swipeX("no");
-                }
-                if (swipeNormal.y > 0.8) {
-                    // down
-                    $(this.container).animate({y: this.canvasGame.height});
-                }
-                if (swipeNormal.y < -0.8) {
-                    // up
-                    $(this.container).animate({y: this.canvasGame.height / 2});
-                }
+                }, this.swipeX, this);
             }
+            if (swipeNormal.y > 0.8) {
+                // down
+                $(this.container).animate({y: this.canvasGame.height});
+            }
+            if (swipeNormal.y < -0.8) {
+                // up
+                $(this.container).animate({y: this.canvasGame.height / 2});
+            }
+        }
 
-            if (this.star.x === this.timeline.width) {
-                this.card.visible = false;
-            }
+
     }
 
     swipeX(direction) {
-        this.moveStar();
-        this.updateEarth();
-        this.createCard();
+        this.endGame = this.moveStar();
+        if (!this.endGame) {
+            this.updateEarth();
+            this.createCard();
+            this.flip = this.flipCard();
+            applyConsequence(this.currentEvent[direction]);
+        }
 
-        this.flip = this.flipCard();
-        applyConsequence(this.currentEvent[direction]);
     }
 
 

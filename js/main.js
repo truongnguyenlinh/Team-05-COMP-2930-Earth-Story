@@ -82,6 +82,7 @@ class playGame extends Phaser.Scene {
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
 
         this.setupIcons();
+        this.earth();
         this.createDefaultEarth();
 
         this.input.on("pointerup", this.endSwipe, this);
@@ -92,10 +93,17 @@ class playGame extends Phaser.Scene {
 
     }
 
-    createDefaultEarth() {
-        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+    earth() {
+        this.oneEarth = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
         this.earth_land = this.add.image(0, 0, "earth_land");
+        this.oneEarth.add([this.earth_water, this.earth_land])
+    }
+
+    createDefaultEarth() {
+        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        // this.earth_water = this.add.image(0, 0, "earth_water");
+        // this.earth_land = this.add.image(0, 0, "earth_land");
 
         this.bush_2 = this.add.image(0, 0, "bush_2");
         this.tree_3 = this.add.image(0, 0, "tree_3");
@@ -109,19 +117,62 @@ class playGame extends Phaser.Scene {
         this.cow_2 = this.add.image(0, 0, "cow_2");
         this.pig_2 = this.add.image(0, 0, "pig_2");
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
-        this.earthContainer.add([this.earth_water, this.earth_land, this.bush_2, this.tree_4, this.tree_3, this.clean_mt,
+        this.earthContainer.add([this.bush_2, this.tree_4, this.tree_3, this.clean_mt,
             this.clean_clouds, this.fish_2, this.whale_2, this.salmon_2, this.tuna_2, this.cow_2, this.pig_2, this.shrimp_2]);
     }
 
     updateEarth() {
+
         if (getEnvironment() < 50) {
+            // this.earthContainer.removeAll();
             // this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
             this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-            this.earthContainer.replace(this.earth_water, this.earth_dirty_water_3);
-            // this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3")
-            // this.earthContainer.add([this.earth_dirty_water_3, this.earth_dirty_land_3]);
-            console.log(getEnvironment());
-            console.log("less than 30");
+            this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
+            //this.earthContainer.add([this.earth_dirty_water_3, this.earth_dirty_land_3]);
+            this.oneEarth.replace(this.earth_water, this.earth_dirty_water_3);
+            this.oneEarth.replace(this.earth_land, this.earth_dirty_land_3);
+            this.createDefaultEarth();
+            //console.log(getEnvironment());
+            console.log("environment < 50 = bad earth");
+            }
+
+        if (getEnvironment() > 50) {
+            this.oneEarth.add([this.earth_water, this.earth_land]);
+            this.createDefaultEarth();
+            //console.log(getEnvironment());
+            console.log("environment > 50 = good earth");
+        }
+        if (getResources() > 50) {
+            this.tree_2 = this.add.image(0, 0, "tree_2");
+            this.earthContainer.add([this.tree_2]);
+            //console.log(getResources());
+            console.log("resource > 50 = add trees");
+        }
+        if (getResources() < 50) {
+            this.earthContainer.remove([this.tree_4, this.tree_3]);
+            //console.log(getResources());
+            console.log("resource < 50 = remove trees");
+        }
+
+        if (getEconomy() > 50) {
+            this.factory_2 = this.add.image(0, 0, "factory_2");
+            this.earthContainer.add([this.factory_2]);
+            //console.log(getEconomy());
+            console.log("economy > 50 = add factories");
+        }
+        if (getEconomy() < 50) {
+            this.earthContainer.remove([this.factory_2]);
+            //console.log(getEconomy());
+            console.log("economy < 50 = remove factories");
+        }
+        if (getSociety() > 50) {
+            this.house_2 = this.add.image(0, 0, "house_2");
+            this.earthContainer.add([this.house_2]);
+            console.log("society > 50 = add houses");
+        }
+        if (getSociety() < 50) {
+            this.earthContainer.remove([this.house_2]);
+            console.log("society < 50 = remove houses");
         }
     }
 
@@ -231,8 +282,11 @@ class playGame extends Phaser.Scene {
 
     swipeX(direction) {
         this.moveStar();
+        this.earth();
         this.updateEarth();
+
         this.createCard();
+
         this.flip = this.flipCard();
         applyConsequence(this.currentEvent[direction]);
     }

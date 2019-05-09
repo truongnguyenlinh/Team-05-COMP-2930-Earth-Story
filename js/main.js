@@ -72,17 +72,12 @@ class playGame extends Phaser.Scene {
         this.canvasGame = document.getElementById("canvasGame");
 
         this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
-        // this.earth = this.add.image(game.config.width / 2, this.canvasGame.height / 2, "earth");
-        // this.earth.displayWidth = this.canvasGame.width * 0.8;
-        // this.earth.displayHeight = this.earth.displayWidth;
         this.timeline = this.add.image(0, 0, "timeline");
-        // this.timeline = this.add.image(game.config.width / 2, this.canvasGame.height - 150, "timeline");
-
-        // this.star = this.add.image(150, this.canvasGame.height - 170, "star").setScale(.25);
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
 
         this.setupIcons();
-        this.createDefaultEarth();
+
+        this.createEarth();
 
         this.input.on("pointerup", this.endSwipe, this);
         this.cards = this.createCard();
@@ -92,36 +87,158 @@ class playGame extends Phaser.Scene {
 
     }
 
-    createDefaultEarth() {
+    // preloadEarth() {
+    //     this.oneEarth = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        // this.earth_water = this.add.image("earth_water");
+        // this.earth_land = this.add.image("earth_land");
+        // this.add.image("earth_dirty_water_1");
+        // this.add.image("earth_dirty_water_2");
+        // this.add.image("earth_dirty_water_3");
+        // this.add.image("earth_dirty_land_1");
+        // this.add.image("earth_dirty_land_2");
+        // this.add.image("earth_dirty_land_3");
+
+        // this.add.image(0,0, "clean_mt", "./assets/images/layers/clean_mt.png");
+        // this.add.image(0,0, "default_mt", "./assets/images/layers/default_mt.png");
+        // this.add.image(0,0, "dirty_mt", "./assets/images/layers/dirty_mt.png");
+        // this.add.image(0,0, "clean_clouds", "./assets/images/layers/clean_clouds.png");
+        // this.add.image(0,0, "dirty_clouds", "./assets/images/layers/dirty_clouds.png");
+        // this.add.image(0,0, "bush_1", "./assets/images/layers/bush_1.png");
+        // this.add.image(0,0, "bush_2", "./assets/images/layers/bush_2.png");
+        // this.add.image(0,0, "tree_1", "./assets/images/layers/tree_1.png");
+        // this.add.image(0,0, "tree_2", "./assets/images/layers/tree_2.png");
+        // this.add.image(0,0, "tree_3", "./assets/images/layers/tree_3.png");
+        // this.add.image(0,0, "tree_4", "./assets/images/layers/tree_4.png");
+        //
+        // this.add.image(0,0, "cow_1", "./assets/images/layers/cow_1.png");
+        // this.add.image(0,0, "cow_2", "./assets/images/layers/cow_2.png");
+        // this.add.image(0,0, "pig_1", "./assets/images/layers/pig_1.png");
+        // this.add.image(0,0, "pig_2", "./assets/images/layers/pig_2.png");
+        // this.add.image(0,0, "fish_1", "./assets/images/layers/fish_1.png");
+        // this.add.image(0,0, "fish_2", "./assets/images/layers/fish_2.png");
+        // this.add.image(0,0, "salmon_1", "./assets/images/layers/salmon_1.png");
+        // this.add.image(0,0, "salmon_2", "./assets/images/layers/salmon_2.png");
+        // this.add.image(0,0, "shrimp_1", "./assets/images/layers/shrimp_1.png");
+        // this.add.image(0,0, "shrimp_2", "./assets/images/layers/shrimp_2.png");
+        // this.add.image(0,0, "tuna_1", "./assets/images/layers/tuna_1.png");
+        // this.add.image(0,0, "tuna_2", "./assets/images/layers/tuna_2.png");
+        // this.add.image(0,0, "whale_1", "./assets/images/layers/whale_1.png");
+        // this.add.image(0,0, "whale_2", "./assets/images/layers/whale_2.png");
+        //
+        // this.add.image(0,0, "factory_1", "./assets/images/layers/factory_1.png");
+        // this.add.image(0,0, "factory_2", "./assets/images/layers/factory_2.png");
+        // this.add.image(0,0, "house_1", "./assets/images/layers/house_1.png");
+        // this.add.image(0,0, "house_2");
+        //
+        // this.add.image(0,0, "solar_panel_1");
+        // this.add.image(0,0, "solar_panel_2");
+        // this.add.image(0,0, "wind_turbines_1");
+        // this.add.image(0,0, "wind_turbines_2");
+        // this.add.image(0,0, "wind_turbines_3");
+        // this.oneEarth.add([this.earth_water, this.earth_land])
+    // }
+
+    createEarth() {
         this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
-        this.earth_land = this.add.image(0, 0, "earth_land");
 
+        this.earth_land = this.add.image(0, 0, "earth_land");
+        this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
+        this.earth_dirty_land_1.visible = false;
+
+        this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
+        this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
+
+        this.earth_dirty_land_3.visible = false;
+        this.earth_dirty_water_3.visible = false;
+
+        this.bush_1 = this.add.image(0, 0, "bush_1");
         this.bush_2 = this.add.image(0, 0, "bush_2");
+
+        this.tree_1 = this.add.image(0, 0, "tree_1");
+        this.tree_2 = this.add.image(0, 0, "tree_2");
         this.tree_3 = this.add.image(0, 0, "tree_3");
         this.tree_4 = this.add.image(0, 0, "tree_4");
+
+        this.tree_3.visible = false;
+        this.tree_4.visible = false;
+
+
         this.clean_mt = this.add.image(0, 0, "clean_mt");
+
         this.clean_clouds = this.add.image(0, 0, "clean_clouds");
+
         this.fish_2 = this.add.image(0, 0, "fish_2");
+
         this.whale_2 = this.add.image(0, 0, "whale_2");
+
         this.salmon_2 = this.add.image(0, 0, "salmon_2");
+
         this.tuna_2 = this.add.image(0, 0, "tuna_2");
+
         this.cow_2 = this.add.image(0, 0, "cow_2");
+
         this.pig_2 = this.add.image(0, 0, "pig_2");
+
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
-        this.earthContainer.add([this.earth_water, this.earth_land, this.bush_2, this.tree_4, this.tree_3, this.clean_mt,
-            this.clean_clouds, this.fish_2, this.whale_2, this.salmon_2, this.tuna_2, this.cow_2, this.pig_2, this.shrimp_2]);
+
+        this.factory_2 = this.add.image(0, 0, "factory_2");
+        this.factory_2.visible = false;
+
+        this.house_2 = this.add.image(0, 0, "house_2");
+
+        this.earthContainer.add([this.earth_water, this.earth_land, this.earth_dirty_water_3, this.earth_dirty_land_3,
+            this.bush_1, this.bush_2, this.tree_1, this.tree_2, this.tree_3, this.tree_4, this.clean_mt,
+            this.clean_clouds, this.fish_2, this.whale_2, this.salmon_2, this.tuna_2,
+            this.cow_2, this.pig_2, this.shrimp_2, this.factory_2, this.house_2]);
     }
 
     updateEarth() {
         if (getEnvironment() < 50) {
-            // this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
-            this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-            this.earthContainer.replace(this.earth_water, this.earth_dirty_water_3);
-            // this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3")
-            // this.earthContainer.add([this.earth_dirty_water_3, this.earth_dirty_land_3]);
-            console.log(getEnvironment());
-            console.log("less than 30");
+            this.earth_dirty_water_3.visible = true;
+            this.earth_dirty_land_3.visible = true;
+
+            console.log("environment < 50 = bad earth");
+            }
+
+        if (getEnvironment() > 50) {
+            this.earth_dirty_water_3.visible = false;
+            this.earth_dirty_land_3.visible = false;
+
+            console.log("environment > 50 = good earth");
+        }
+        if (getResources() > 50) {
+            this.tree_3.visible = true;
+            this.tree_4.visible = true;
+
+            console.log("resource > 50 = add trees");
+        }
+        if (getResources() < 50) {
+            this.tree_3.visible = false;
+            this.tree_4.visible = false;
+            //console.log(getResources());
+            console.log("resource < 50 = remove trees");
+        }
+
+        if (getEconomy() > 50) {
+            this.factory_2.visible = true;
+
+            console.log("economy > 50 = add factories");
+        }
+        if (getEconomy() < 50) {
+            this.factory_2.visible = false;
+
+            console.log("economy < 50 = remove factories");
+        }
+        if (getSociety() > 50) {
+            this.house_2.visible = true;
+
+            console.log("society > 50 = add houses");
+        }
+        if (getSociety() < 50) {
+            this.house_2.visible = false;
+
+            console.log("society < 50 = remove houses");
         }
     }
 
@@ -233,6 +350,7 @@ class playGame extends Phaser.Scene {
         this.moveStar();
         this.updateEarth();
         this.createCard();
+
         this.flip = this.flipCard();
         applyConsequence(this.currentEvent[direction]);
     }

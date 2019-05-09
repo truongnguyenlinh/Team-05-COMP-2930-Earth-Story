@@ -240,7 +240,7 @@ class playGame extends Phaser.Scene {
     createCard() {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setOrigin(0.5);
-        this.card.setScale(2.5);
+        this.card.setScale(2.75);
         this.card.alpha = 0.7;
         this.currentEvent = getRandomEvent();
 
@@ -250,7 +250,7 @@ class playGame extends Phaser.Scene {
             boundsAlignH: "center",
             fontSize: '50px',
             wordWrap: {
-                width: this.card.width * 2.5,
+                width: this.card.width * 2.75,
                 useAdvancedWrap: false }
         };
 
@@ -283,7 +283,7 @@ class playGame extends Phaser.Scene {
         this.card.on('pointerup', function(pointer, localX, localY, event){
             this.cardTween = this.tweens.add({
                 targets: this.card,
-                scaleY: 2.7,
+                scaleY: 2.9,
                 scaleX: 0,
                 flipX: true,
                 yoyo: false,
@@ -311,8 +311,8 @@ class playGame extends Phaser.Scene {
 
                 this.cardTween = this.tweens.add({
                     targets: this.card,
-                    scaleY: 2.5,
-                    scaleX: 2.5,
+                    scaleY: 2.75,
+                    scaleX: 2.75,
                     flipX: true,
                     yoyo: false,
                     duration: 200,
@@ -373,7 +373,7 @@ class playGame extends Phaser.Scene {
             }
             if (swipeNormal.y > 0.8) {
                 // down
-                $(this.container).animate({y: this.canvasGame.height});
+                $(this.container).animate({y: this.canvasGame.height * 1.15});
             }
             if (swipeNormal.y < -0.8) {
                 // up
@@ -395,19 +395,19 @@ class playGame extends Phaser.Scene {
 
     setupIcons() {
         // Under icons
-        this.add.image(this.canvasGame.width / 2 - 330, 160, 'env').setScale(0.5);
-        this.add.image(this.canvasGame.width / 2 - 110, 160, 'soc').setScale(0.5);
-        this.add.image(this.canvasGame.width / 2 + 110, 160, 'eco').setScale(0.5);
-        this.add.image(this.canvasGame.width / 2 + 330, 160, 'res').setScale(0.5);
+        this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
 
         // Over icons
-        this.envMask = this.add.image(this.canvasGame.width / 2 - 330, 160, 'env').setScale(0.5);
+        this.envMask = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
         this.envMask.tint = 0x808080;
-        this.socMask = this.add.image(this.canvasGame.width / 2 - 110, 160, 'soc').setScale(0.5);
+        this.socMask = this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
         this.socMask.tint = 0x808080;
-        this.ecoMask = this.add.image(this.canvasGame.width / 2 + 110, 160, 'eco').setScale(0.5);
+        this.ecoMask = this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
         this.ecoMask.tint = 0x808080;
-        this.resMask = this.add.image(this.canvasGame.width / 2 + 330, 160, 'res').setScale(0.5);
+        this.resMask = this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
         this.resMask.tint = 0x808080;
 
         this.updateIcons();

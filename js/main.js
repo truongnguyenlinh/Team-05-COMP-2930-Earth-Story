@@ -437,6 +437,7 @@ class BootScene extends Phaser.Scene {
 
     create() {
         initializeEvents(); // Read and initialize events.json
+        initializeEndings(); // Read and initialize endings.json
 
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");

@@ -8,6 +8,36 @@ class playGame extends Phaser.Scene {
 
 
     preload() {
+        this.canvas1 = document.getElementsByTagName("canvas");
+        this.canvas1[0].setAttribute("id", "canvasGame");
+        this.canvasGame = document.getElementById("canvasGame");
+
+        this.add.image(0, 0, "bg").setOrigin(0);
+        let loader = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "earth");
+        loader.displayWidth = this.canvasGame.width * 0.8;
+        loader.displayHeight = loader.displayWidth;
+
+        let loadingText = this.make.text({
+            x: this.canvasGame.width / 2,
+            y: this.canvasGame.height - 200,
+            text: 'Loading...',
+            style: {
+                fill: '#ffffff',
+                fontSize: "3em"
+            }
+        });
+        loadingText.setOrigin(0.5);
+
+        this.load.on("progress", function() {
+            loader.rotation += 0.01;
+        });
+
+        this.load.on("complete", function(value) {
+            console.log(value);
+            loader.destroy();
+            loadingText.destroy();
+        });
+
         this.load.image("earth_water", "./assets/images/layers/earth_water.png");
         this.load.image("earth_land", "./assets/images/layers/earth_land.png");
         this.load.image("earth_dirty_water_1", "./assets/images/layers/earth_dirty_water_1.png");
@@ -57,7 +87,6 @@ class playGame extends Phaser.Scene {
 
 
         this.load.image("timeline", "./assets/images/timeline.png");
-        this.load.image("background", "./assets/images/background.png");
         this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 167, frameHeight: 243 });
         this.load.image("star", "./assets/images/star.png");
         this.load.image("eco", "./assets/images/icons/eco.png");
@@ -68,11 +97,6 @@ class playGame extends Phaser.Scene {
 
 
     create() {
-        this.canvas1 = document.getElementsByTagName("canvas");
-        this.canvas1[0].setAttribute("id", "canvasGame");
-        this.canvasGame = document.getElementById("canvasGame");
-
-        this.background = this.add.image(0, 0, "background").setOrigin(0, 0);
         this.timeline = this.add.image(0, 0, "timeline");
         this.star = this.add.image(-this.timeline.width / 2 * 0.9, 0, "star").setScale(.25);
 
@@ -431,6 +455,7 @@ class playGame extends Phaser.Scene {
 
 class BootScene extends Phaser.Scene {
     preload() {
+        this.load.image("earth", "./assets/images/earth.png");
         this.load.image("logo", "./assets/images/logo.png");
         this.load.image("bg", "./assets/images/background.png");
     }
@@ -440,11 +465,11 @@ class BootScene extends Phaser.Scene {
 
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
-        this.canvasgame = document.getElementById("canvasGame");
+        this.canvasGame = document.getElementById("canvasGame");
 
         this.bg = this.add.image(0, 0, "bg").setOrigin(0,0);
-        this.logo = this.add.image(this.canvasgame.width / 2, this.canvasgame.height / 2, "logo");
-        this.logo.displayWidth = this.canvasgame.width * 0.8;
+        this.logo = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "logo");
+        this.logo.displayWidth = this.canvasGame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
         this.countSpin = 0;
@@ -452,19 +477,18 @@ class BootScene extends Phaser.Scene {
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
 
-        this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
+        this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
             "Play", { fill: "#FFFFFF", fontSize: "3em" });
         this.button.setInteractive().setOrigin(0.5, 0);
-        this.button.on("pointerdown", function() {
-            this.scene.add("PlayGame", playGame, true);
-            this.scene.setVisible(false);
+        this.button.on("pointerdown", function(){
+            this.scene.start("PlayGame");
         }, this);
 
-        this.tutorial = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.25,
+        this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
             "Tutorial", { fill: "#FFFFFF", fontSize: "3em" });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
 
-        this.options = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.15,
+        this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
             "Options", { fill: "#FFFFFF", fontSize: "3em" });
         this.options.setInteractive().setOrigin(0.5, 0);
     }

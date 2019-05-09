@@ -88,6 +88,7 @@ class playGame extends Phaser.Scene {
 
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.spritesheet('card', './assets/images/cards.png', { frameWidth: 167, frameHeight: 243 });
+        this.load.image("card", "./assets/images/card.png");
         this.load.image("star", "./assets/images/star.png");
         this.load.image("eco", "./assets/images/icons/eco.png");
         this.load.image("env", "./assets/images/icons/env.png");
@@ -100,7 +101,7 @@ class playGame extends Phaser.Scene {
         this.timeline = this.add.image(0, 0, "timeline");
         this.star = this.add.image(-this.timeline.width / 2 * 0.9, 0, "star").setScale(.25);
 
-        this.containerTimeline = this.add.container(game.config.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
+        this.containerTimeline = this.add.container(this.canvasGame.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
         this.containerTimeline.add([this.star, this.timeline]);
 
 
@@ -117,7 +118,7 @@ class playGame extends Phaser.Scene {
 
 
     createEarth() {
-        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
@@ -218,7 +219,7 @@ class playGame extends Phaser.Scene {
             this.earth_dirty_land_3.visible = true;
 
             console.log("environment < 50 = bad earth");
-            }
+        }
 
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
@@ -262,8 +263,10 @@ class playGame extends Phaser.Scene {
     }
 
     createCard() {
-        this.card = this.add.image(0, 0 , "card", 0).setInteractive();
-        this.card.setScale(3);
+        this.card = this.add.image(0, 0, "card").setInteractive();
+        this.card.setOrigin(0.5);
+        this.card.setScale(2.75);
+        this.card.alpha = 0.7;
         this.currentEvent = getRandomEvent();
 
         let style = {
@@ -272,7 +275,7 @@ class playGame extends Phaser.Scene {
             boundsAlignH: "center",
             fontSize: '50px',
             wordWrap: {
-                width: this.card.width * 3,
+                width: this.card.width * 2.75,
                 useAdvancedWrap: false }
         };
 
@@ -280,7 +283,7 @@ class playGame extends Phaser.Scene {
         this.info = this.add.text(0, 0, this.currentEvent["info"], style).setOrigin(0.5, 0.5);
         this.info.visible = false;
         //container for the card
-        this.container = this.add.container(game.config.width / 2, this.canvasGame.height / 2)
+        this.container = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2)
             .setSize(this.canvasGame.width * 0.5, this.canvasGame.width * 0.5)
             .setInteractive();
         this.container.add([this.card, this.question, this.info]);
@@ -302,10 +305,10 @@ class playGame extends Phaser.Scene {
 
 
     flipCard(){
-        this.card.on('pointerdown', function(pointer, localX, localY, event){
+        this.card.on('pointerup', function(pointer, localX, localY, event){
             this.cardTween = this.tweens.add({
                 targets: this.card,
-                scaleY: 3.2,
+                scaleY: 2.9,
                 scaleX: 0,
                 flipX: true,
                 yoyo: false,
@@ -323,8 +326,7 @@ class playGame extends Phaser.Scene {
 
 
             this.time.delayedCall(200, function(card){
-                this.card.setFrame(1 - this.card.frame.name);
-                if (this.card.frame.name === 1){
+                if (this.question.visible){
                     this.info.visible = true;
                     this.question.visible = false;
                 } else {
@@ -334,8 +336,8 @@ class playGame extends Phaser.Scene {
 
                 this.cardTween = this.tweens.add({
                     targets: this.card,
-                    scaleY: 3,
-                    scaleX: 3,
+                    scaleY: 2.75,
+                    scaleX: 2.75,
                     flipX: true,
                     yoyo: false,
                     duration: 200,
@@ -396,15 +398,13 @@ class playGame extends Phaser.Scene {
             }
             if (swipeNormal.y > 0.8) {
                 // down
-                $(this.container).animate({y: this.canvasGame.height});
+                $(this.container).animate({y: this.canvasGame.height * 1.15});
             }
             if (swipeNormal.y < -0.8) {
                 // up
                 $(this.container).animate({y: this.canvasGame.height / 2});
             }
         }
-
-
     }
 
     swipeX(direction) {
@@ -415,25 +415,24 @@ class playGame extends Phaser.Scene {
             this.flip = this.flipCard();
             applyConsequence(this.currentEvent[direction]);
         }
-
     }
 
 
     setupIcons() {
         // Under icons
-        this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
-        this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
-        this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
-        this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+        this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
+        this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
 
         // Over icons
-        this.envMask = this.add.image(game.config.width / 2 - 340, 175, 'env').setScale(0.5);
+        this.envMask = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
         this.envMask.tint = 0x808080;
-        this.socMask = this.add.image(game.config.width / 2 - 140, 175, 'soc').setScale(0.5);
+        this.socMask = this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
         this.socMask.tint = 0x808080;
-        this.ecoMask = this.add.image(game.config.width / 2 + 60, 175, 'eco').setScale(0.5);
+        this.ecoMask = this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
         this.ecoMask.tint = 0x808080;
-        this.resMask = this.add.image(game.config.width / 2 + 260, 175, 'res').setScale(0.5);
+        this.resMask = this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
         this.resMask.tint = 0x808080;
 
         this.updateIcons();
@@ -462,6 +461,7 @@ class BootScene extends Phaser.Scene {
 
     create() {
         initializeEvents(); // Read and initialize events.json
+        initializeEndings(); // Read and initialize endings.json
 
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -511,6 +511,5 @@ class BootScene extends Phaser.Scene {
         if (this.countSpin == 3) {
             console.log("Send Nyan Cat!")
         }
-
     }
 }

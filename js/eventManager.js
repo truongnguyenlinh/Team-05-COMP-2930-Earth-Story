@@ -1,7 +1,7 @@
 let rawEvents;
 
 
-// Async call to events.json. Data is written onto the global variable rawEvent, and the first random event is called.
+// Async call to events.json. Data is written onto the global variable rawEvent.
 function initializeEvents() {
     console.log("LOADING EVENTS");
     $.getJSON("./assets/json/events.json", function(json) {

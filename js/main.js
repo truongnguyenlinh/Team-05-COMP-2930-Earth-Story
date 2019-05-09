@@ -447,6 +447,11 @@ class BootScene extends Phaser.Scene {
         this.logo.displayWidth = this.canvasgame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
+        this.countSpin = 0;
+        this.canSpin = true;
+        this.logo.setInteractive();
+        this.logo.on("pointerdown", this.spinEarth, this);
+
         this.button = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.35,
             "Play", { fill: "#FFFFFF", fontSize: "3em" });
         this.button.setInteractive().setOrigin(0.5, 0);
@@ -462,5 +467,26 @@ class BootScene extends Phaser.Scene {
         this.options = this.add.text(this.canvasgame.width / 2, this.canvasgame.height / 1.15,
             "Options", { fill: "#FFFFFF", fontSize: "3em" });
         this.options.setInteractive().setOrigin(0.5, 0);
+    }
+
+    spinEarth() {
+        if (this.canSpin) {
+            this.canSpin = false;
+            this.tweens.add({
+                targets: [this.logo],
+                angle: 360,
+                duration: 1000,
+                ease: "Cubic.easeOut",
+                callbackScope: this,
+                onComplete: function() {
+                    this.canSpin = true;
+                }
+            });
+        }
+        this.countSpin += 1;
+        if (this.countSpin == 3) {
+            console.log("Send Nyan Cat!")
+        }
+
     }
 }

@@ -148,87 +148,86 @@ class playGame extends Phaser.Scene {
 
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
+
         this.earth_water = this.add.image(0, 0, "earth_water");
+
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
         this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-
         this.earth_dirty_water_1.visible = false;
         this.earth_dirty_water_2.visible = false;
         this.earth_dirty_water_3.visible = false;
 
         this.earth_land = this.add.image(0, 0, "earth_land");
+
         this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
-
         this.earth_dirty_land_1.visible = false;
         this.earth_dirty_land_2.visible = false;
         this.earth_dirty_land_3.visible = false;
 
-        this.clean_mt = this.add.image(0,0, "clean_mt");
+        // Visible elements
         this.default_mt = this.add.image(0,0, "default_mt");
-        this.dirty_mt = this.add.image(0,0, "dirty_mt");
         this.clean_clouds = this.add.image(0,0, "clean_clouds");
-        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
-
-        this.clean_mt.visible = false;
-        this.dirty_mt.visible = false;
-        this.dirty_clouds.visible = false;
-
         this.bush_1 = this.add.image(0, 0, "bush_1");
         this.bush_2 = this.add.image(0, 0, "bush_2");
-
         this.tree_1 = this.add.image(0, 0, "tree_1");
         this.tree_2 = this.add.image(0, 0, "tree_2");
+
+        this.fish_1 = this.add.image(0, 0, "fish_1");
+        this.whale_1 = this.add.image(0, 0, "whale_1");
+        this.salmon_1 = this.add.image(0, 0, "salmon_1");
+        this.tuna_1 = this.add.image(0, 0, "tuna_1");
+        this.cow_1 = this.add.image(0, 0, "cow_1");
+        this.pig_1 = this.add.image(0, 0, "pig_1");
+        this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
+
+        // Invisible elements
+        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
+        this.dirty_clouds.visible = false;
+        this.clean_mt = this.add.image(0,0, "clean_mt");
+        this.dirty_mt = this.add.image(0,0, "dirty_mt");
+        this.clean_mt.visible = false;
+        this.dirty_mt.visible = false;
         this.tree_3 = this.add.image(0, 0, "tree_3");
         this.tree_4 = this.add.image(0, 0, "tree_4");
-
         this.tree_3.visible = false;
         this.tree_4.visible = false;
 
-        this.fish_1 = this.add.image(0, 0, "fish_1");
         this.fish_2 = this.add.image(0, 0, "fish_2");
-
         this.fish_2.visible = false;
-
-        this.whale_1 = this.add.image(0, 0, "whale_1");
         this.whale_2 = this.add.image(0, 0, "whale_2");
-
         this.whale_2.visible = false;
-
-        this.salmon_1 = this.add.image(0, 0, "salmon_1");
         this.salmon_2 = this.add.image(0, 0, "salmon_2");
-
         this.salmon_2.visible = false;
-
-        this.tuna_1 = this.add.image(0, 0, "tuna_1");
         this.tuna_2 = this.add.image(0, 0, "tuna_2");
-
         this.tuna_2.visible = false;
-
-        this.cow_1 = this.add.image(0, 0, "cow_1");
         this.cow_2 = this.add.image(0, 0, "cow_2");
-
         this.cow_2.visible = false;
-
-        this.pig_1 = this.add.image(0, 0, "pig_1");
         this.pig_2 = this.add.image(0, 0, "pig_2");
-
         this.pig_2.visible = false;
-
-        this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
-
         this.shrimp_2.visible = false;
 
         this.factory_1= this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
+        this.factory_1.visible = false;
         this.factory_2.visible = false;
-
         this.house_1 = this.add.image(0, 0, "house_1");
         this.house_2 = this.add.image(0, 0, "house_2");
+        this.house_1.visible = false;
         this.house_2.visible = false;
+        this.wind_turbines_1 = this.add.image(0, 0, "wind_turbines_1");
+        this.wind_turbines_2 = this.add.image(0, 0, "wind_turbines_2");
+        this.wind_turbines_3 = this.add.image(0, 0, "wind_turbines_3");
+        this.wind_turbines_1.visible = false;
+        this.wind_turbines_2.visible = false;
+        this.wind_turbines_3.visible = false;
+        this.solar_panel_1 = this.add.image(0, 0, "solar_panel_1");
+        this.solar_panel_2 = this.add.image(0, 0, "solar_panel_2");
+        this.solar_panel_1.visible = false;
+        this.solar_panel_2.visible = false;
 
         this.earthContainer.add([this.earth_water, this.earth_dirty_water_1, this.earth_dirty_water_2, this.earth_dirty_water_3,
             this.earth_land, this.earth_dirty_land_1, this.earth_dirty_land_2, this.earth_dirty_land_3,
@@ -246,6 +245,8 @@ class playGame extends Phaser.Scene {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
             this.earth_dirty_land_3.visible = true;
+            this.dirty_clouds.visible = true;
+            this.dirty_mt.visible = true;
 
             console.log("environment < 50 = bad earth");
         }
@@ -253,38 +254,72 @@ class playGame extends Phaser.Scene {
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
             this.earth_dirty_land_3.visible = false;
+            this.dirty_clouds.visible = false;
+            this.dirty_mt.visible = false;
+            this.clean_mt.visible = true;
 
             console.log("environment > 50 = good earth");
         }
+
         if (getResources() > 50) {
             this.tree_3.visible = true;
             this.tree_4.visible = true;
+            this.fish_2.visible = true;
+            this.salmon_2.visible = true;
+            this.tuna_2.visible = true;
+            this.cow_2.visible = true;
+            this.pig_2.visible = true;
+            this.shrimp_2.visible = true;
 
-            console.log("resource > 50 = add trees");
+            console.log("resource > 50 = add all trees and fisheries");
         }
+
         if (getResources() < 50) {
+            this.bush_2.visible = false;
+            this.tree_1.visible = false;
+            this.tree_2.visible = false;
             this.tree_3.visible = false;
             this.tree_4.visible = false;
+            this.fish_1.visible = false;
+            this.fish_2.visible = false;
+            this.salmon_1.visible = false;
+            this.salmon_2.visible = false;
+            this.tuna_1.visible = false;
+            this.tuna_2.visible = false;
+            this.cow_1.visible = false;
+            this.cow_2.visible = false;
+            this.pig_1.visible = false;
+            this.pig_2.visible = false;
+            this.shrimp_1.visible = false;
+            this.shrimp_2.visible = false;
+            this.whale_1.visible = false;
+
             //console.log(getResources());
-            console.log("resource < 50 = remove trees");
+            console.log("resource < 50 = remove all trees and fisheries");
         }
 
         if (getEconomy() > 50) {
+            this.factory_1.visible = true;
             this.factory_2.visible = true;
+            this.wind_turbines_1.visible = true;
+            this.solar_panel_1.visible = true;
 
             console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
+            this.factory_1.visible = false;
             this.factory_2.visible = false;
 
             console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
+            this.house_1.visible = true;
             this.house_2.visible = true;
 
             console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
+            this.house_1.visible = false;
             this.house_2.visible = false;
 
             console.log("society < 50 = remove houses");

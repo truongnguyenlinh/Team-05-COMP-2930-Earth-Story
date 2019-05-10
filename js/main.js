@@ -508,7 +508,16 @@ class BootScene extends Phaser.Scene {
             "Options", { fill: "#FFFFFF", fontSize: "3em" });
         this.options.setInteractive().setOrigin(0.5, 0);
 
-        //Firebase
+        this.user = firebase.auth().currentUser;
+        if (firebase.auth().currentUser) {
+                this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
+                    "Log out", {fill: "#FFFFFF", fontSize: "3em"});
+                this.logout.setInteractive().setOrigin(0.5, 0);
+                this.logout.on("pointerdown", this.firebaseLogout, this);
+            } else {
+
+            }
+
 
     }
 
@@ -536,6 +545,12 @@ class BootScene extends Phaser.Scene {
         this.login();
     }
 
+    firebaseLogout(){
+        firebase.auth().signOut().then(function() {
+            // Redirect to google sign out.
+            window.location.assign('https://accounts.google.com/logout');
+        })
+    }
 
     spinEarth() {
         if (this.canSpin) {

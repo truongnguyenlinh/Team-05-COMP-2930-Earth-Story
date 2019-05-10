@@ -276,7 +276,7 @@ class playGame extends Phaser.Scene {
             boundsAlignH: "center",
             fontSize: '50px',
             wordWrap: {
-                width: this.card.width * 2.75,
+                width: this.card.width * 2.25,
                 useAdvancedWrap: false }
         };
 
@@ -391,7 +391,7 @@ class playGame extends Phaser.Scene {
             }
             if (swipeNormal.y > 0.8) {
                 // down
-                $(this.container).animate({y: this.canvasGame.height * 1.15});
+                $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
             }
             if (swipeNormal.y < -0.8) {
@@ -499,6 +499,7 @@ class BootScene extends Phaser.Scene {
         this.options.setInteractive().setOrigin(0.5, 0);
     }
 
+
     spinEarth() {
         if (this.canSpin) {
             this.canSpin = false;
@@ -541,6 +542,7 @@ class BootScene extends Phaser.Scene {
         this.cat_3.anims.play('right', true);
     }
 }
+
 
 class EndScene extends Phaser.Scene {
     constructor() {
@@ -798,7 +800,7 @@ class EndScene extends Phaser.Scene {
             boundsAlignH: "center",
             fontSize: '50px',
             wordWrap: {
-                width: this.card.width * 2.75,
+                width: this.card.width * 2.25,
                 useAdvancedWrap: false }
         };
 

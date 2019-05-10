@@ -121,24 +121,24 @@ class playGame extends Phaser.Scene {
 
 
     createEarth() {
-        this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
+        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
         this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
 
-        this.earth_dirty_water_1.visible = false;
-        this.earth_dirty_water_2.visible = false;
-        this.earth_dirty_water_3.visible = false;
+        this.earth_dirty_water_1.alpha = 0;
+        this.earth_dirty_water_2.alpha = 0;
+        this.earth_dirty_water_3.alpha = 0;
 
         this.earth_land = this.add.image(0, 0, "earth_land");
         this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
 
-        this.earth_dirty_land_1.visible = false;
-        this.earth_dirty_land_2.visible = false;
-        this.earth_dirty_land_3.visible = false;
+        this.earth_dirty_land_1.alpha = 0;
+        this.earth_dirty_land_2.alpha = 0;
+        this.earth_dirty_land_3.alpha = 0;
 
         this.clean_mt = this.add.image(0,0, "clean_mt");
         this.default_mt = this.add.image(0,0, "default_mt");
@@ -146,9 +146,9 @@ class playGame extends Phaser.Scene {
         this.clean_clouds = this.add.image(0,0, "clean_clouds");
         this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
 
-        this.clean_mt.visible = false;
-        this.dirty_mt.visible = false;
-        this.dirty_clouds.visible = false;
+        this.clean_mt.alpha = 0;
+        this.dirty_mt.alpha = 0;
+        this.dirty_clouds.alpha = 0;
 
         this.bush_1 = this.add.image(0, 0, "bush_1");
         this.bush_2 = this.add.image(0, 0, "bush_2");
@@ -158,51 +158,51 @@ class playGame extends Phaser.Scene {
         this.tree_3 = this.add.image(0, 0, "tree_3");
         this.tree_4 = this.add.image(0, 0, "tree_4");
 
-        this.tree_3.visible = false;
-        this.tree_4.visible = false;
+        this.tree_3.alpha = 0;
+        this.tree_4.alpha = 0;
 
         this.fish_1 = this.add.image(0, 0, "fish_1");
         this.fish_2 = this.add.image(0, 0, "fish_2");
 
-        this.fish_2.visible = false;
+        this.fish_2.alpha = 0;
 
         this.whale_1 = this.add.image(0, 0, "whale_1");
         this.whale_2 = this.add.image(0, 0, "whale_2");
 
-        this.whale_2.visible = false;
+        this.whale_2.alpha = 0;
 
         this.salmon_1 = this.add.image(0, 0, "salmon_1");
         this.salmon_2 = this.add.image(0, 0, "salmon_2");
 
-        this.salmon_2.visible = false;
+        this.salmon_2.alpha = 0;
 
         this.tuna_1 = this.add.image(0, 0, "tuna_1");
         this.tuna_2 = this.add.image(0, 0, "tuna_2");
 
-        this.tuna_2.visible = false;
+        this.tuna_2.alpha = 0;
 
         this.cow_1 = this.add.image(0, 0, "cow_1");
         this.cow_2 = this.add.image(0, 0, "cow_2");
 
-        this.cow_2.visible = false;
+        this.cow_2.alpha = 0;
 
         this.pig_1 = this.add.image(0, 0, "pig_1");
         this.pig_2 = this.add.image(0, 0, "pig_2");
 
-        this.pig_2.visible = false;
+        this.pig_2.alpha = 0;
 
         this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
 
-        this.shrimp_2.visible = false;
+        this.shrimp_2.alpha = 0;
 
         this.factory_1= this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
-        this.factory_2.visible = false;
+        this.factory_2.alpha = 0;
 
         this.house_1 = this.add.image(0, 0, "house_1");
         this.house_2 = this.add.image(0, 0, "house_2");
-        this.house_2.visible = false;
+        this.house_2.alpha = 0;
 
         this.earthContainer.add([this.earth_water, this.earth_dirty_water_1, this.earth_dirty_water_2, this.earth_dirty_water_3,
             this.earth_land, this.earth_dirty_land_1, this.earth_dirty_land_2, this.earth_dirty_land_3,
@@ -219,51 +219,59 @@ class playGame extends Phaser.Scene {
 
     updateEarth() {
         if (getEnvironment() < 50) {
-            this.earth_dirty_water_3.visible = true;
-            this.earth_dirty_land_3.visible = true;
+            this.tweenLayer(this.earth_dirty_water_3, 1);
+            this.tweenLayer(this.earth_dirty_land_3, 1);
 
             console.log("environment < 50 = bad earth");
         }
         if (getEnvironment() > 50) {
-            this.earth_dirty_water_3.visible = false;
-            this.earth_dirty_land_3.visible = false;
+            this.tweenLayer(this.earth_dirty_water_3, 0);
+            this.tweenLayer(this.earth_dirty_land_3, 0);
 
             console.log("environment > 50 = good earth");
         }
         if (getResources() > 50) {
-            this.tree_3.visible = true;
-            this.tree_4.visible = true;
+            this.tweenLayer(this.tree_3, 1);
+            this.tweenLayer(this.tree_4, 1);
 
             console.log("resource > 50 = add trees");
         }
         if (getResources() < 50) {
-            this.tree_3.visible = false;
-            this.tree_4.visible = false;
+            this.tweenLayer(this.tree_3, 0);
+            this.tweenLayer(this.tree_4, 0);
 
             console.log("resource < 50 = remove trees");
         }
         if (getEconomy() > 50) {
-            this.factory_2.visible = true;
+            this.tweenLayer(this.factory_2, 1);
 
             console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
-            this.factory_2.visible = false;
+            this.tweenLayer(this.factory_2, 0);
+
 
             console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
-            this.house_2.visible = true;
+            this.tweenLayer(this.house_2, 1);
 
             console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
-            this.house_2.visible = false;
-
+            this.tweenLayer(this.house_2, 0);
             console.log("society < 50 = remove houses");
         }
     }
 
+
+    tweenLayer(layer, alphaValue) {
+         this.tweens.add({
+                targets: layer,
+                alpha: alphaValue,
+                ease: 'Linear',
+                duration: 600,})
+    }
 
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
@@ -365,10 +373,12 @@ class playGame extends Phaser.Scene {
                 this.time.delayedCall(500, function (container) {
                     if (this.container.x === this.canvasGame.width + 1500){
                         this.container.destroy();
+                        this.updateEarth();
+
                     }
                 }, this.container, this);
 
-                this.time.delayedCall(800, function (swipe) {
+                this.time.delayedCall(1200, function (swipe) {
                     this.hasSwiped = false;
 
                     this.swipeX("yes");
@@ -381,10 +391,12 @@ class playGame extends Phaser.Scene {
                 this.time.delayedCall(500, function (container) {
                     if (this.container.x === -1500){
                         this.container.destroy();
+                        this.updateEarth();
+
 
                     }
                 }, this.container, this);
-                this.time.delayedCall(800, function (swipe) {
+                this.time.delayedCall(1200, function (swipe) {
                     this.hasSwiped = false;
                     this.swipeX("no");
                 }, this.swipeX, this);

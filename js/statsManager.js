@@ -65,5 +65,10 @@ function getSociety() {
 
 
 function getAverage(){
-    return getEconomy() + getResources() + getResources() + getEnvironment()
+    console.log(getEnvironment());
+    console.log(getSociety());
+    console.log(getEconomy());
+    console.log(getResources());
+    console.log(getEconomy() + getResources() + getSociety() + getEnvironment());
+    return getEconomy() + getResources() + getSociety() + getEnvironment()
 }

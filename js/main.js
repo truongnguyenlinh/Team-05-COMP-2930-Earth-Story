@@ -405,11 +405,14 @@ class playGame extends Phaser.Scene {
 
     swipeX(direction) {
         if (!this.endGame) {
-            this.moveStar()
+            if (this.currentEvent) {
+                applyConsequence(this.currentEvent[direction]);
+            }
+            this.currentEvent = getRandomEvent();
+            this.moveStar();
             this.updateEarth();
-            this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
+            this.createCard(this.currentEvent["question"], this.currentEvent["info"]);
             this.flipCard();
-            applyConsequence(getRandomEvent()[direction]);
         }
     }
 

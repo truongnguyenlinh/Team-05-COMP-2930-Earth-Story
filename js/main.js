@@ -107,7 +107,8 @@ class playGame extends Phaser.Scene {
         this.hasSwiped = false;
         this.endGame = false;
 
-        this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
+        this.currentEvent = getRandomEvent();
+        this.createCard(this.currentEvent["question"], this.currentEvent["info"]);
         this.flipCard();
         this.input.on("pointerup", this.endSwipe, this);
     }
@@ -272,6 +273,7 @@ class playGame extends Phaser.Scene {
                 ease: 'Linear',
                 duration: 600,})
     }
+
 
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
@@ -468,14 +470,15 @@ class playGame extends Phaser.Scene {
     }
 }
 
+
 class BootScene extends Phaser.Scene {
     preload() {
         this.load.image("earth", "./assets/images/earth.png");
         this.load.image("logo", "./assets/images/logo.png");
         this.load.image("bg", "./assets/images/background.png");
         this.load.spritesheet('cat', './assets/images/nyan_cat_sprite.png', { frameWidth: 52.7, frameHeight: 22});
-
     }
+
 
     create() {
         initializeEvents(); // Read and initialize events.json
@@ -534,6 +537,7 @@ class BootScene extends Phaser.Scene {
         }
     }
 
+
     nyanCat(){
         this.cat = this.physics.add.sprite(-10, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
@@ -568,7 +572,6 @@ class EndScene extends Phaser.Scene {
         this.canvasGame = document.getElementById("canvasGame");
 
         this.add.image(0, 0, "bg").setOrigin(0);
-
 
         this.load.image("earth_water", "./assets/images/layers/earth_water.png");
         this.load.image("earth_land", "./assets/images/layers/earth_land.png");
@@ -616,7 +619,6 @@ class EndScene extends Phaser.Scene {
         this.load.image("wind_turbines_1", "./assets/images/layers/wind_turbines_1.png");
         this.load.image("wind_turbines_2", "./assets/images/layers/wind_turbines_2.png");
         this.load.image("wind_turbines_3", "./assets/images/layers/wind_turbines_3.png");
-
 
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("card", "./assets/images/card.png");

@@ -12,9 +12,7 @@ function initializeEvents() {
 
 
 function getRandomEvent() {
-    let randomEvent = rawEvents[getRandomInt(0, rawEvents.length)];
-    console.log(randomEvent["question"]);
-    return randomEvent;
+    return rawEvents[getRandomInt(0, rawEvents.length)];
 }
 
 

@@ -540,13 +540,14 @@ class BootScene extends Phaser.Scene {
         if (this.countSpin == 3) {
             console.log("Send Nyan Cat!");
             this.nyanCat();
+            this.countSpin = 0;
         }
     }
   
   nyanCat(){
-        this.cat = this.physics.add.sprite(-10, 120 + Math.random() * 200, "cat", 0).setScale(3);
-        this.cat_2 = this.physics.add.sprite(-50, 120 + Math.random() * 200, "cat", 0).setScale(3);
-        this.cat_3 = this.physics.add.sprite(-20, 120 + Math.random() * 200, "cat", 0).setScale(3);
+        this.cat = this.physics.add.sprite(-10, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
+        this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
+        this.cat_3 = this.physics.add.sprite(-20, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
 
         this.anims.create({
             key: 'right',

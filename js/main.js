@@ -133,18 +133,14 @@ class playGame extends Phaser.Scene {
         }
     }
 
-    gameOver(){
-            if (getAverage() > 300){
-                this.createCard(getGoodEnding(), getEndingBack());
-            }
-            else {
-                this.createCard(getBadEnding(), getEndingBack());
-            }
-            this.flipCard()
-
-
-
-    }
+    // gameOver(){
+    //         if (getAverage() > 300){
+    //             this.createCard(getGoodEnding(), getEndingBack());
+    //         } else {
+    //             this.createCard(getBadEnding(), getEndingBack());
+    //         }
+    //         this.flipCard();
+    // }
 
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
@@ -437,11 +433,7 @@ class playGame extends Phaser.Scene {
             this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
             this.flipCard();
             applyConsequence(getRandomEvent()[direction]);
-        } else {
-            this.gameOver();
         }
-
-
     }
 
 
@@ -476,6 +468,11 @@ class playGame extends Phaser.Scene {
 
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
+    }
+
+
+    triggerEndGame() {
+        this.endGame = true;
     }
 }
 
@@ -543,8 +540,8 @@ class BootScene extends Phaser.Scene {
             this.countSpin = 0;
         }
     }
-  
-  nyanCat(){
+
+    nyanCat(){
         this.cat = this.physics.add.sprite(-10, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_3 = this.physics.add.sprite(-20, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
@@ -563,7 +560,6 @@ class BootScene extends Phaser.Scene {
         this.cat_3.setVelocityX(400);
         this.cat_3.anims.play('right', true);
     }
-
 }
 
 class EndScene extends Phaser.Scene {

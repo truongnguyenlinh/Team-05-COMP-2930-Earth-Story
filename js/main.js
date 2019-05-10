@@ -433,6 +433,8 @@ class BootScene extends Phaser.Scene {
     preload() {
         this.load.image("logo", "./assets/images/logo.png");
         this.load.image("bg", "./assets/images/background.png");
+        this.load.spritesheet('cat', './assets/images/nyan_cat_sprite.png', { frameWidth: 52.7, frameHeight: 22});
+
     }
 
     create() {
@@ -485,8 +487,29 @@ class BootScene extends Phaser.Scene {
         }
         this.countSpin += 1;
         if (this.countSpin == 3) {
-            console.log("Send Nyan Cat!")
+            console.log("Send Nyan Cat!");
+            this.nyanCat();
         }
 
+    }
+
+    nyanCat(){
+        this.cat = this.physics.add.sprite(-10, 120 + Math.random() * 200, "cat", 0).setScale(3);
+        this.cat_2 = this.physics.add.sprite(-50, 120 + Math.random() * 200, "cat", 0).setScale(3);
+        this.cat_3 = this.physics.add.sprite(-20, 120 + Math.random() * 200, "cat", 0).setScale(3);
+
+        this.anims.create({
+            key: 'right',
+            frames: this.anims.generateFrameNumbers('cat', { start: 0, end: 9 }),
+            frameRate: 9,
+            repeat: -1
+        });
+
+        this.cat.setVelocityX(300);
+        this.cat.anims.play('right', true);
+        this.cat_2.setVelocityX(200);
+        this.cat_2.anims.play('right', true);
+        this.cat_3.setVelocityX(400);
+        this.cat_3.anims.play('right', true);
     }
 }

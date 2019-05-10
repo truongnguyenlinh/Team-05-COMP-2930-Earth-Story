@@ -3,7 +3,6 @@ const maxStat = 100;
 const startStat = 50;
 let stats = {environment: startStat, resources: startStat, economy: startStat, society: startStat};
 
-
 Number.prototype.clamp = function(min, max) {
     return Math.min(Math.max(this, min), max);
 };
@@ -50,4 +49,8 @@ function modifySociety(amount) {
 
 function getSociety() {
     return stats.society;
+}
+
+function getAverage(){
+    return getEconomy() + getResources() + getResources() + getEnvironment()
 }

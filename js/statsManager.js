@@ -63,6 +63,7 @@ function getSociety() {
     return stats.society;
 }
 
+
 function getAverage(){
     return getEconomy() + getResources() + getResources() + getEnvironment()
 }

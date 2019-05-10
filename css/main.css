@@ -1,5 +1,9 @@
+@font-face {
+    font-family:'font-earth-story';
+    src: url('/assets/abel-regular.ttf') format('ttf')
+}
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'abel-regular', sans-serif;
 }
 
 .flip-card {

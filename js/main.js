@@ -333,10 +333,11 @@ class playGame extends Phaser.Scene {
         // this.currentEvent = getRandomEvent();
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontFamily: 'abel-regular',
+            fontSize: '60px',
             wordWrap: {
                 width: this.card.width * 2.75,
                 useAdvancedWrap: false }
@@ -542,18 +543,18 @@ class BootScene extends Phaser.Scene {
         this.logo.on("pointerdown", this.spinEarth, this);
 
         this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
-            "Play", { fill: "#FFFFFF", fontSize: "3em" });
+            "Play", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.button.setInteractive().setOrigin(0.5, 0);
         this.button.on("pointerdown", function(){
             this.scene.start("PlayGame");
         }, this);
 
         this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
-            "Tutorial", { fill: "#FFFFFF", fontSize: "3em" });
+            "Tutorial", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
 
         this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
-            "Options", { fill: "#FFFFFF", fontSize: "3em" });
+            "Options", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.options.setInteractive().setOrigin(0.5, 0);
     }
 
@@ -856,10 +857,11 @@ class EndScene extends Phaser.Scene {
         // this.currentEvent = getRandomEvent();
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
+            fontFamily: 'abel-regular',
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontSize: '60px',
             wordWrap: {
                 width: this.card.width * 2.75,
                 useAdvancedWrap: false }

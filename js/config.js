@@ -11,6 +11,6 @@ let config = {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [BootScene, playGame]
+    scene: [BootScene, playGame, EndScene]
 };
 let game = new Phaser.Game(config);

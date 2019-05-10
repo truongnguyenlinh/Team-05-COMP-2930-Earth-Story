@@ -19,3 +19,8 @@ function getGoodEnding() {
 function getBadEnding() {
     return rawEndings["ending bad"];
 }
+
+
+function getEndingBack() {
+    return rawEndings["ending back"];
+}

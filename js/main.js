@@ -121,7 +121,7 @@ class playGame extends Phaser.Scene {
 
 
     createEarth() {
-        this.earthContainer = this.add.container(game.config.width / 2, this.canvasGame.height / 2);
+        this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");

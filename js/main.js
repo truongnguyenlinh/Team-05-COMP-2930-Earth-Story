@@ -85,7 +85,6 @@ class playGame extends Phaser.Scene {
         this.load.image("wind_turbines_2", "./assets/images/layers/wind_turbines_2.png");
         this.load.image("wind_turbines_3", "./assets/images/layers/wind_turbines_3.png");
 
-
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("card", "./assets/images/card.png");
         this.load.image("star", "./assets/images/star.png");
@@ -98,45 +97,26 @@ class playGame extends Phaser.Scene {
 
     create() {
         this.timeline = this.add.image(0, 0, "timeline");
-
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
-
         this.progressBar = this.add.container(this.canvasGame.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
         this.progressBar.add([this.timeline, this.star]);
-
 
         this.setupIcons();
         this.createEarth();
 
-
         this.hasSwiped = false;
         this.endGame = false;
-
 
         this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
         this.flipCard();
         this.input.on("pointerup", this.endSwipe, this);
-
-
-
     }
 
 
     update() {
-        console.log(this.endGame);
         if (this.endGame) {
             this.scene.start("EndGame");
         }
-    }
-
-    gameOver(){
-            if (getAverage() > 300){
-                this.createCard(getGoodEnding(), getEndingBack());
-            }
-            else {
-                this.createCard(getBadEnding(), getEndingBack());
-            }
-            this.flipCard()
     }
 
 
@@ -244,7 +224,6 @@ class playGame extends Phaser.Scene {
 
             console.log("environment < 50 = bad earth");
         }
-
         if (getEnvironment() > 50) {
             this.tweenLayer(this.earth_dirty_water_3, 0);
             this.tweenLayer(this.earth_dirty_land_3, 0);
@@ -263,7 +242,6 @@ class playGame extends Phaser.Scene {
 
             console.log("resource < 50 = remove trees");
         }
-
         if (getEconomy() > 50) {
             this.tweenLayer(this.factory_2, 1);
 
@@ -276,14 +254,12 @@ class playGame extends Phaser.Scene {
             console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
-            // this.house_2.visible = true;
             this.tweenLayer(this.house_2, 1);
 
             console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
             this.tweenLayer(this.house_2, 0);
-
             console.log("society < 50 = remove houses");
         }
     }
@@ -301,7 +277,6 @@ class playGame extends Phaser.Scene {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
         this.card.alpha = 0.7;
-        // this.currentEvent = getRandomEvent();
 
         let textStyle = {
             color:'#FF0000',
@@ -435,10 +410,10 @@ class playGame extends Phaser.Scene {
                 // up
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
-
             }
         }
     }
+
 
     swipeX(direction) {
         if (!this.endGame) {
@@ -448,11 +423,7 @@ class playGame extends Phaser.Scene {
             this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
             this.flipCard();
             applyConsequence(getRandomEvent()[direction]);
-        } else {
-            this.gameOver();
         }
-
-
     }
 
 
@@ -487,6 +458,11 @@ class playGame extends Phaser.Scene {
 
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
+    }
+
+
+    triggerEndGame() {
+        this.endGame = true;
     }
 }
 
@@ -554,8 +530,8 @@ class BootScene extends Phaser.Scene {
             this.countSpin = 0;
         }
     }
-  
-  nyanCat(){
+
+    nyanCat(){
         this.cat = this.physics.add.sprite(-10, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_3 = this.physics.add.sprite(-20, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
@@ -574,7 +550,6 @@ class BootScene extends Phaser.Scene {
         this.cat_3.setVelocityX(400);
         this.cat_3.anims.play('right', true);
     }
-
 }
 
 class EndScene extends Phaser.Scene {
@@ -662,9 +637,7 @@ class EndScene extends Phaser.Scene {
         this.createEarth();
         this.updateEarth();
         this.gameOver();
-
     }
-
 
 
     gameOver(){
@@ -674,11 +647,9 @@ class EndScene extends Phaser.Scene {
         else {
             this.createCard(getBadEnding(), getEndingBack());
         }
-        this.flipCard()
-
-
-
+        this.flipCard();
     }
+
 
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
@@ -776,6 +747,7 @@ class EndScene extends Phaser.Scene {
             this.factory_1, this.factory_2, this.house_1, this.house_2]);
     }
 
+
     updateEarth() {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
@@ -783,7 +755,6 @@ class EndScene extends Phaser.Scene {
 
             console.log("environment < 50 = bad earth");
         }
-
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
             this.earth_dirty_land_3.visible = false;
@@ -799,10 +770,9 @@ class EndScene extends Phaser.Scene {
         if (getResources() < 50) {
             this.tree_3.visible = false;
             this.tree_4.visible = false;
-            //console.log(getResources());
+
             console.log("resource < 50 = remove trees");
         }
-
         if (getEconomy() > 50) {
             this.factory_2.visible = true;
 
@@ -824,6 +794,7 @@ class EndScene extends Phaser.Scene {
             console.log("society < 50 = remove houses");
         }
     }
+
 
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
@@ -850,6 +821,7 @@ class EndScene extends Phaser.Scene {
             .setInteractive();
         this.container.add([this.card, this.question, this.info]);
     }
+
 
     flipCard(){
         this.card.on('pointerup', function(pointer, localX, localY, event){
@@ -900,6 +872,7 @@ class EndScene extends Phaser.Scene {
         }, this);
     }
 
+
     setupIcons() {
         // Under icons
         this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -919,6 +892,7 @@ class EndScene extends Phaser.Scene {
 
         this.updateIcons();
     }
+
 
     updateIcons() {
         this.cropIcon(this.envMask, getEnvironment());

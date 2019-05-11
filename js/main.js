@@ -124,86 +124,85 @@ class playGame extends Phaser.Scene {
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
+
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
         this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-
         this.earth_dirty_water_1.alpha = 0;
         this.earth_dirty_water_2.alpha = 0;
         this.earth_dirty_water_3.alpha = 0;
 
         this.earth_land = this.add.image(0, 0, "earth_land");
+
         this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
-
         this.earth_dirty_land_1.alpha = 0;
         this.earth_dirty_land_2.alpha = 0;
         this.earth_dirty_land_3.alpha = 0;
 
-        this.clean_mt = this.add.image(0,0, "clean_mt");
         this.default_mt = this.add.image(0,0, "default_mt");
-        this.dirty_mt = this.add.image(0,0, "dirty_mt");
         this.clean_clouds = this.add.image(0,0, "clean_clouds");
-        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
 
+        this.clean_mt = this.add.image(0,0, "clean_mt");
+        this.dirty_mt = this.add.image(0,0, "dirty_mt");
+        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
         this.clean_mt.alpha = 0;
         this.dirty_mt.alpha = 0;
         this.dirty_clouds.alpha = 0;
 
+        // Visible layers
         this.bush_1 = this.add.image(0, 0, "bush_1");
         this.bush_2 = this.add.image(0, 0, "bush_2");
-
         this.tree_1 = this.add.image(0, 0, "tree_1");
         this.tree_2 = this.add.image(0, 0, "tree_2");
+
+        this.fish_1 = this.add.image(0, 0, "fish_1");
+        this.whale_1 = this.add.image(0, 0, "whale_1");
+        this.salmon_1 = this.add.image(0, 0, "salmon_1");
+        this.tuna_1 = this.add.image(0, 0, "tuna_1");
+        this.cow_1 = this.add.image(0, 0, "cow_1");
+        this.pig_1 = this.add.image(0, 0, "pig_1");
+        this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
+
+        // Invisible layers
         this.tree_3 = this.add.image(0, 0, "tree_3");
         this.tree_4 = this.add.image(0, 0, "tree_4");
-
         this.tree_3.alpha = 0;
         this.tree_4.alpha = 0;
 
-        this.fish_1 = this.add.image(0, 0, "fish_1");
         this.fish_2 = this.add.image(0, 0, "fish_2");
-
         this.fish_2.alpha = 0;
-
-        this.whale_1 = this.add.image(0, 0, "whale_1");
         this.whale_2 = this.add.image(0, 0, "whale_2");
-
         this.whale_2.alpha = 0;
-
-        this.salmon_1 = this.add.image(0, 0, "salmon_1");
         this.salmon_2 = this.add.image(0, 0, "salmon_2");
-
         this.salmon_2.alpha = 0;
-
-        this.tuna_1 = this.add.image(0, 0, "tuna_1");
         this.tuna_2 = this.add.image(0, 0, "tuna_2");
-
         this.tuna_2.alpha = 0;
-
-        this.cow_1 = this.add.image(0, 0, "cow_1");
         this.cow_2 = this.add.image(0, 0, "cow_2");
-
         this.cow_2.alpha = 0;
-
-        this.pig_1 = this.add.image(0, 0, "pig_1");
         this.pig_2 = this.add.image(0, 0, "pig_2");
-
         this.pig_2.alpha = 0;
-
-        this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
-
         this.shrimp_2.alpha = 0;
 
         this.factory_1= this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
+        this.factory_1.alpha = 0;
         this.factory_2.alpha = 0;
-
         this.house_1 = this.add.image(0, 0, "house_1");
         this.house_2 = this.add.image(0, 0, "house_2");
         this.house_2.alpha = 0;
+        this.solar_panel_1 = this.add.image(0, 0, "solar_panel_1");
+        this.solar_panel_2 = this.add.image(0, 0, "solar_panel_2");
+        this.solar_panel_1.alpha = 0;
+        this.solar_panel_2.alpha = 0;
+        this.wind_turbines_1 = this.add.image(0, 0, "wind_turbines_1");
+        this.wind_turbines_2 = this.add.image(0, 0, "wind_turbines_2");
+        this.wind_turbines_3 = this.add.image(0, 0, "wind_turbines_3");
+        this.wind_turbines_1.alpha = 0;
+        this.wind_turbines_2.alpha = 0;
+        this.wind_turbines_3.alpha = 0;
 
         this.earthContainer.add([this.earth_water, this.earth_dirty_water_1, this.earth_dirty_water_2, this.earth_dirty_water_3,
             this.earth_land, this.earth_dirty_land_1, this.earth_dirty_land_2, this.earth_dirty_land_3,
@@ -214,7 +213,8 @@ class playGame extends Phaser.Scene {
             this.whale_1, this.whale_2,
             this.salmon_1, this.salmon_2, this.tuna_1, this.tuna_2,
             this.cow_1, this.cow_2, this.pig_1, this.pig_2, this.shrimp_1, this.shrimp_2,
-            this.factory_1, this.factory_2, this.house_1, this.house_2]);
+            this.factory_1, this.factory_2, this.house_1, this.house_2, this.solar_panel_1, this.solar_panel_2,
+            this.wind_turbines_1, this.wind_turbines_2, this.wind_turbines_3]);
     }
 
 
@@ -222,35 +222,62 @@ class playGame extends Phaser.Scene {
         if (getEnvironment() < 50) {
             this.tweenLayer(this.earth_dirty_water_3, 1);
             this.tweenLayer(this.earth_dirty_land_3, 1);
+            this.tweenLayer(this.dirty_mt, 1);
+            this.tweenLayer(this.dirty_clouds, 1);
 
             console.log("environment < 50 = bad earth");
         }
         if (getEnvironment() > 50) {
             this.tweenLayer(this.earth_dirty_water_3, 0);
             this.tweenLayer(this.earth_dirty_land_3, 0);
+            this.tweenLayer(this.dirty_clouds, 0);
+            this.tweenLayer(this.dirty_mt, 0);
+            this.tweenLayer(this.clean_mt, 1);
 
             console.log("environment > 50 = good earth");
         }
         if (getResources() > 50) {
             this.tweenLayer(this.tree_3, 1);
             this.tweenLayer(this.tree_4, 1);
+            this.tweenLayer(this.fish_2, 1);
+            this.tweenLayer(this.salmon_2, 1);
+            this.tweenLayer(this.tuna_2, 1);
+            this.tweenLayer(this.cow_2, 1);
+            this.tweenLayer(this.pig_2, 1);
+            this.tweenLayer(this.shrimp_2, 1);
 
-            console.log("resource > 50 = add trees");
+            console.log("resource > 50 = add all trees and fisheries");
         }
         if (getResources() < 50) {
+            this.tweenLayer(this.tree_1, 0);
+            this.tweenLayer(this.tree_2, 0);
             this.tweenLayer(this.tree_3, 0);
             this.tweenLayer(this.tree_4, 0);
+            this.tweenLayer(this.fish_2, 0);
+            this.tweenLayer(this.salmon_2, 0);
+            this.tweenLayer(this.tuna_2, 0);
+            this.tweenLayer(this.cow_2, 0);
+            this.tweenLayer(this.pig_2, 0);
+            this.tweenLayer(this.shrimp_2, 0);
+            this.tweenLayer(this.fish_1, 0);
+            this.tweenLayer(this.salmon_1, 0);
+            this.tweenLayer(this.tuna_1, 0);
+            this.tweenLayer(this.cow_1, 0);
+            this.tweenLayer(this.pig_1, 0);
+            this.tweenLayer(this.shrimp_1, 0);
 
-            console.log("resource < 50 = remove trees");
+            console.log("resource < 50 = remove all trees and fisheries");
         }
         if (getEconomy() > 50) {
+            this.tweenLayer(this.factory_1, 1);
             this.tweenLayer(this.factory_2, 1);
+            this.tweenLayer(this.wind_turbines_1, 1);
 
             console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
+            this.tweenLayer(this.factory_1, 0);
             this.tweenLayer(this.factory_2, 0);
-
 
             console.log("economy < 50 = remove factories");
         }
@@ -260,8 +287,10 @@ class playGame extends Phaser.Scene {
             console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
+            this.tweenLayer(this.house_1, 0);
             this.tweenLayer(this.house_2, 0);
-            console.log("society < 50 = remove houses");
+
+            console.log("society < 50 = remove all houses");
         }
     }
 
@@ -281,10 +310,11 @@ class playGame extends Phaser.Scene {
         this.card.alpha = 0.7;
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontFamily: 'abel-regular',
+            fontSize: '60px',
             wordWrap: {
                 width: this.card.width * 2.25,
                 useAdvancedWrap: false }
@@ -499,16 +529,16 @@ class BootScene extends Phaser.Scene {
         this.logo.on("pointerdown", this.spinEarth, this);
 
         this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
-            "Play", { fill: "#FFFFFF", fontSize: "3em" });
+            "Play", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.button.setInteractive().setOrigin(0.5, 0);
         this.button.on("pointerdown", this.firebaseLogin, this);
 
         this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
-            "Tutorial", { fill: "#FFFFFF", fontSize: "3em" });
+            "Tutorial", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
 
         this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
-            "Options", { fill: "#FFFFFF", fontSize: "3em" });
+            "Options", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.options.setInteractive().setOrigin(0.5, 0);
 
         this.user = firebase.auth().currentUser;
@@ -849,10 +879,11 @@ class EndScene extends Phaser.Scene {
         // this.currentEvent = getRandomEvent();
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
+            fontFamily: 'abel-regular',
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontSize: '60px',
             wordWrap: {
                 width: this.card.width * 2.25,
                 useAdvancedWrap: false }

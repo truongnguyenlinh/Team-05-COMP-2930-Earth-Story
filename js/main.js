@@ -454,7 +454,6 @@ class playGame extends Phaser.Scene {
             }
             this.currentEvent = getRandomEvent();
             this.moveStar();
-            this.updateEarth();
             this.createCard(this.currentEvent["question"], this.currentEvent["info"]);
             this.flipCard();
         }

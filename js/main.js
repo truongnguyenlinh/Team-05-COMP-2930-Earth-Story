@@ -85,7 +85,6 @@ class playGame extends Phaser.Scene {
         this.load.image("wind_turbines_2", "./assets/images/layers/wind_turbines_2.png");
         this.load.image("wind_turbines_3", "./assets/images/layers/wind_turbines_3.png");
 
-
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("card", "./assets/images/card.png");
         this.load.image("star", "./assets/images/star.png");
@@ -98,137 +97,112 @@ class playGame extends Phaser.Scene {
 
     create() {
         this.timeline = this.add.image(0, 0, "timeline");
-
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
-
         this.progressBar = this.add.container(this.canvasGame.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
         this.progressBar.add([this.timeline, this.star]);
-
 
         this.setupIcons();
         this.createEarth();
 
-
         this.hasSwiped = false;
         this.endGame = false;
 
-
-        this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
+        this.currentEvent = getRandomEvent();
+        this.createCard(this.currentEvent["question"], this.currentEvent["info"]);
         this.flipCard();
         this.input.on("pointerup", this.endSwipe, this);
-
-
-
     }
 
 
     update() {
-        // this.end =scene.get("EndGame")
-        console.log(this.endGame);
         if (this.endGame) {
-            // this.scene.pause("PlayGame");
-        this.scene.start("EndGame");
-
-
+            this.scene.start("EndGame");
         }
     }
 
-    gameOver(){
-            if (getAverage() > 300){
-                this.createCard(getGoodEnding(), getEndingBack());
-            }
-            else {
-                this.createCard(getBadEnding(), getEndingBack());
-            }
-            this.flipCard()
-
-
-
-    }
 
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
+
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
         this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-
-        this.earth_dirty_water_1.visible = false;
-        this.earth_dirty_water_2.visible = false;
-        this.earth_dirty_water_3.visible = false;
+        this.earth_dirty_water_1.alpha = 0;
+        this.earth_dirty_water_2.alpha = 0;
+        this.earth_dirty_water_3.alpha = 0;
 
         this.earth_land = this.add.image(0, 0, "earth_land");
+
         this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
+        this.earth_dirty_land_1.alpha = 0;
+        this.earth_dirty_land_2.alpha = 0;
+        this.earth_dirty_land_3.alpha = 0;
 
-        this.earth_dirty_land_1.visible = false;
-        this.earth_dirty_land_2.visible = false;
-        this.earth_dirty_land_3.visible = false;
+        this.default_mt = this.add.image(0,0, "default_mt");
+        this.clean_clouds = this.add.image(0,0, "clean_clouds");
 
         this.clean_mt = this.add.image(0,0, "clean_mt");
-        this.default_mt = this.add.image(0,0, "default_mt");
         this.dirty_mt = this.add.image(0,0, "dirty_mt");
-        this.clean_clouds = this.add.image(0,0, "clean_clouds");
         this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
+        this.clean_mt.alpha = 0;
+        this.dirty_mt.alpha = 0;
+        this.dirty_clouds.alpha = 0;
 
-        this.clean_mt.visible = false;
-        this.dirty_mt.visible = false;
-        this.dirty_clouds.visible = false;
-
+        // Visible layers
         this.bush_1 = this.add.image(0, 0, "bush_1");
         this.bush_2 = this.add.image(0, 0, "bush_2");
-
         this.tree_1 = this.add.image(0, 0, "tree_1");
         this.tree_2 = this.add.image(0, 0, "tree_2");
-        this.tree_3 = this.add.image(0, 0, "tree_3");
-        this.tree_4 = this.add.image(0, 0, "tree_4");
-
-        this.tree_3.visible = false;
-        this.tree_4.visible = false;
 
         this.fish_1 = this.add.image(0, 0, "fish_1");
-        this.fish_2 = this.add.image(0, 0, "fish_2");
-
-        this.fish_2.visible = false;
-
         this.whale_1 = this.add.image(0, 0, "whale_1");
-        this.whale_2 = this.add.image(0, 0, "whale_2");
-
-        this.whale_2.visible = false;
-
         this.salmon_1 = this.add.image(0, 0, "salmon_1");
-        this.salmon_2 = this.add.image(0, 0, "salmon_2");
-
-        this.salmon_2.visible = false;
-
         this.tuna_1 = this.add.image(0, 0, "tuna_1");
-        this.tuna_2 = this.add.image(0, 0, "tuna_2");
-
-        this.tuna_2.visible = false;
-
         this.cow_1 = this.add.image(0, 0, "cow_1");
-        this.cow_2 = this.add.image(0, 0, "cow_2");
-
-        this.cow_2.visible = false;
-
         this.pig_1 = this.add.image(0, 0, "pig_1");
-        this.pig_2 = this.add.image(0, 0, "pig_2");
-
-        this.pig_2.visible = false;
-
         this.shrimp_1 = this.add.image(0, 0, "shrimp_1");
-        this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
 
-        this.shrimp_2.visible = false;
+        // Invisible layers
+        this.tree_3 = this.add.image(0, 0, "tree_3");
+        this.tree_4 = this.add.image(0, 0, "tree_4");
+        this.tree_3.alpha = 0;
+        this.tree_4.alpha = 0;
+
+        this.fish_2 = this.add.image(0, 0, "fish_2");
+        this.fish_2.alpha = 0;
+        this.whale_2 = this.add.image(0, 0, "whale_2");
+        this.whale_2.alpha = 0;
+        this.salmon_2 = this.add.image(0, 0, "salmon_2");
+        this.salmon_2.alpha = 0;
+        this.tuna_2 = this.add.image(0, 0, "tuna_2");
+        this.tuna_2.alpha = 0;
+        this.cow_2 = this.add.image(0, 0, "cow_2");
+        this.cow_2.alpha = 0;
+        this.pig_2 = this.add.image(0, 0, "pig_2");
+        this.pig_2.alpha = 0;
+        this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
+        this.shrimp_2.alpha = 0;
 
         this.factory_1= this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
-        this.factory_2.visible = false;
-
+        this.factory_1.alpha = 0;
+        this.factory_2.alpha = 0;
         this.house_1 = this.add.image(0, 0, "house_1");
         this.house_2 = this.add.image(0, 0, "house_2");
-        this.house_2.visible = false;
+        this.house_2.alpha = 0;
+        this.solar_panel_1 = this.add.image(0, 0, "solar_panel_1");
+        this.solar_panel_2 = this.add.image(0, 0, "solar_panel_2");
+        this.solar_panel_1.alpha = 0;
+        this.solar_panel_2.alpha = 0;
+        this.wind_turbines_1 = this.add.image(0, 0, "wind_turbines_1");
+        this.wind_turbines_2 = this.add.image(0, 0, "wind_turbines_2");
+        this.wind_turbines_3 = this.add.image(0, 0, "wind_turbines_3");
+        this.wind_turbines_1.alpha = 0;
+        this.wind_turbines_2.alpha = 0;
+        this.wind_turbines_3.alpha = 0;
 
         this.earthContainer.add([this.earth_water, this.earth_dirty_water_1, this.earth_dirty_water_2, this.earth_dirty_water_3,
             this.earth_land, this.earth_dirty_land_1, this.earth_dirty_land_2, this.earth_dirty_land_3,
@@ -239,71 +213,110 @@ class playGame extends Phaser.Scene {
             this.whale_1, this.whale_2,
             this.salmon_1, this.salmon_2, this.tuna_1, this.tuna_2,
             this.cow_1, this.cow_2, this.pig_1, this.pig_2, this.shrimp_1, this.shrimp_2,
-            this.factory_1, this.factory_2, this.house_1, this.house_2]);
+            this.factory_1, this.factory_2, this.house_1, this.house_2, this.solar_panel_1, this.solar_panel_2,
+            this.wind_turbines_1, this.wind_turbines_2, this.wind_turbines_3]);
     }
+
 
     updateEarth() {
         if (getEnvironment() < 50) {
-            this.earth_dirty_water_3.visible = true;
-            this.earth_dirty_land_3.visible = true;
+            this.tweenLayer(this.earth_dirty_water_3, 1);
+            this.tweenLayer(this.earth_dirty_land_3, 1);
+            this.tweenLayer(this.dirty_mt, 1);
+            this.tweenLayer(this.dirty_clouds, 1);
 
             console.log("environment < 50 = bad earth");
         }
-
         if (getEnvironment() > 50) {
-            this.earth_dirty_water_3.visible = false;
-            this.earth_dirty_land_3.visible = false;
+            this.tweenLayer(this.earth_dirty_water_3, 0);
+            this.tweenLayer(this.earth_dirty_land_3, 0);
+            this.tweenLayer(this.dirty_clouds, 0);
+            this.tweenLayer(this.dirty_mt, 0);
+            this.tweenLayer(this.clean_mt, 1);
 
             console.log("environment > 50 = good earth");
         }
         if (getResources() > 50) {
-            this.tree_3.visible = true;
-            this.tree_4.visible = true;
+            this.tweenLayer(this.tree_3, 1);
+            this.tweenLayer(this.tree_4, 1);
+            this.tweenLayer(this.fish_2, 1);
+            this.tweenLayer(this.salmon_2, 1);
+            this.tweenLayer(this.tuna_2, 1);
+            this.tweenLayer(this.cow_2, 1);
+            this.tweenLayer(this.pig_2, 1);
+            this.tweenLayer(this.shrimp_2, 1);
 
-            console.log("resource > 50 = add trees");
+            console.log("resource > 50 = add all trees and fisheries");
         }
         if (getResources() < 50) {
-            this.tree_3.visible = false;
-            this.tree_4.visible = false;
-            //console.log(getResources());
-            console.log("resource < 50 = remove trees");
-        }
+            this.tweenLayer(this.tree_1, 0);
+            this.tweenLayer(this.tree_2, 0);
+            this.tweenLayer(this.tree_3, 0);
+            this.tweenLayer(this.tree_4, 0);
+            this.tweenLayer(this.fish_2, 0);
+            this.tweenLayer(this.salmon_2, 0);
+            this.tweenLayer(this.tuna_2, 0);
+            this.tweenLayer(this.cow_2, 0);
+            this.tweenLayer(this.pig_2, 0);
+            this.tweenLayer(this.shrimp_2, 0);
+            this.tweenLayer(this.fish_1, 0);
+            this.tweenLayer(this.salmon_1, 0);
+            this.tweenLayer(this.tuna_1, 0);
+            this.tweenLayer(this.cow_1, 0);
+            this.tweenLayer(this.pig_1, 0);
+            this.tweenLayer(this.shrimp_1, 0);
 
+            console.log("resource < 50 = remove all trees and fisheries");
+        }
         if (getEconomy() > 50) {
-            this.factory_2.visible = true;
+            this.tweenLayer(this.factory_1, 1);
+            this.tweenLayer(this.factory_2, 1);
+            this.tweenLayer(this.wind_turbines_1, 1);
 
             console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
-            this.factory_2.visible = false;
+            this.tweenLayer(this.factory_1, 0);
+            this.tweenLayer(this.factory_2, 0);
 
             console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
-            this.house_2.visible = true;
+            this.tweenLayer(this.house_2, 1);
 
             console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
-            this.house_2.visible = false;
+            this.tweenLayer(this.house_1, 0);
+            this.tweenLayer(this.house_2, 0);
 
-            console.log("society < 50 = remove houses");
+            console.log("society < 50 = remove all houses");
         }
     }
+
+
+    tweenLayer(layer, alphaValue) {
+         this.tweens.add({
+                targets: layer,
+                alpha: alphaValue,
+                ease: 'Linear',
+                duration: 600,})
+    }
+
 
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
         this.card.alpha = 0.7;
-        // this.currentEvent = getRandomEvent();
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontFamily: 'abel-regular',
+            fontSize: '60px',
             wordWrap: {
-                width: this.card.width * 2.75,
+                width: this.card.width * 2.25,
                 useAdvancedWrap: false }
         };
 
@@ -392,10 +405,12 @@ class playGame extends Phaser.Scene {
                 this.time.delayedCall(500, function (container) {
                     if (this.container.x === this.canvasGame.width + 1500){
                         this.container.destroy();
+                        this.updateEarth();
+
                     }
                 }, this.container, this);
 
-                this.time.delayedCall(800, function (swipe) {
+                this.time.delayedCall(1200, function (swipe) {
                     this.hasSwiped = false;
 
                     this.swipeX("yes");
@@ -408,40 +423,41 @@ class playGame extends Phaser.Scene {
                 this.time.delayedCall(500, function (container) {
                     if (this.container.x === -1500){
                         this.container.destroy();
+                        this.updateEarth();
+
 
                     }
                 }, this.container, this);
-                this.time.delayedCall(800, function (swipe) {
+                this.time.delayedCall(1200, function (swipe) {
                     this.hasSwiped = false;
                     this.swipeX("no");
                 }, this.swipeX, this);
             }
             if (swipeNormal.y > 0.8) {
                 // down
-                $(this.container).animate({y: this.canvasGame.height * 1.15});
+                $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
             }
             if (swipeNormal.y < -0.8) {
                 // up
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
-
             }
         }
     }
 
+
     swipeX(direction) {
         if (!this.endGame) {
-            this.moveStar()
+            if (this.currentEvent) {
+                applyConsequence(this.currentEvent[direction]);
+            }
+            this.currentEvent = getRandomEvent();
+            this.moveStar();
             this.updateEarth();
-            this.createCard(getRandomEvent()["question"], getRandomEvent()["info"]);
+            this.createCard(this.currentEvent["question"], this.currentEvent["info"]);
             this.flipCard();
-            applyConsequence(getRandomEvent()[direction]);
-        } else {
-            this.gameOver();
         }
-
-
     }
 
 
@@ -477,7 +493,13 @@ class playGame extends Phaser.Scene {
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }
+
+
+    triggerEndGame() {
+        this.endGame = true;
+    }
 }
+
 
 class BootScene extends Phaser.Scene {
     preload() {
@@ -485,8 +507,8 @@ class BootScene extends Phaser.Scene {
         this.load.image("logo", "./assets/images/logo.png");
         this.load.image("bg", "./assets/images/background.png");
         this.load.spritesheet('cat', './assets/images/nyan_cat_sprite.png', { frameWidth: 52.7, frameHeight: 22});
-
     }
+
 
     create() {
         initializeEvents(); // Read and initialize events.json
@@ -507,19 +529,60 @@ class BootScene extends Phaser.Scene {
         this.logo.on("pointerdown", this.spinEarth, this);
 
         this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
-            "Play", { fill: "#FFFFFF", fontSize: "3em" });
+            "Play", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.button.setInteractive().setOrigin(0.5, 0);
-        this.button.on("pointerdown", function(){
-            this.scene.start("PlayGame");
-        }, this);
+        this.button.on("pointerdown", this.firebaseLogin, this);
 
         this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
-            "Tutorial", { fill: "#FFFFFF", fontSize: "3em" });
+            "Tutorial", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
 
         this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
-            "Options", { fill: "#FFFFFF", fontSize: "3em" });
+            "Options", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.options.setInteractive().setOrigin(0.5, 0);
+
+        this.user = firebase.auth().currentUser;
+        if (firebase.auth().currentUser) {
+                this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
+                    "Log out", {fill: "#FFFFFF", fontSize: "3em"});
+                this.logout.setInteractive().setOrigin(0.5, 0);
+                this.logout.on("pointerdown", this.firebaseLogout, this);
+            } else {
+
+            }
+
+
+    }
+
+    firebaseLogin() {
+        console.log("called firebaseLogin");
+        this.login = function (provider) {
+            "use strict";
+            var provider, user;
+            if (!firebase.auth().currentUser) {
+                provider = new firebase.auth.GoogleAuthProvider();
+                //provider.addScope('https://www.googleapis.com/auth/plus.login');
+                provider.addScope("https://www.googleapis.com/auth/userinfo.email");
+
+                firebase.auth().signInWithRedirect(provider).then(this.start_game.bind(this));
+            } else {
+                firebase.database().ref("/users/" + firebase.auth().currentUser.uid).once("value").then(this.start_game.bind(this));
+            }
+        };
+
+        this.start_game = function () {
+            "use strict";
+            this.scene.start("PlayGame");
+        };
+
+        this.login();
+    }
+
+    firebaseLogout(){
+        firebase.auth().signOut().then(function() {
+            // Redirect to google sign out.
+            window.location.assign('https://accounts.google.com/logout');
+        })
     }
 
     spinEarth() {
@@ -543,8 +606,9 @@ class BootScene extends Phaser.Scene {
             this.countSpin = 0;
         }
     }
-  
-  nyanCat(){
+
+
+    nyanCat(){
         this.cat = this.physics.add.sprite(-10, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_3 = this.physics.add.sprite(-20, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
@@ -563,8 +627,8 @@ class BootScene extends Phaser.Scene {
         this.cat_3.setVelocityX(400);
         this.cat_3.anims.play('right', true);
     }
-
 }
+
 
 class EndScene extends Phaser.Scene {
     constructor() {
@@ -578,7 +642,6 @@ class EndScene extends Phaser.Scene {
         this.canvasGame = document.getElementById("canvasGame");
 
         this.add.image(0, 0, "bg").setOrigin(0);
-
 
         this.load.image("earth_water", "./assets/images/layers/earth_water.png");
         this.load.image("earth_land", "./assets/images/layers/earth_land.png");
@@ -627,7 +690,6 @@ class EndScene extends Phaser.Scene {
         this.load.image("wind_turbines_2", "./assets/images/layers/wind_turbines_2.png");
         this.load.image("wind_turbines_3", "./assets/images/layers/wind_turbines_3.png");
 
-
         this.load.image("timeline", "./assets/images/timeline.png");
         this.load.image("card", "./assets/images/card.png");
         this.load.image("star", "./assets/images/star.png");
@@ -651,9 +713,7 @@ class EndScene extends Phaser.Scene {
         this.createEarth();
         this.updateEarth();
         this.gameOver();
-
     }
-
 
 
     gameOver(){
@@ -663,11 +723,9 @@ class EndScene extends Phaser.Scene {
         else {
             this.createCard(getBadEnding(), getEndingBack());
         }
-        this.flipCard()
-
-
-
+        this.flipCard();
     }
+
 
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
@@ -765,6 +823,7 @@ class EndScene extends Phaser.Scene {
             this.factory_1, this.factory_2, this.house_1, this.house_2]);
     }
 
+
     updateEarth() {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
@@ -772,7 +831,6 @@ class EndScene extends Phaser.Scene {
 
             console.log("environment < 50 = bad earth");
         }
-
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
             this.earth_dirty_land_3.visible = false;
@@ -788,10 +846,9 @@ class EndScene extends Phaser.Scene {
         if (getResources() < 50) {
             this.tree_3.visible = false;
             this.tree_4.visible = false;
-            //console.log(getResources());
+
             console.log("resource < 50 = remove trees");
         }
-
         if (getEconomy() > 50) {
             this.factory_2.visible = true;
 
@@ -814,6 +871,7 @@ class EndScene extends Phaser.Scene {
         }
     }
 
+
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
@@ -821,12 +879,13 @@ class EndScene extends Phaser.Scene {
         // this.currentEvent = getRandomEvent();
 
         let textStyle = {
-            color:'#FF0000',
+            color:'#000000',
             align:"center",
+            fontFamily: 'abel-regular',
             boundsAlignH: "center",
-            fontSize: '50px',
+            fontSize: '60px',
             wordWrap: {
-                width: this.card.width * 2.75,
+                width: this.card.width * 2.25,
                 useAdvancedWrap: false }
         };
 
@@ -839,6 +898,7 @@ class EndScene extends Phaser.Scene {
             .setInteractive();
         this.container.add([this.card, this.question, this.info]);
     }
+
 
     flipCard(){
         this.card.on('pointerup', function(pointer, localX, localY, event){
@@ -889,6 +949,7 @@ class EndScene extends Phaser.Scene {
         }, this);
     }
 
+
     setupIcons() {
         // Under icons
         this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -908,6 +969,7 @@ class EndScene extends Phaser.Scene {
 
         this.updateIcons();
     }
+
 
     updateIcons() {
         this.cropIcon(this.envMask, getEnvironment());

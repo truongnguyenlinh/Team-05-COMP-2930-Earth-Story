@@ -501,6 +501,9 @@ class playGame extends Phaser.Scene {
 
 
 class BootScene extends Phaser.Scene {
+    constructor() {
+        super("Bootgame");
+    }
     preload() {
         this.load.image("earth", "./assets/images/earth.png");
         this.load.image("logo", "./assets/images/logo.png");
@@ -701,12 +704,22 @@ class EndScene extends Phaser.Scene {
 
     create() {
         console.log("scene change")
-        this.timeline = this.add.image(0, 0, "timeline");
 
-        this.star = this.add.image( this.timeline.width / 2, 0, "star").setScale(.25)
+        this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.8,
+            "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+        this.leaderboard.setInteractive().setOrigin(0.5, 0);
+        this.leaderboard.on("pointerdown", function(){
+            console.log("Hi")
+        }, this);
 
-        this.progressBar = this.add.container(this.canvasGame.width / 2, this.canvasGame.height * 0.9).setSize(this.timeline.width, this.timeline.height);
-        this.progressBar.add([this.timeline, this.star]);
+        this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.8,
+            "restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+        this.restart.setInteractive().setOrigin(0.5, 0);
+        this.restart.on("pointerdown", function(pointer){
+            restartStat();
+            this.scene.start("PlayGame");
+        }, this);
+
 
         this.setupIcons();
         this.createEarth();

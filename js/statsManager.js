@@ -72,10 +72,3 @@ function getAverage(){
     console.log(getEconomy() + getResources() + getSociety() + getEnvironment());
     return getEconomy() + getResources() + getSociety() + getEnvironment()
 }
-
-function restartStat(){
-    stats.environment = startStat;
-    stats.resources = startStat;
-    stats.society = startStat;
-    stats.economy = startStat;
-}

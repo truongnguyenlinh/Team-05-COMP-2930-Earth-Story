@@ -724,6 +724,7 @@ class EndScene extends Phaser.Scene {
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
+        getPlayerNum();
         this.gameOver();
     }
 

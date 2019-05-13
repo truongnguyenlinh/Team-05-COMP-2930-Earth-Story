@@ -564,7 +564,7 @@ class BootScene extends Phaser.Scene {
                 //provider.addScope('https://www.googleapis.com/auth/plus.login');
                 provider.addScope("https://www.googleapis.com/auth/userinfo.email");
 
-                firebase.auth().signInWithRedirect(provider).then(this.start_game.bind(this));
+                firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
             } else {
                 firebase.database().ref("/users/" + firebase.auth().currentUser.uid).once("value").then(this.start_game.bind(this));
             }

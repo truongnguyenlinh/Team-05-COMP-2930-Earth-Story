@@ -46,33 +46,22 @@ class BootScene extends Phaser.Scene {
         this.about = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.08,
             "About", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.about.setInteractive().setOrigin(0.5, 0);
-
-        if (firebase.auth().currentUser) {
-            this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
-                "Log out", {fill: "#FFFFFF", fontSize: "3em"});
-            this.logout.setInteractive().setOrigin(0.5, 0);
-            this.logout.on("pointerdown", this.firebaseLogout, this);
-        }
     }
 
 
     firebaseLogin() {
         console.log("called firebaseLogin");
         this.login = function (provider) {
-            "use strict";
             if (!firebase.auth().currentUser) {
                 provider = new firebase.auth.GoogleAuthProvider();
-                //provider.addScope('https://www.googleapis.com/auth/plus.login');
                 provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-
-                firebase.auth().signInWithRedirect(provider).then(this.start_game.bind(this));
+                firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
             } else {
                 firebase.database().ref("/users/" + firebase.auth().currentUser.uid).once("value").then(this.start_game.bind(this));
             }
         };
 
         this.start_game = function () {
-            "use strict";
             this.scene.start("PlayGame");
         };
         this.login();
@@ -80,10 +69,9 @@ class BootScene extends Phaser.Scene {
 
 
     firebaseLogout(){
-        firebase.auth().signOut().then(function() {
-            // Redirect to google sign out.
-            window.location.assign('https://accounts.google.com/logout');
-        });
+        firebase.auth().signOut();
+        console.log("restart scene");
+        this.scene.restart();
     }
 
 
@@ -115,6 +103,7 @@ class BootScene extends Phaser.Scene {
         this.cat_2 = this.physics.add.sprite(-50, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
         this.cat_3 = this.physics.add.sprite(-20, Math.random() * this.canvasGame.height, "cat", 0).setScale(3);
 
+        // animate cat sprite
         this.anims.create({
             key: 'right',
             frames: this.anims.generateFrameNumbers('cat', { start: 0, end: 9 }),
@@ -124,9 +113,22 @@ class BootScene extends Phaser.Scene {
 
         this.cat.setVelocityX(300);
         this.cat.anims.play('right', true);
+
         this.cat_2.setVelocityX(200);
         this.cat_2.anims.play('right', true);
+
         this.cat_3.setVelocityX(400);
         this.cat_3.anims.play('right', true);
+    }
+
+
+    update(){
+        // Display log out button if user logged in
+        if (firebase.auth().currentUser) {
+            this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
+                "Log out", {fill: "#FFFFFF", fontSize: "3em"});
+            this.logout.setInteractive().setOrigin(0.5, 0);
+            this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
+        }
     }
 }

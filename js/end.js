@@ -14,63 +14,40 @@ class EndScene extends Phaser.Scene {
 
     create() {
 
-
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
         addPlayer();
         this.gameOver();
-
+        this.getLeader();
+        this.showLeader = false;
 
         this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.8,
             "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.leaderboard.setInteractive().setOrigin(0.5, 0);
-        this.leaderboard.on("pointerdown", function(leader) {
-            console.log("Hi");
-            this.getLeader();
+        this.leaderboard.on("pointerdown", function() {
+            if (this.showLeader === false) {
+                this.hideScore();
 
+                this.leaderRankTitle.visible = true;
+                this.leaderNameTitle.visible = true;
+                this.leaderScoreTitle.visible = true;
+                this.leaderRank.visible = true;
+                this.leaderName.visible = true;
+                this.leaderScore.visible = true;
+                this.showLeader = true;
+            }
         }, this);
 
         this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.8,
-            "restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+            "Restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.restart.setInteractive().setOrigin(0.5, 0);
         this.restart.on("pointerdown", function(){
             restartStat();
             this.scene.start("BootScene");
         }, this);
     }
-    displayLeaders(leaders){
-        console.log(leaders[0]);
-        this.hideScore();
-        var style = { fill: "#000000", fontSize: "5em", fontFamily: 'abel-regular', tabs: 300,};
-        this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
-        this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
-        this.leaderScoreTitle = this.add.text(this.container.width *2.75/ 4 , -this.container.height / 1.5, "Score", style).setOrigin(0.5, 0);
 
-        this.leaderRank = this.add.text(-this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
-        this.leaderName = this.add.text(0, -this.container.height *2.75/ 6, "", style).setOrigin(0.5, 0);
-        this.leaderScore = this.add.text(this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
-
-
-        this.container.add([this.leaderRankTitle, this.leaderNameTitle, this.leaderScoreTitle]);
-        if (leaders.length >= 5) {
-            for (let i = 0; i < 5; i++) {
-                this.leaderRank.text += i+1+"\n";
-                this.leaderName.text += leaders[i][0]+"\n";
-                this.leaderScore.text += leaders[i][1]+"\n";
-            }
-        } else {
-            for (let i = 0; i < leaders.length; i++) {
-                this.leaderRank.text += i+1+"\n";
-                this.leaderName.text += leaders[i][0]+"\n";
-                this.leaderScore.text += leaders[i][1]+"\n";
-            }
-
-        }
-        this.container.add([this.leaderRank, this.leaderName, this.leaderScore]);
-
-        console.log(this.container.list);
-    }
 
     getLeader(){
         const playerRoot = firebase.database().ref().child("players/");
@@ -90,10 +67,46 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    displayLeaders(leaders){
+        // console.log(leaders[0]);
+        var style = { fill: "#000000", fontSize: "5em", fontFamily: 'abel-regular', tabs: 300,};
+        this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
+        this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
+        this.leaderScoreTitle = this.add.text(this.container.width *2.75/ 4 , -this.container.height / 1.5, "Score", style).setOrigin(0.5, 0);
+
+        this.leaderRank = this.add.text(-this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
+        this.leaderName = this.add.text(0, -this.container.height *2.75/ 6, "", style).setOrigin(0.5, 0);
+        this.leaderScore = this.add.text(this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
+
+        this.leaderRankTitle.visible = false;
+        this.leaderNameTitle.visible = false;
+        this.leaderScoreTitle.visible = false;
+        this.leaderRank.visible = false;
+        this.leaderName.visible = false;
+        this.leaderScore.visible = false;
+
+        this.container.add([this.leaderRankTitle, this.leaderNameTitle, this.leaderScoreTitle]);
+        if (leaders.length >= 5) {
+            for (let i = 0; i < 5; i++) {
+                this.leaderRank.text += i+1+"\n";
+                this.leaderName.text += leaders[i][0]+"\n";
+                this.leaderScore.text += leaders[i][1]+"\n";
+            }
+        } else {
+            for (let i = 0; i < leaders.length; i++) {
+                this.leaderRank.text += i+1+"\n";
+                this.leaderName.text += leaders[i][0]+"\n";
+                this.leaderScore.text += leaders[i][1]+"\n";
+            }
+
+        }
+        this.container.add([this.leaderRank, this.leaderName, this.leaderScore]);
+    }
+
+
     hideScore(){
         this.question.visible = false;
         this.info.visible = false;
-
     }
 
     gameOver(){
@@ -277,17 +290,16 @@ class EndScene extends Phaser.Scene {
 
 
         this.card.on('pointerup', function(){
+            if (this.showLeader){
+                this.leaderRankTitle.visible = false;
+                this.leaderNameTitle.visible = false;
+                this.leaderScoreTitle.visible = false;
+                this.leaderRank.visible = false;
+                this.leaderName.visible = false;
+                this.leaderScore.visible = false;
+                this.showLeader = false;
 
-
-            this.leaderRankTitle.visible = false;
-            this.leaderNameTitle.visible = false;
-            this.leaderScoreTitle.visible = false;
-            this.leaderRank.visible = false;
-            this.leaderName.visible = false;
-            this.leaderScore.visible = false;
-
-
-
+            }
             this.tweens.add({
                 targets: this.card,
                 scaleY: 2.9,

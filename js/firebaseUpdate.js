@@ -35,24 +35,5 @@ function saveData(numOfPlayers){
 
 
 
-// function getLeader(){
-//     const playerRoot = firebase.database().ref().child("players/");
-//     playerRoot.once('value').then((snapshot) => {
-//         list = snapshot.val();
-//         let leaders = [];
-//         for (x in list){
-//             playersInfo = [];
-//             playersInfo.push(list[x]['profile']['name']);
-//             playersInfo.push(list[x]['score']['average']);
-//             leaders.push(playersInfo)
-//         }
-//         leaders.sort(function(a, b) { return b[1] - a[1]});
-//         return leaders;
-//     });
-// }
-
-// function showLeaders(leaderArr){
-
-
 
 

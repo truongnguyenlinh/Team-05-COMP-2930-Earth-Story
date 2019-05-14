@@ -198,7 +198,7 @@ class PlayTutorial extends Phaser.Scene {
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
         if (this.tutorialEnd) {
-            this.scene.start("Bootgame");
+            this.scene.start("BootScene");
         }
 
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
@@ -280,7 +280,7 @@ class PlayTutorial extends Phaser.Scene {
 
     swipeX(direction) {
         this.moveStar();
-        this.createCard("Hello!", "Welcome to the tutorial!");
+        this.createCard("Choices we make, shape our world!", "Welcome to the tutorial!");
     }
 
 

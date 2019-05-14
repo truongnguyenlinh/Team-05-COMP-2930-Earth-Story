@@ -11,6 +11,9 @@ let config = {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
+
+    mute: false,
+    loop: true,
     scene: [BootScene, PlayGame, EndScene, PlayTutorial]
 };
 

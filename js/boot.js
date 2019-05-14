@@ -38,6 +38,10 @@ class BootScene extends Phaser.Scene {
         this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
             "Tutorial", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
         this.tutorial.setInteractive().setOrigin(0.5, 0);
+        this.tutorial.on("pointerdown", function() {
+            this.scene.start("PlayTutorial");
+        }, this);
+
 
         this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
             "Options", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });

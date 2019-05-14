@@ -3,9 +3,9 @@
     "question": "It is a hot summer day at the beach. Do you want to grab an ice cream?",
     "info": "Dairy production accounts for almost 4% of global carbon emissions.",
     "yes": {
-      "economy": -5,
-      "society": 15,
-      "environment": -15,
+      "economy": 5,
+      "society": 5,
+      "environment": -5,
       "resources": 0
     },
     "no": {
@@ -157,6 +157,358 @@
       "society": 0,
       "environment": -5,
       "resources": -5
+    }
+  },
+  {
+    "question": "A large lot of city land is available for building city. Do you want to build a mall?",
+    "info": "Buildings are responsible for 38% of all CO2 emissions.",
+    "yes": {
+      "economy": 15,
+      "society": 10,
+      "environment": -15,
+      "resources": -10
+    },
+    "no": {
+      "economy": 0,
+      "society": -10,
+      "environment": 5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "Population is growing, and people need more residential area. Do you want to build houses?",
+    "info": "Building construction is responsible for a huge percentage of the greenhouse gas emissions that affects climate change.",
+    "yes": {
+      "economy": 10,
+      "society": 20,
+      "environment": -15,
+      "resources": -10
+    },
+    "no": {
+      "economy": 0,
+      "society": -10,
+      "environment": 5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "You are sweating from hot summer weather. Do you want to take a nice shower?",
+    "info": "Conserving water prevents greenhouse gas emissions associated with treating and distributing water.",
+    "yes": {
+      "economy": 5,
+      "society": 5,
+      "environment": -5,
+      "resources": -5
+    },
+    "no": {
+      "economy": 0,
+      "society": -5,
+      "environment": 5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "You recently moved into a new house, and you found that your room wall colour is white. Do you want to paint it with your favourite colour?",
+    "info": "Wall painting supplies emit toxic chemicals in the air and cause air pollution.",
+    "yes": {
+      "economy": 5,
+      "society": 5,
+      "environment": -5,
+      "resources": 0
+    },
+    "no": {
+      "economy": -5,
+      "society": 0,
+      "environment": 5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "You won a million dollar lottery. Do you want a new car and house?",
+    "info": "During the process of mining, dust and chemicals are released in the air causing massive air pollution.",
+    "yes": {
+      "economy": 5,
+      "society": 5,
+      "environment": -10,
+      "resources": -5
+    },
+    "no": {
+      "economy": 0,
+      "society": -5,
+      "environment": 1,
+      "resources": 1
+    }
+  },
+  {
+    "question": "A recent deposit of coal was discovered in a remote area. Do you allow mining?",
+    "info": "Allowing permission for mining would increase the amount of jobs in the area. However, coal contributes to largest amount of greenhouse gases for energy production.",
+    "yes": {
+      "economy": 15,
+      "society": 10,
+      "environment": -15,
+      "resources": -10
+    },
+    "no": {
+      "economy": -10,
+      "society": -10,
+      "environment": 1,
+      "resources": 1
+    }
+  },
+  {
+    "question": "As Director of the City Planning Department, you want to mandate building more zero emission buildings. Would you do it?",
+    "info": "This will cause each building to cost 8% more and housing prices to increase.",
+    "yes": {
+      "economy": -5,
+      "society": -5,
+      "environment": 5,
+      "resources": -1
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "Should we phase out traditional energy (oil, coal) and introduce alternative energy (wind, solar)?",
+    "info": "Just 1 wind turbine can generate enough electricity to power 1,400 homes.",
+    "yes": {
+      "economy": -5,
+      "society": -5,
+      "environment": 10,
+      "resources": 1
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -1,
+      "resources": -5
+    }
+  },
+  {
+    "question": "Should we build a nuclear power plant?",
+    "info": "Nuclear power plants do not emit greenhouse gases while generating electricity, but radioactive waste is difficult to safely dispose.",
+    "yes": {
+      "economy": 5,
+      "society": -5,
+      "environment": 0,
+      "resources": -5
+    },
+    "no": {
+      "economy": -1,
+      "society": 1,
+      "environment": 0,
+      "resources": 1
+    }
+  },
+  {
+    "question": "Do you mind losing 5 minutes of your regular shower time?",
+    "info": "10 litres of water is used per minute during the shower.",
+    "yes": {
+      "economy": -1,
+      "society": -1,
+      "environment": 5,
+      "resources": 5
+    },
+    "no": {
+      "economy": 5,
+      "society": 5,
+      "environment": -1,
+      "resources": -1
+    }
+  },
+  {
+    "question": "You are in charge of one of the farming company. Do you decide to implement crop rotation?",
+    "info": "Crop rotation prevents soil and nutrient loss, but will reduce farming output.",
+    "yes": {
+      "economy": -1,
+      "society": -1,
+      "environment": 5,
+      "resources": -1
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "No one is using that room, but the light is turned on. Go turn the light off!",
+    "info": "Turning lights off save energy and money.",
+    "yes": {
+      "economy": -1,
+      "society": -1,
+      "environment": 1,
+      "resources": 1
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -1,
+      "resources": -1
+    }
+  },
+  {
+    "question": "Question of the Day: Do you open and close fridge multiple times a day?",
+    "info": "Careless with opening and closing your fridge door wastes 50 to 120kWh a year.",
+    "yes": {
+      "economy": 1,
+      "society": 1,
+      "environment": -1,
+      "resources": -1
+    },
+    "no": {
+      "economy": -1,
+      "society": -1,
+      "environment": 1,
+      "resources": 1
+    }
+  },
+  {
+    "question": "As a director of city plan, would you build bike lanes?",
+    "info": "To help reduce congestion in the city, space-efficient means of moving people such as walking, cycling and public transport should be prioritised over low-occupancy car transport.",
+    "yes": {
+      "economy": -1,
+      "society": 1,
+      "environment": 5,
+      "resources": -1
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -1,
+      "resources": 1
+    }
+  },
+  {
+    "question": "Should we invest in vertical farming?",
+    "info": "Vertical farming prevents nutrient loss and saves up to 97% of water.",
+    "yes": {
+      "economy": -1,
+      "society": -1,
+      "environment": 5,
+      "resources": 5
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": -5,
+      "resources": -5
+    }
+  },
+  {
+    "question": "Should we invest in lab grown meat?",
+    "info": "Clean meat produces 78 - 96% less greenhouse gas emissions, uses 99% less land and between 82 - 92% less water.",
+    "yes": {
+      "economy": 5,
+      "society": 10,
+      "environment": -10,
+      "resources": -5
+    },
+    "no": {
+      "economy": -5,
+      "society": -10,
+      "environment": 10,
+      "resources": 5
+    }
+  },
+  {
+    "question": "You are thinking to buy your favourite novel. Do you want to get a paper book? If not, you can get E-Book.",
+    "info": "Pulp and paper is the third largest industrial polluter to air, water, and land in both Canada and the United States, and releases well over 100 million kg of toxic pollution each year.",
+    "yes": {
+      "economy": 1,
+      "society": 1,
+      "environment": -5,
+      "resources": -5
+    },
+    "no": {
+      "economy": 1,
+      "society": 1,
+      "environment": 5,
+      "resources": 1
+    }
+  },
+  {
+    "question": "Question of the Day: Did you have your own water bottle with you today?",
+    "info": "Plastic water bottles can take between 400 and 1,000 years to decompose.",
+    "yes": {
+      "economy": 1,
+      "society": 1,
+      "environment": 5,
+      "resources": 5
+    },
+    "no": {
+      "economy": -1,
+      "society": 0,
+      "environment": -10,
+      "resources": -5
+    }
+  },
+  {
+    "question": "Question of the Day: Did you use disposable container today?",
+    "info": "An estimated 17.6 billion pounds of plastic enters into the marine environment from land- based sources every year – roughly equivalent to dumping a garbage truck full of plastic into the oceans every minute.",
+    "yes": {
+      "economy": 1,
+      "society": 5,
+      "environment": -10,
+      "resources": -5
+    },
+    "no": {
+      "economy": -1,
+      "society": -5,
+      "environment": 10,
+      "resources": 5
+    }
+  },
+  {
+    "question": "Question of the Day: Do you want to hang your laundry instead of using dryer?",
+    "info": "The carbon footprint of a load of laundry:\n0.7 kg of carbon, dried on the line\n2.4 kg of carbon, tumble-dried in a vented dryer.\n",
+    "yes": {
+      "economy": -1,
+      "society": 5,
+      "environment": 1,
+      "resources": 1
+    },
+    "no": {
+      "economy": 1,
+      "society": -1,
+      "environment": -1,
+      "resources": -1
+    }
+  },
+  {
+    "question": "You need to go grocery shopping. Do you want to buy local produce?",
+    "info": "Whilst only 1% of food is transported by air, it accounts for 11% of carbon emissions.",
+    "yes": {
+      "economy": 1,
+      "society": 1,
+      "environment": 1,
+      "resources": 1
+    },
+    "no": {
+      "economy": -1,
+      "society": -1,
+      "environment": -1,
+      "resources": -1
+    }
+  },
+  {
+    "question": "It’s Christmas! Do you want to buy artificial Christmas tree instead of real Evergreen tree??",
+    "info": "Fake Christmas trees can be reused for couple of years but cannot be recycled.",
+    "yes": {
+      "economy": 2,
+      "society": 2,
+      "environment": -2,
+      "resources": -2
+    },
+    "no": {
+      "economy": -2,
+      "society": -2,
+      "environment": 2,
+      "resources": 2
     }
   }
 ]

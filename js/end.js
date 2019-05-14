@@ -13,11 +13,22 @@ class EndScene extends Phaser.Scene {
 
 
     create() {
+
+
+        this.setupIcons();
+        this.createEarth();
+        this.updateEarth();
+        addPlayer();
+        this.gameOver();
+
+
         this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.8,
             "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
         this.leaderboard.setInteractive().setOrigin(0.5, 0);
-        this.leaderboard.on("pointerdown", function(){
-            console.log("Hi")
+        this.leaderboard.on("pointerdown", function(leader) {
+            console.log("Hi");
+            this.getLeader();
+
         }, this);
 
         this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.8,
@@ -25,17 +36,65 @@ class EndScene extends Phaser.Scene {
         this.restart.setInteractive().setOrigin(0.5, 0);
         this.restart.on("pointerdown", function(){
             restartStat();
-            this.scene.start("PlayGame");
+            this.scene.start("BootScene");
         }, this);
+    }
+    displayLeaders(leaders){
+        console.log(leaders[0]);
+        this.hideScore();
+        var style = { fill: "#000000", fontSize: "5em", fontFamily: 'abel-regular', tabs: 300,};
+        this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
+        this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
+        this.leaderScoreTitle = this.add.text(this.container.width *2.75/ 4 , -this.container.height / 1.5, "Score", style).setOrigin(0.5, 0);
+
+        this.leaderRank = this.add.text(-this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
+        this.leaderName = this.add.text(0, -this.container.height *2.75/ 6, "", style).setOrigin(0.5, 0);
+        this.leaderScore = this.add.text(this.container.width *2.75/ 4, -this.container.height*2.75 / 6, "", style).setOrigin(0.5, 0);
 
 
-        this.setupIcons();
-        this.createEarth();
-        this.updateEarth();
-        getPlayerNum();
-        this.gameOver();
+        this.container.add([this.leaderRankTitle, this.leaderNameTitle, this.leaderScoreTitle]);
+        if (leaders.length >= 5) {
+            for (let i = 0; i < 5; i++) {
+                this.leaderRank.text += i+1+"\n";
+                this.leaderName.text += leaders[i][0]+"\n";
+                this.leaderScore.text += leaders[i][1]+"\n";
+            }
+        } else {
+            for (let i = 0; i < leaders.length; i++) {
+                this.leaderRank.text += i+1+"\n";
+                this.leaderName.text += leaders[i][0]+"\n";
+                this.leaderScore.text += leaders[i][1]+"\n";
+            }
+
+        }
+        this.container.add([this.leaderRank, this.leaderName, this.leaderScore]);
+
+        console.log(this.container.list);
     }
 
+    getLeader(){
+        const playerRoot = firebase.database().ref().child("players/");
+        var leaders = [];
+        playerRoot.once('value').then((snapshot) => {
+            let list = snapshot.val();
+            for (this.x in list){
+                let playersInfo = [];
+                playersInfo.push(list[this.x]['profile']['name']);
+                playersInfo.push(list[this.x]['score']['average']);
+                leaders.push(playersInfo)
+            }
+            leaders.sort(function(a, b) { return b[1] - a[1]});
+            console.log(leaders);
+            this.displayLeaders(leaders);
+        })
+    }
+
+
+    hideScore(){
+        this.question.visible = false;
+        this.info.visible = false;
+
+    }
 
     gameOver(){
         if (getAverage() > 300){
@@ -215,7 +274,20 @@ class EndScene extends Phaser.Scene {
 
 
     flipCard(){
+
+
         this.card.on('pointerup', function(){
+
+
+            this.leaderRankTitle.visible = false;
+            this.leaderNameTitle.visible = false;
+            this.leaderScoreTitle.visible = false;
+            this.leaderRank.visible = false;
+            this.leaderName.visible = false;
+            this.leaderScore.visible = false;
+
+
+
             this.tweens.add({
                 targets: this.card,
                 scaleY: 2.9,
@@ -231,9 +303,8 @@ class EndScene extends Phaser.Scene {
                 flipX: true,
                 duration: 200,
             });
-
-
             this.time.delayedCall(200, function(){
+
                 if (this.question.visible){
                     this.info.visible = true;
                     this.question.visible = false;

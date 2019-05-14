@@ -1,7 +1,7 @@
 let gameInstance = null;
 
 
-class playGame extends Phaser.Scene {
+class PlayGame extends Phaser.Scene {
     constructor() {
         super("PlayGame");
         gameInstance = this;

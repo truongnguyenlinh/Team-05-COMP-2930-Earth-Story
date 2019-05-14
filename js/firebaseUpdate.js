@@ -1,5 +1,5 @@
-function getPlayerNum() {
-    var playerRoot = firebase.database().ref().child("players/");
+function addPlayer() {
+    const playerRoot = firebase.database().ref().child("players/");
     var count = 0;
     playerRoot.once('value').then((snapshot) => {
         list = snapshot.val();
@@ -7,13 +7,14 @@ function getPlayerNum() {
         for (x in list) {
             count += 1;
         }
-        addToFireBase(count);
+    }).then(function(){
+        saveData(count);
     });
 }
 
 
-let addToFireBase = function (getPlayerNum) {
-    let playerId = getPlayerNum + 1;
+function saveData(numOfPlayers){
+    let playerId = numOfPlayers + 1;
     console.log("playerid:" + playerId);
     const scoreRoot = firebase.database().ref().child('players/' + playerId + '/score');
     const profileRoot = firebase.database().ref().child('players/' + playerId + '/profile');
@@ -30,5 +31,28 @@ let addToFireBase = function (getPlayerNum) {
     profileObj.name = firebase.auth().currentUser.displayName;
     profileObj.email = firebase.auth().currentUser.email;
     profileRoot.set(profileObj);
+}
 
-};
+
+
+// function getLeader(){
+//     const playerRoot = firebase.database().ref().child("players/");
+//     playerRoot.once('value').then((snapshot) => {
+//         list = snapshot.val();
+//         let leaders = [];
+//         for (x in list){
+//             playersInfo = [];
+//             playersInfo.push(list[x]['profile']['name']);
+//             playersInfo.push(list[x]['score']['average']);
+//             leaders.push(playersInfo)
+//         }
+//         leaders.sort(function(a, b) { return b[1] - a[1]});
+//         return leaders;
+//     });
+// }
+
+// function showLeaders(leaderArr){
+
+
+
+

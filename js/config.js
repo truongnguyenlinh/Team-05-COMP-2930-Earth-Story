@@ -11,7 +11,9 @@ let config = {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [BootScene, playGame, EndScene]
+    scene: [BootScene, playGame, EndScene],
+    mute: false,
+    loop: true
 };
 
 let firebaseConfig = {

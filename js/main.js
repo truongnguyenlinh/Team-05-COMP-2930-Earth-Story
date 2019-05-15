@@ -24,7 +24,8 @@ class PlayGame extends Phaser.Scene {
             text: 'Loading...',
             style: {
                 fill: '#ffffff',
-                fontSize: "3em"
+                fontSize: "3em",
+                fontFamily: 'Abel'
             }
         });
         loadingText.setOrigin(0.5);
@@ -315,8 +316,8 @@ class PlayGame extends Phaser.Scene {
             color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontFamily: 'abel-regular',
-            fontSize: '60px',
+            fontFamily: 'Abel',
+            fontSize: '6em',
             wordWrap: {
                 width: this.card.width * 2.25,
                 useAdvancedWrap: false

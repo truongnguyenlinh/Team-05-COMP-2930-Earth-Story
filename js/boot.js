@@ -35,13 +35,14 @@ class BootScene extends Phaser.Scene {
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
 
+        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
         this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
-            "Play", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+            "Play", style);
         this.button.setInteractive().setOrigin(0.5, 0);
         this.button.on("pointerdown", this.firebaseLogin, this);
 
         this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
-            "Tutorial", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
+            "Tutorial", style);
         this.tutorial.setInteractive().setOrigin(0.5, 0);
         this.tutorial.on("pointerdown", function() {
             this.scene.start("PlayTutorial");
@@ -49,11 +50,11 @@ class BootScene extends Phaser.Scene {
 
 
         this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
-            "Options", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
+            "Options", style);
         this.options.setInteractive().setOrigin(0.5, 0);
 
         this.about = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.08,
-            "About", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular' });
+            "About", style);
         this.about.setInteractive().setOrigin(0.5, 0);
     }
 
@@ -132,10 +133,12 @@ class BootScene extends Phaser.Scene {
 
 
     update(){
+        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
+
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
             this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
-                "Log out", {fill: "#FFFFFF", fontSize: "3em"});
+                "Log out", style);
             this.logout.setInteractive().setOrigin(0.5, 0);
             this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
         }

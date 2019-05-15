@@ -24,7 +24,7 @@ function saveData(numOfPlayers){
     scoreObj.society = getResources();
     scoreObj.economy = getEconomy();
     scoreObj.resources = getResources();
-    scoreObj.average = getAverage() / 4;
+    scoreObj.average = Math.round(getAverage() / 4);
     scoreRoot.set(scoreObj);
 
     var profileObj = {};

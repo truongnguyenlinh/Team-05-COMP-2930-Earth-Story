@@ -14,7 +14,7 @@ let config = {
 
     mute: false,
     loop: true,
-    scene: [BootScene, PlayGame, EndScene, PlayTutorial]
+    scene: [BootScene, PlayGame, EndScene, PlayTutorial, AboutScene]
 };
 
 let firebaseConfig = {

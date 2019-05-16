@@ -56,6 +56,9 @@ class BootScene extends Phaser.Scene {
         this.about = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.08,
             "About", style);
         this.about.setInteractive().setOrigin(0.5, 0);
+        this.about.on("pointerdown", function() {
+            this.scene.start("AboutScene");
+        }, this);
     }
 
 

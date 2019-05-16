@@ -17,9 +17,8 @@ class EndScene extends Phaser.Scene {
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
-        addPlayer();
+        this.readDatabase();
         this.gameOver();
-        this.getLeader();
         this.showLeader = false;
 
         this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.9,
@@ -48,6 +47,20 @@ class EndScene extends Phaser.Scene {
         }, this);
     }
 
+    readDatabase() {
+        const playerRoot = firebase.database().ref().child("players/");
+        var count = 0;
+        playerRoot.once('value').then((snapshot) => {
+            let list = snapshot.val();
+            console.log(list);
+            for (this.x in list) {
+                count += 1;
+            }
+            addPlayer(count);
+        }).then((getLeader) => {
+            this.getLeader()})
+
+    }
 
     getLeader(){
         const playerRoot = firebase.database().ref().child("players/");

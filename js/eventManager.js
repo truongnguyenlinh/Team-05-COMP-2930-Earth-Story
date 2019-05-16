@@ -12,7 +12,10 @@ function initializeEvents() {
 
 
 function getRandomEvent() {
-    return rawEvents[getRandomInt(0, rawEvents.length)];
+    let chosenIndex = getRandomInt(0, rawEvents.length);
+    let chosenEvent = rawEvents[chosenIndex];
+    rawEvents.splice(chosenIndex, 1);
+    return chosenEvent;
 }
 
 

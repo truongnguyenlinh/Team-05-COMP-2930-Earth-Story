@@ -1,4 +1,4 @@
-let colors = ["0xffffff","0xffffff","0xffffff","0xffffff","0xffffff","0xffffff"];
+let colors = ["0xffffff","0xffffff","0xffffff","0xffffff","0xffffff"];
 
 class AboutScene extends Phaser.Scene{
     constructor(){
@@ -37,11 +37,11 @@ class AboutScene extends Phaser.Scene{
 
         this.load.image("levelpages", "./assets/images/about/levelpages.png");
         this.load.image("transp", "./assets/images/about/transp.png");
-        this.load.image("gordon", "./assets/images/about/gordon.jpg");
-        this.load.image("josh", "./assets/images/about/josh.jpg");
-        this.load.image("may", "./assets/images/about/may.jpg");
-        this.load.image("suhee", "./assets/images/about/suhee.jpg");
-        this.load.image("linh", "./assets/images/about/linh.jpg");
+        this.load.image("gordon", "./assets/images/about/gordon.png");
+        this.load.image("josh", "./assets/images/about/josh.png");
+        this.load.image("may", "./assets/images/about/may.png");
+        this.load.image("suhee", "./assets/images/about/suhee.png");
+        this.load.image("linh", "./assets/images/about/linh.png");
     }
 
 
@@ -64,18 +64,18 @@ class AboutScene extends Phaser.Scene{
         this.pageSelectors = [];
         let leftMargin = this.canvasGame.width / 2;
 
-        let thumb = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "gordon").setOrigin(0.5, 1);
-        let thumb1 = this.add.image(this.canvasGame.width + leftMargin + 60, this.canvasGame.height / 2, "suhee").setOrigin(0.5, 1);
-        let thumb2 = this.add.image(2 * (this.canvasGame.width + 60) + leftMargin, this.canvasGame.height / 2, "may").setOrigin(0.5, 1);
-        let thumb3 = this.add.image(3 * (this.canvasGame.width + 60) + leftMargin, this.canvasGame.height / 2, "linh").setOrigin(0.5, 1);
-        let thumb4 = this.add.image(4 * (this.canvasGame.width + 60) + leftMargin, this.canvasGame.height / 2, "josh").setOrigin(0.5, 1);
+        let gordon_image = this.add.image(this.canvasGame.width / 1.9, this.canvasGame.height / 2, "gordon").setOrigin(0.5, 1);
+        let suhee_image = this.add.image(this.canvasGame.width + leftMargin * 1.1, this.canvasGame.height / 2, "suhee").setOrigin(0.5, 1);
+        let may_image = this.add.image(2 * (this.canvasGame.width * 1.076) + leftMargin, this.canvasGame.height / 2, "may").setOrigin(0.5, 1);
+        let linh_image = this.add.image(3 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "linh").setOrigin(0.5, 1);
+        let josh_image = this.add.image(4 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "josh").setOrigin(0.5, 1);
 
         for (let k = 0; k < colors.length; k++){
-            this.itemGroup.add(thumb);
-            this.itemGroup.add(thumb1);
-            this.itemGroup.add(thumb2);
-            this.itemGroup.add(thumb3);
-            this.itemGroup.add(thumb4);
+            this.itemGroup.add(gordon_image);
+            this.itemGroup.add(suhee_image);
+            this.itemGroup.add(may_image);
+            this.itemGroup.add(linh_image);
+            this.itemGroup.add(josh_image);
 
 
             this.pageSelectors[k] = this.add.sprite(this.canvasGame.width / 2 + (k - Math.floor(colors.length / 2) + 0.5 * (1 - colors.length % 2)) * 40, this.canvasGame.height - 40, "levelpages");

@@ -480,18 +480,18 @@
     }
   },
   {
-    "question": "Do you have compost bin at home?",
+    "question": "Do you have a compost bin at home?",
     "info": "Composting transforms waste into valuable soil nutrient and saves space in landfills",
     "yes": {
-      "economy": 5,
+      "economy": 0,
       "society": 5,
-      "environment": -5,
-      "resources": -5
+      "environment": 5,
+      "resources": 0
     },
     "no": {
-      "economy": -5,
+      "economy": 0,
       "society": -5,
-      "environment": 5,
+      "environment": -10,
       "resources": 0
     }
   }

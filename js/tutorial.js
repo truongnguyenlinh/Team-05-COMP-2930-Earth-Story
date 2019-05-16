@@ -54,6 +54,13 @@ class PlayTutorial extends Phaser.Scene {
         this.load.image("tutorial_text_click", "./assets/images/tutorial/click_to_flip.png");
         this.load.image("tutorial_text_exit", "./assets/images/tutorial/click_to_exit.png");
         this.load.image("tutorial_shadow", "./assets/images/tutorial/shadow.png");
+
+        this.load.image("tutorial_environment", "./assets/images/tutorial/ENVIRONMENT.png");
+        this.load.image("tutorial_society", "./assets/images/tutorial/SOCIETY.png");
+        this.load.image("tutorial_economy", "./assets/images/tutorial/ECONOMY.png");
+        this.load.image("tutorial_resources", "./assets/images/tutorial/RESOURCES.png");
+        this.load.image("tutorial_progress", "./assets/images/tutorial/GAME_PROGRESS.png");
+        this.load.image("tutorial_earth_status", "./assets/images/tutorial/EARTH_STATUS.png");
     }
 
 
@@ -85,6 +92,12 @@ class PlayTutorial extends Phaser.Scene {
         this.tutorialRight = false;
         this.tutorialLeft = false;
         this.tutorialEnd = false;
+        this.tutorialStatus = false;
+        this.tutorialEnvironment= false;
+        this.tutorialSociety = false;
+        this.tutorialEconomy = false;
+        this.tutorialResources = false;
+        this.tutorialProgress = false;
 
         this.tutorial_text = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 1.2, "tutorial_text_click");
         this.tutorial_text.setScale(2);
@@ -198,7 +211,41 @@ class PlayTutorial extends Phaser.Scene {
         let swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
-        if (this.tutorialEnd) {
+        if (this.tutorialStatus) {
+            this.env.setDepth(1);
+            this.envMask.setDepth(1);
+            this.tutorial_text.setTexture('tutorial_environment');
+            this.tutorialStatus = false;
+            this.tutorialEnvironment = true;
+        } else if (this.tutorialEnvironment) {
+            this.soc.setDepth(1);
+            this.socMask.setDepth(1);
+            this.tutorial_text.setTexture('tutorial_society');
+            this.tutorialEnvironment = false;
+            this.tutorialSociety = true;
+        } else if (this.tutorialSociety) {
+            this.eco.setDepth(1);
+            this.ecoMask.setDepth(1);
+            this.tutorial_text.setTexture('tutorial_economy');
+            this.tutorialSociety = false;
+            this.tutorialEconomy = true;
+        } else if (this.tutorialEconomy) {
+            this.res.setDepth(1);
+            this.resMask.setDepth(1);
+            this.tutorial_text.setTexture('tutorial_resources');
+            this.tutorialEconomy = false;
+            this.tutorialResources = true;
+        } else if (this.tutorialResources) {
+            this.progressBar.setDepth(1);
+            this.tutorial_text.setTexture('tutorial_progress');
+            this.tutorial_text.y = this.canvasGame.height / 1.2;
+            this.tutorialResources = false;
+            this.tutorialProgress = true;
+        } else if (this.tutorialProgress) {
+            this.tutorial_text.setTexture('tutorial_text_exit');
+            this.tutorialProgress = false;
+            this.tutorialEnd = true;
+        } else if (this.tutorialEnd) {
             this.scene.start("BootScene");
         }
 
@@ -233,8 +280,9 @@ class PlayTutorial extends Phaser.Scene {
                     return;
                 }  else {
                     this.tutorialLeft = false;
-                    this.tutorialEnd = true;
-                    this.tutorial_text.setTexture('tutorial_text_exit');
+                    this.tutorialStatus = true;
+                    this.tutorial_text.y = this.canvasGame.height/5.25;
+                    this.tutorial_text.setTexture('tutorial_earth_status');
                 }
 
                 this.hasSwiped = true;
@@ -287,10 +335,10 @@ class PlayTutorial extends Phaser.Scene {
 
     setupIcons() {
         // Under icons
-        this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
-        this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
-        this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
-        this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
+        this.env = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
+        this.soc = this.add.image(this.canvasGame.width / 2 - 110, 150, 'soc').setScale(0.4);
+        this.eco = this.add.image(this.canvasGame.width / 2 + 110, 150, 'eco').setScale(0.4);
+        this.res = this.add.image(this.canvasGame.width / 2 + 330, 150, 'res').setScale(0.4);
 
         // Over icons
         this.envMask = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);

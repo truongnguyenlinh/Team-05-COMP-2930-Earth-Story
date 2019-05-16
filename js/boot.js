@@ -19,6 +19,12 @@ class BootScene extends Phaser.Scene {
 
 
         this.load.audio('bgm','./assets/bgm.mp3');
+
+
+        this.load.image("about", "./assets/images/button/About_button.png");
+        this.load.image("start", "./assets/images/button/Start_button.png");
+        this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
+
     }
 
 
@@ -30,7 +36,7 @@ class BootScene extends Phaser.Scene {
         initializeEndings(); // Read and initialize endings.json
 
         this.bg = this.add.image(0, 0, "bg").setOrigin(0,0);
-        this.logo = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "logo");
+        this.logo = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.4, "logo");
         this.logo.displayWidth = this.canvasGame.width * 0.8;
         this.logo.displayHeight = this.logo.displayWidth;
 
@@ -39,28 +45,24 @@ class BootScene extends Phaser.Scene {
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
 
-
         let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
-        this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
-            "Play", style);
-        this.button.setInteractive().setOrigin(0.5, 0);
-        this.button.on("pointerdown", this.firebaseLogin, this);
+        this.start = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.65,
+            "start");
+        this.start.setInteractive().setOrigin(0.5, 0).setScale(0.25);
+        this.start.on("pointerdown", this.firebaseLogin, this);
 
-        this.tutorial = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.25,
-            "Tutorial", style);
-        this.tutorial.setInteractive().setOrigin(0.5, 0);
+        this.tutorial = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.72,
+            "tutorial");
+        this.tutorial.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.tutorial.on("pointerdown", function() {
             this.scene.start("PlayTutorial");
         }, this);
 
+        this.about = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.79,
+            "about");
+        this.about.setInteractive().setOrigin(0.5, 0).setScale(0.25);
 
-        this.options = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.15,
-            "Options", style);
-        this.options.setInteractive().setOrigin(0.5, 0);
 
-        this.about = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.08,
-            "About", style);
-        this.about.setInteractive().setOrigin(0.5, 0);
         this.about.on("pointerdown", function() {
             this.scene.start("AboutScene");
         }, this);
@@ -80,16 +82,6 @@ class BootScene extends Phaser.Scene {
             );
     }
 
-
-
-
-    tweenLayer(layer, alphaValue) {
-        this.tweens.add({
-            targets: layer,
-            alpha: alphaValue,
-            ease: 'Linear',
-            duration: 600
-        })}
 
     firebaseLogin() {
         console.log("called firebaseLogin");
@@ -182,6 +174,4 @@ class BootScene extends Phaser.Scene {
             game.sound.mute = false;
         }
     }
-
-
 }

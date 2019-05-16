@@ -108,8 +108,8 @@ class PlayTutorial extends Phaser.Scene {
             color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontFamily: 'abel-regular',
-            fontSize: '60px',
+            fontFamily: 'Abel',
+            fontSize: '6em',
             wordWrap: {
                 width: this.card.width * 2.25,
                 useAdvancedWrap: false }

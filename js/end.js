@@ -17,13 +17,12 @@ class EndScene extends Phaser.Scene {
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
-        addPlayer();
+        this.readDatabase();
         this.gameOver();
-        this.getLeader();
         this.showLeader = false;
 
-        this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.8,
-            "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+        this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.9,
+            "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'});
         this.leaderboard.setInteractive().setOrigin(0.5, 0);
         this.leaderboard.on("pointerdown", function() {
             if (this.showLeader === false) {
@@ -39,8 +38,8 @@ class EndScene extends Phaser.Scene {
             }
         }, this);
 
-        this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.8,
-            "Restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'abel-regular'});
+        this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.9,
+            "Restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'});
         this.restart.setInteractive().setOrigin(0.5, 0);
         this.restart.on("pointerdown", function(){
             restartStat();
@@ -48,6 +47,20 @@ class EndScene extends Phaser.Scene {
         }, this);
     }
 
+    readDatabase() {
+        const playerRoot = firebase.database().ref().child("players/");
+        var count = 0;
+        playerRoot.once('value').then((snapshot) => {
+            let list = snapshot.val();
+            console.log(list);
+            for (this.x in list) {
+                count += 1;
+            }
+            addPlayer(count);
+        }).then((getLeader) => {
+            this.getLeader()})
+
+    }
 
     getLeader(){
         const playerRoot = firebase.database().ref().child("players/");
@@ -69,7 +82,7 @@ class EndScene extends Phaser.Scene {
 
     displayLeaders(leaders){
         // console.log(leaders[0]);
-        var style = { fill: "#000000", fontSize: "5em", fontFamily: 'abel-regular', tabs: 300,};
+        var style = { fill: "#000000", fontSize: "5em", fontFamily: 'Abel', tabs: 300,};
         this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
         this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
         this.leaderScoreTitle = this.add.text(this.container.width *2.75/ 4 , -this.container.height / 1.5, "Score", style).setOrigin(0.5, 0);
@@ -266,7 +279,7 @@ class EndScene extends Phaser.Scene {
         let textStyle = {
             color:'#000000',
             align:"center",
-            fontFamily: 'abel-regular',
+            fontFamily: 'Abel',
             boundsAlignH: "center",
             fontSize: '60px',
             wordWrap: {

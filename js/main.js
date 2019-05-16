@@ -18,16 +18,17 @@ class PlayGame extends Phaser.Scene {
         loader.displayWidth = this.canvasGame.width * 0.8;
         loader.displayHeight = loader.displayWidth;
 
-        let loadingText = this.make.text({
+        this.loadingText = this.make.text({
             x: this.canvasGame.width / 2,
             y: this.canvasGame.height - 200,
             text: 'Loading...',
             style: {
                 fill: '#ffffff',
-                fontSize: "3em"
+                fontSize: "3em",
+                fontFamily: 'Abel'
             }
         });
-        loadingText.setOrigin(0.5);
+        this.loadingText.setOrigin(0.5);
 
         this.load.on("progress", function() {
             loader.rotation += 0.01;
@@ -36,7 +37,6 @@ class PlayGame extends Phaser.Scene {
         this.load.on("complete", function(value) {
             console.log(value);
             loader.destroy();
-            loadingText.destroy();
         });
 
         this.load.image("earth_water", "./assets/images/layers/earth_water.png");
@@ -97,6 +97,8 @@ class PlayGame extends Phaser.Scene {
 
 
     create() {
+        this.loadingText.destroy();
+
         this.timeline = this.add.image(0, 0, "timeline");
         this.star = this.add.image(-this.timeline.width / 2, 0, "star").setScale(.25);
         this.progressBar = this.add.container(this.canvasGame.width / 2,
@@ -315,8 +317,8 @@ class PlayGame extends Phaser.Scene {
             color:'#000000',
             align:"center",
             boundsAlignH: "center",
-            fontFamily: 'abel-regular',
-            fontSize: '60px',
+            fontFamily: 'Abel',
+            fontSize: '6em',
             wordWrap: {
                 width: this.card.width * 2.25,
                 useAdvancedWrap: false

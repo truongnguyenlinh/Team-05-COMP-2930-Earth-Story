@@ -53,10 +53,11 @@ class BootScene extends Phaser.Scene {
             this.scene.start("PlayTutorial");
         }, this);
 
-
         this.about = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.79,
             "about");
         this.about.setInteractive().setOrigin(0.5, 0).setScale(0.25);
+
+      
         this.about.on("pointerdown", function() {
             this.scene.start("AboutScene");
         }, this);

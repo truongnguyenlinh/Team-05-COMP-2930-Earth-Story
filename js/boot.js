@@ -14,6 +14,10 @@ class BootScene extends Phaser.Scene {
         this.load.image("bg", "./assets/images/background.png");
         this.load.spritesheet('cat', './assets/images/nyan_cat_sprite.png', { frameWidth: 52.7, frameHeight: 22});
 
+        this.load.image("unmute", "./assets/images/unmute.png");
+        this.load.image("mute", "./assets/images/mute.png");
+
+
         this.load.audio('bgm','./assets/bgm.mp3');
     }
 
@@ -34,6 +38,7 @@ class BootScene extends Phaser.Scene {
         this.canSpin = true;
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
+
 
         let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
         this.button = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.35,
@@ -59,8 +64,32 @@ class BootScene extends Phaser.Scene {
         this.about.on("pointerdown", function() {
             this.scene.start("AboutScene");
         }, this);
+
+        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
+        this.unmute.setInteractive().setOrigin(0.5, 0);
+        this.unmute.on("pointerdown", function(){
+            game.sound.mute = false;
+        });
+
+        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        // this.mute.visible = false;
+        this.mute.setInteractive().setOrigin(0.5, 0);
+        this.mute.on("pointerdown",function(){
+            game.sound.mute = true;
+            }
+            );
     }
 
+
+
+
+    tweenLayer(layer, alphaValue) {
+        this.tweens.add({
+            targets: layer,
+            alpha: alphaValue,
+            ease: 'Linear',
+            duration: 600
+        })}
 
     firebaseLogin() {
         console.log("called firebaseLogin");
@@ -135,8 +164,8 @@ class BootScene extends Phaser.Scene {
     }
 
 
-    update(){
-        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
+    update() {
+        let style = {fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
 
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
@@ -145,5 +174,14 @@ class BootScene extends Phaser.Scene {
             this.logout.setInteractive().setOrigin(0.5, 0);
             this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
         }
+
+        if (game.sound.mute == true){
+            this.mute.visible = false;
+        } else {
+            this.mute.visible = true;
+            game.sound.mute = false;
+        }
     }
+
+
 }

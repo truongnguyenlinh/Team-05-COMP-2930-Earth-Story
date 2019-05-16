@@ -1,4 +1,4 @@
-let colors = ["0xffffff","0xffffff","0xffffff","0xffffff","0xffffff"];
+let colors = ["0xffffff", "0xffffff", "0xffffff", "0xffffff", "0xffffff"];
 
 class AboutScene extends Phaser.Scene{
     constructor(){

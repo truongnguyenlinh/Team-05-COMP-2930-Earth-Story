@@ -464,7 +464,7 @@
     }
   },
   {
-    "question": "It’s Christmas! Do you want to buy an artificial Christmas tree instead of real Evergreen tree??",
+    "question": "It’s Christmas! Do you want to buy an artificial Christmas tree instead of real Evergreen tree?",
     "info": "Fake Christmas trees can be reused for couple of years but cannot be recycled.",
     "yes": {
       "economy": 5,

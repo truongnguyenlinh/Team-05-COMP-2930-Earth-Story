@@ -9,6 +9,9 @@ class EndScene extends Phaser.Scene {
         this.canvas1[0].setAttribute("id", "canvasGame");
         this.canvasGame = document.getElementById("canvasGame");
         this.add.image(0, 0, "bg").setOrigin(0);
+
+        this.load.image("leaderboard", "./assets/images/button/leaderboard_button.png");
+        this.load.image("Restart", "./assets/images/button/restart_button.png");
     }
 
 
@@ -21,9 +24,9 @@ class EndScene extends Phaser.Scene {
         this.gameOver();
         this.showLeader = false;
 
-        this.leaderboard = this.add.text(this.canvasGame.width / 4, this.canvasGame.height * 0.9,
-            "Leaderboard", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'});
-        this.leaderboard.setInteractive().setOrigin(0.5, 0);
+        this.leaderboard = this.add.image(this.canvasGame.width / 3, this.canvasGame.height * 0.9,
+            "leaderboard");
+        this.leaderboard.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.leaderboard.on("pointerdown", function() {
             if (this.showLeader === false) {
                 this.hideScore();
@@ -38,9 +41,9 @@ class EndScene extends Phaser.Scene {
             }
         }, this);
 
-        this.restart = this.add.text(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.9,
-            "Restart", { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'});
-        this.restart.setInteractive().setOrigin(0.5, 0);
+        this.restart = this.add.image(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.9,
+            "Restart");
+        this.restart.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.restart.on("pointerdown", function(){
             restartStat();
             this.scene.start("BootScene");

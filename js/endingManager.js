@@ -12,12 +12,12 @@ function initializeEndings() {
 
 
 function getGoodEnding() {
-    return "Score: " + getAverage() / 4 + "\n" + rawEndings["ending good"];
+    return "Score: " + Math.round(getAverage() / 4) + "\n" + rawEndings["ending good"];
 }
 
 
 function getBadEnding() {
-    return "Score: " + getAverage() / 4 + "\n" + rawEndings["ending bad"];
+    return "Score: " + Math.round(getAverage() / 4) + "\n" + rawEndings["ending bad"];
 }
 
 

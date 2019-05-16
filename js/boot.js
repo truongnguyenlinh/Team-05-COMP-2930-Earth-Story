@@ -13,6 +13,11 @@ class BootScene extends Phaser.Scene {
         this.load.image("logo", "./assets/images/logo.png");
         this.load.image("bg", "./assets/images/background.png");
         this.load.spritesheet('cat', './assets/images/nyan_cat_sprite.png', { frameWidth: 52.7, frameHeight: 22});
+
+        this.load.image("unmute", "./assets/images/unmute.png");
+        this.load.image("mute", "./assets/images/mute.png");
+
+
         this.load.audio('bgm','./assets/bgm.mp3');
 
 
@@ -57,10 +62,24 @@ class BootScene extends Phaser.Scene {
             "about");
         this.about.setInteractive().setOrigin(0.5, 0).setScale(0.25);
 
-      
+
         this.about.on("pointerdown", function() {
             this.scene.start("AboutScene");
         }, this);
+
+        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
+        this.unmute.setInteractive().setOrigin(0.5, 0);
+        this.unmute.on("pointerdown", function(){
+            game.sound.mute = false;
+        });
+
+        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        // this.mute.visible = false;
+        this.mute.setInteractive().setOrigin(0.5, 0);
+        this.mute.on("pointerdown",function(){
+            game.sound.mute = true;
+            }
+            );
     }
 
 
@@ -137,8 +156,8 @@ class BootScene extends Phaser.Scene {
     }
 
 
-    update(){
-        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
+    update() {
+        let style = {fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
 
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
@@ -146,6 +165,13 @@ class BootScene extends Phaser.Scene {
                 "Log out", style);
             this.logout.setInteractive().setOrigin(0.5, 0);
             this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
+        }
+
+        if (game.sound.mute == true){
+            this.mute.visible = false;
+        } else {
+            this.mute.visible = true;
+            game.sound.mute = false;
         }
     }
 }

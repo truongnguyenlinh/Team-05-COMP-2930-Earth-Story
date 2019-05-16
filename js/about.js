@@ -1,4 +1,6 @@
 let colors = ["0xffffff", "0xffffff", "0xffffff", "0xffffff", "0xffffff"];
+let textStyle = { fill: "#FFFFFF", fontSize: "4em", fontFamily: 'Abel'};
+
 
 class AboutScene extends Phaser.Scene{
     constructor(){
@@ -19,11 +21,7 @@ class AboutScene extends Phaser.Scene{
         this.loadingText = this.make.text({
             x: this.canvasGame.width / 2,
             y: this.canvasGame.height - 200,
-            text: 'Loading...',
-            style: {
-                fill: '#ffffff',
-                fontSize: "3em"
-            }
+            text: 'Loading...', style: textStyle
         });
         this.loadingText.setOrigin(0.5);
 
@@ -61,17 +59,83 @@ class AboutScene extends Phaser.Scene{
         let leftMargin = this.canvasGame.width / 2;
 
         let gordon_image = this.add.image(this.canvasGame.width / 1.9, this.canvasGame.height / 2, "gordon").setOrigin(0.5, 1);
+        let gordon_bio = this.make.text({
+            x: this.canvasGame.width / 2,
+            y: this.canvasGame.height / 1.5,
+            text: "Gordon, aka the leng jai, is the genius behind the nyan cat.\n" +
+                "He loves everything about cats. His favourite shirt is the \n" +
+                "'if I fit, I sit' cat shirt. He believes that the world would\n " +
+                "be a better place if cats conquer the world.\n\n" +
+                "His love of cats continuously pushes him to go \nfurther in creating a better earth for cats.\n" +
+                "As an environmental scientist, he is also really \nupset about fish chewing on plastic in the sea. \n",
+            style: textStyle
+        });
+        gordon_bio.setOrigin(0.5);
+
         let suhee_image = this.add.image(this.canvasGame.width + leftMargin * 1.1, this.canvasGame.height / 2, "suhee").setOrigin(0.5, 1);
+        let suhee_bio = this.make.text({
+            x: this.canvasGame.width + leftMargin * 1.1,
+            y: this.canvasGame.height / 1.5,
+            text: "Suhee, aka the magnae, is a professional graphic designer.\n" +
+                " She did all the beautiful artwork of the app.\n " +
+                "Her photoshop skills bring a lot of fun, fun, fun to the group. \n\n" +
+                "She loves getting starbucks coffee and she asks for a straw \neverytime.\n" +
+                "One day, she had an epiphany that she has to stop \n" +
+                "and start protecting the environment.\n",
+            style: textStyle
+        });
+        suhee_bio.setOrigin(0.5);
+
         let may_image = this.add.image(2 * (this.canvasGame.width * 1.076) + leftMargin, this.canvasGame.height / 2, "may").setOrigin(0.5, 1);
+        let may_bio = this.make.text({
+            x: (2 * this.canvasGame.width * 1.076) + leftMargin,
+            y: this.canvasGame.height / 1.5,
+            text: "May, aka the entertainer, makes sure the daily \npose picture is up to standard.She also makes sure\n everyone has lunch so they all have strength \nto work cause coding takes LOTS OF ENERGY.\n\n" +
+                "Working at a restaurant made her realize how wasteful \nhuman beings are. Time to teach people a lesson!",
+            style: textStyle
+        });
+        may_bio.setOrigin(0.5);
+
         let linh_image = this.add.image(3 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "linh").setOrigin(0.5, 1);
+        let linh_bio = this.make.text({
+            x: (3 * this.canvasGame.width * 1.063) + leftMargin,
+            y: this.canvasGame.height / 1.5,
+            text: "Linh, aka the đẹp, is the fashion icon and game expert. \n" +
+                "Her years of experience in the gaming industry\n is a great asset to the project.\n " +
+                "She spends a lot of time doing her research\n even when she is not working with the team.\n\n" +
+                "As a vegetarian, she hopes to tell\n people the consequences of eating animal.",
+            style: textStyle
+        });
+        linh_bio.setOrigin(0.5);
+
         let josh_image = this.add.image(4 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "josh").setOrigin(0.5, 1);
+        let josh_bio = this.make.text({
+            x: (4 * this.canvasGame.width * 1.063) + leftMargin,
+            y: this.canvasGame.height / 1.5,
+            text: "Josh, aka the oppa, wants to be jacked. \n" +
+                "He has a poster of his head attached to Arnold's\n body in his room. " +
+                "That's his life goal.\n He would love to share the poster. Just ask!\n\n" +
+                "His friends at the gym always take hot\n baths after working out.\n " +
+                "Josh feels like it's time to let his friends\n know taking hot bath is a No No to the planet!",
+            style: textStyle
+        });
+        josh_bio.setOrigin(0.5);
 
         for (let k = 0; k < colors.length; k++){
             this.itemGroup.add(gordon_image);
+            this.itemGroup.add(gordon_bio);
+
             this.itemGroup.add(suhee_image);
+            this.itemGroup.add(suhee_bio);
+
             this.itemGroup.add(may_image);
+            this.itemGroup.add(may_bio);
+
             this.itemGroup.add(linh_image);
+            this.itemGroup.add(linh_bio);
+
             this.itemGroup.add(josh_image);
+            this.itemGroup.add(josh_bio);
 
 
             this.pageSelectors[k] = this.add.sprite(this.canvasGame.width / 2 + (k - Math.floor(colors.length / 2) + 0.5 * (1 - colors.length % 2)) * 40, this.canvasGame.height - 40, "levelpages");
@@ -129,8 +193,7 @@ class AboutScene extends Phaser.Scene{
             }
         }, this);
 
-        let style = { fill: "#FFFFFF", fontSize: "6em", fontFamily: 'Abel'};
-        this.exitbutton = this.add.text(100, 100, " X ", style);
+        this.exitbutton = this.add.text(this.canvasGame.width - 100, 100, " X ", textStyle);
         this.exitbutton.setInteractive();
         this.exitbutton.on("pointerdown", function() {
             this.scene.start("BootScene");

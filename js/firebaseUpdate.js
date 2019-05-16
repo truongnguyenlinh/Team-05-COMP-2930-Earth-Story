@@ -1,19 +1,4 @@
-function addPlayer() {
-    const playerRoot = firebase.database().ref().child("players/");
-    var count = 0;
-    playerRoot.once('value').then((snapshot) => {
-        list = snapshot.val();
-        console.log(list);
-        for (x in list) {
-            count += 1;
-        }
-    }).then(function(){
-        saveData(count);
-    });
-}
-
-
-function saveData(numOfPlayers){
+function addPlayer(numOfPlayers){
     let playerId = numOfPlayers + 1;
     console.log("playerid:" + playerId);
     const scoreRoot = firebase.database().ref().child('players/' + playerId + '/score');
@@ -24,7 +9,7 @@ function saveData(numOfPlayers){
     scoreObj.society = getResources();
     scoreObj.economy = getEconomy();
     scoreObj.resources = getResources();
-    scoreObj.average = getAverage() / 4;
+    scoreObj.average = Math.round(getAverage() / 4);
     scoreRoot.set(scoreObj);
 
     var profileObj = {};

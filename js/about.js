@@ -31,10 +31,8 @@ class AboutScene extends Phaser.Scene{
             loader.rotation += 0.01;
         });
 
-        this.load.on("complete", function(value) {
-            loader.destroy();
-        });
-
+        loader.destroy();
+        this.loadingText.destroy();
         this.load.image("levelpages", "./assets/images/about/levelpages.png");
         this.load.image("transp", "./assets/images/about/transp.png");
         this.load.image("gordon", "./assets/images/about/gordon.png");
@@ -46,8 +44,6 @@ class AboutScene extends Phaser.Scene{
 
 
     create(){
-        this.loadingText.destroy();
-
         this.container = [];
         this.container[0] = 0;
         this.canMove = true;
@@ -131,6 +127,13 @@ class AboutScene extends Phaser.Scene{
                     this.changePage(0);
                 }
             }
+        }, this);
+
+        let style = { fill: "#FFFFFF", fontSize: "6em", fontFamily: 'Abel'};
+        this.exitbutton = this.add.text(100, 100, " X ", style);
+        this.exitbutton.setInteractive();
+        this.exitbutton.on("pointerdown", function() {
+            this.scene.start("BootScene");
         }, this);
     }
 

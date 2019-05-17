@@ -102,8 +102,8 @@ class EndScene extends Phaser.Scene {
         this.leaderScore.visible = false;
 
         this.container.add([this.leaderRankTitle, this.leaderNameTitle, this.leaderScoreTitle]);
-        if (leaders.length >= 5) {
-            for (let i = 0; i < 5; i++) {
+        if (leaders.length >= 10) {
+            for (let i = 0; i < 10; i++) {
                 this.leaderRank.text += i+1+"\n";
                 this.leaderName.text += leaders[i][0]+"\n";
                 this.leaderScore.text += leaders[i][1]+"\n";

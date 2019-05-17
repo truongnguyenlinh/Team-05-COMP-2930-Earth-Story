@@ -113,7 +113,7 @@ class AboutScene extends Phaser.Scene{
         let suheeBio = this.make.text({
             x: this.canvasGame.width * 1.063 + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Suhee, aka the magnae, is a professional graphic designer." +
+            text: "Aka the magnae, is a professional graphic designer." +
                 " She did all the beautiful artwork of the app. " +
                 "Her photoshop skills bring a lot of fun, fun, fun to the group. \n\n" +
                 "She loves getting starbucks coffee and she asks for a straw every time. " +
@@ -134,7 +134,7 @@ class AboutScene extends Phaser.Scene{
         let mayBio = this.make.text({
             x: (2 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "May, aka the entertainer, makes sure the daily pose picture is up to standard. She also makes sure everyone has lunch so they all have strength to work cause coding takes LOTS OF ENERGY.\n\n" +
+            text: "Aka the entertainer, makes sure the daily pose picture is up to standard. She also makes sure everyone has lunch so they all have strength to work cause coding takes LOTS OF ENERGY.\n\n" +
                 "Working at a restaurant made her realize how wasteful human beings are. Time to teach people a lesson!",
             style: bioStyle
         });
@@ -150,7 +150,7 @@ class AboutScene extends Phaser.Scene{
         let linhBio = this.make.text({
             x: (3 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Linh, aka the dep, is the fashion icon and game expert. " +
+            text: "Aka the dep, is the fashion icon and game expert. " +
                 "Her years of experience in the gaming industry is a great asset to the project. " +
                 "She spends a lot of time doing her research even when she is not working with the team.\n\n" +
                 "As a vegetarian, she hopes to tell people the consequences of eating animal.",
@@ -168,7 +168,7 @@ class AboutScene extends Phaser.Scene{
         let joshBio = this.make.text({
             x: (4 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Josh, aka the oppa, wants to be jacked. " +
+            text: "Aka the oppa, wants to be jacked. " +
                 "He has a poster of his head attached to Arnold's body in his room. " +
                 "That's his life goal. He would love to share the poster. Just ask!\n\n" +
                 "His friends at the gym always take hot baths after working out. " +

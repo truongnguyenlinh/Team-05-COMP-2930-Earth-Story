@@ -11,7 +11,7 @@ class EndScene extends Phaser.Scene {
         this.add.image(0, 0, "bg").setOrigin(0);
 
         this.load.image("leaderboard", "./assets/images/button/leaderboard_button.png");
-        this.load.image("Restart", "./assets/images/button/restart_button.png");
+        this.load.image("menu", "./assets/images/button/menu_button.png");
     }
 
 
@@ -42,7 +42,7 @@ class EndScene extends Phaser.Scene {
         }, this);
 
         this.restart = this.add.image(this.canvasGame.width * 3 / 4, this.canvasGame.height * 0.9,
-            "Restart");
+            "menu");
         this.restart.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.restart.on("pointerdown", function(){
             restartStat();

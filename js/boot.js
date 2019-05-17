@@ -24,6 +24,8 @@ class BootScene extends Phaser.Scene {
         this.load.image("about", "./assets/images/button/About_button.png");
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
+        this.load.image("logout", "./assets/images/button/logout_button.png");
+
 
     }
 
@@ -157,13 +159,12 @@ class BootScene extends Phaser.Scene {
 
 
     update() {
-        let style = {fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
 
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
-            this.logout = this.add.text(this.canvasGame.width / 2, this.canvasGame.height / 1.05,
-                "Log out", style);
-            this.logout.setInteractive().setOrigin(0.5, 0);
+            this.logout = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.86,
+                "logout");
+            this.logout.setInteractive().setOrigin(0.5, 0).setScale(0.25);
             this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
         }
 

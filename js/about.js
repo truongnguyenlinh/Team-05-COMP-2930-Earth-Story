@@ -23,7 +23,7 @@ class AboutScene extends Phaser.Scene{
             y: this.canvasGame.height - 200,
             text: 'Loading...', style: {
                 fill: "#FFFFFF",
-                fontSize: "4em",
+                fontSize: "5em",
                 fontFamily: 'Abel',
         }});
         this.loadingText.setOrigin(0.5);
@@ -41,6 +41,8 @@ class AboutScene extends Phaser.Scene{
         this.load.image("may", "./assets/images/about/may.png");
         this.load.image("suhee", "./assets/images/about/suhee.png");
         this.load.image("linh", "./assets/images/about/linh.png");
+        this.load.image("quit", "./assets/images/button/quit_button.png");
+
     }
 
 
@@ -53,15 +55,7 @@ class AboutScene extends Phaser.Scene{
             this.container[l] = -1;
         }
 
-        let textStyle = {
-            fill: "#FFFFFF",
-            fontSize: "4em",
-            fontFamily: 'Abel',
-            wordWrap: {
-                width: this.canvasGame.width * 0.7,
-                useAdvancedWrap: false
-            }
-        };
+
 
         this.scrollingMap = this.add.tileSprite(0, 0, colors.length * this.canvasGame.width, this.canvasGame.height, "transp");
         this.scrollingMap.setInteractive();
@@ -71,85 +65,138 @@ class AboutScene extends Phaser.Scene{
         this.pageSelectors = [];
         let leftMargin = this.canvasGame.width / 2;
 
-        let gordon_image = this.add.image(this.canvasGame.width / 1.9, this.canvasGame.height / 2, "gordon").setOrigin(0.5, 1);
-        let gordon_bio = this.make.text({
+        let nameStyle = {
+            fill: "#FFFFFF",
+            align:"center",
+            fontSize: "8em",
+            fontFamily: 'Abel',
+        };
+
+        let bioStyle = {
+            fill: "#FFFFFF",
+            align:"center",
+            fontSize: "4.75em",
+            fontFamily: 'Abel',
+            wordWrap: {
+                width: this.canvasGame.width * 0.7,
+                useAdvancedWrap: false
+            }
+        };
+
+        let gordonImage = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.2, "gordon").setOrigin(0.5);
+        let gordonName = this.make.text({
             x: this.canvasGame.width / 2,
-            y: this.canvasGame.height / 1.5,
-            text: "Gordon, aka the leng jai, is the genius behind the nyan cat. " +
+            y: this.canvasGame.height * 0.4,
+            text: "GORDON TSUI",
+            style: nameStyle});
+        gordonName.setOrigin(0.5);
+        let gordonBio = this.make.text({
+            x: this.canvasGame.width / 2,
+            y: this.canvasGame.height * 0.45,
+            text: "Aka the leng jai, is the genius behind the nyan cat. " +
                 "He loves everything about cats. His favourite shirt is the " +
                 "'if I fit, I sit' cat shirt. He believes that the world would " +
                 "be a better place if it is ruled by cats.\n\n" +
                 "His love of cats continuously pushes him to do more about creating a better earth for cats. " +
                 "As an environmental scientist, he is also really upset about fish chewing on plastic in the sea.",
-            style: textStyle
+            style: bioStyle
         });
-        gordon_bio.setOrigin(0.5);
+        gordonBio.setOrigin(0.5, 0);
 
-        let suhee_image = this.add.image(this.canvasGame.width + leftMargin * 1.1, this.canvasGame.height / 2, "suhee").setOrigin(0.5, 1);
-        let suhee_bio = this.make.text({
+        let suheeImage = this.add.image(this.canvasGame.width + leftMargin * 1.1, this.canvasGame.height * 0.2, "suhee").setOrigin(0.5);
+        let suheeName = this.make.text({
             x: this.canvasGame.width * 1.063 + leftMargin,
-            y: this.canvasGame.height / 1.5,
+            y: this.canvasGame.height * 0.4,
+            text: "SUHEE BAE",
+            style: nameStyle});
+        suheeName.setOrigin(0.5);
+        let suheeBio = this.make.text({
+            x: this.canvasGame.width * 1.063 + leftMargin,
+            y: this.canvasGame.height * 0.45,
             text: "Suhee, aka the magnae, is a professional graphic designer." +
                 " She did all the beautiful artwork of the app. " +
                 "Her photoshop skills bring a lot of fun, fun, fun to the group. \n\n" +
                 "She loves getting starbucks coffee and she asks for a straw every time. " +
                 "One day, she had an epiphany that she has to stop " +
                 "and start protecting the environment.",
-            style: textStyle
+            style: bioStyle
 
         });
-        suhee_bio.setOrigin(0.5);
+        suheeBio.setOrigin(0.5, 0);
 
-        let may_image = this.add.image(2 * (this.canvasGame.width * 1.076) + leftMargin, this.canvasGame.height / 2, "may").setOrigin(0.5, 1);
-        let may_bio = this.make.text({
+        let mayImage = this.add.image(2 * (this.canvasGame.width * 1.076) + leftMargin, this.canvasGame.height * 0.2, "may").setOrigin(0.5);
+        let mayName = this.make.text({
             x: (2 * this.canvasGame.width * 1.063) + leftMargin,
-            y: this.canvasGame.height / 1.5,
+            y: this.canvasGame.height * 0.4,
+            text: "MAY CHAU",
+            style: nameStyle});
+        mayName.setOrigin(0.5);
+        let mayBio = this.make.text({
+            x: (2 * this.canvasGame.width * 1.063) + leftMargin,
+            y: this.canvasGame.height * 0.45,
             text: "May, aka the entertainer, makes sure the daily pose picture is up to standard. She also makes sure everyone has lunch so they all have strength to work cause coding takes LOTS OF ENERGY.\n\n" +
                 "Working at a restaurant made her realize how wasteful human beings are. Time to teach people a lesson!",
-            style: textStyle
+            style: bioStyle
         });
-        may_bio.setOrigin(0.5);
+        mayBio.setOrigin(0.5, 0);
 
-        let linh_image = this.add.image(3 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "linh").setOrigin(0.5, 1);
-        let linh_bio = this.make.text({
+        let linhImage = this.add.image(3 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height * 0.2, "linh").setOrigin(0.5);
+        let linhName = this.make.text({
             x: (3 * this.canvasGame.width * 1.063) + leftMargin,
-            y: this.canvasGame.height / 1.5,
+            y: this.canvasGame.height * 0.4,
+            text: "LINH TROUNG",
+            style: nameStyle});
+        linhName.setOrigin(0.5);
+        let linhBio = this.make.text({
+            x: (3 * this.canvasGame.width * 1.063) + leftMargin,
+            y: this.canvasGame.height * 0.45,
             text: "Linh, aka the dep, is the fashion icon and game expert. " +
                 "Her years of experience in the gaming industry is a great asset to the project. " +
                 "She spends a lot of time doing her research even when she is not working with the team.\n\n" +
                 "As a vegetarian, she hopes to tell people the consequences of eating animal.",
-            style: textStyle
+            style: bioStyle
         });
-        linh_bio.setOrigin(0.5);
+        linhBio.setOrigin(0.5, 0);
 
-        let josh_image = this.add.image(4 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height / 2, "josh").setOrigin(0.5, 1);
-        let josh_bio = this.make.text({
+        let joshImage = this.add.image(4 * (this.canvasGame.width * 1.063) + leftMargin, this.canvasGame.height * 0.2, "josh").setOrigin(0.5);
+        let joshName = this.make.text({
             x: (4 * this.canvasGame.width * 1.063) + leftMargin,
-            y: this.canvasGame.height / 1.5,
+            y: this.canvasGame.height * 0.4,
+            text: "JOSHUA SHIN",
+            style: nameStyle});
+        joshName.setOrigin(0.5);
+        let joshBio = this.make.text({
+            x: (4 * this.canvasGame.width * 1.063) + leftMargin,
+            y: this.canvasGame.height * 0.45,
             text: "Josh, aka the oppa, wants to be jacked. " +
                 "He has a poster of his head attached to Arnold's body in his room. " +
                 "That's his life goal. He would love to share the poster. Just ask!\n\n" +
                 "His friends at the gym always take hot baths after working out. " +
                 "Josh feels like it's time to let his friends know taking hot bath is a No No to the planet!",
-            style: textStyle
+            style: bioStyle
         });
-        josh_bio.setOrigin(0.5);
+        joshBio.setOrigin(0.5, 0);
 
         for (let k = 0; k < colors.length; k++){
-            this.itemGroup.add(gordon_image);
-            this.itemGroup.add(gordon_bio);
+            this.itemGroup.add(gordonImage);
+            this.itemGroup.add(gordonName);
+            this.itemGroup.add(gordonBio);
 
-            this.itemGroup.add(suhee_image);
-            this.itemGroup.add(suhee_bio);
+            this.itemGroup.add(suheeImage);
+            this.itemGroup.add(suheeName);
+            this.itemGroup.add(suheeBio);
 
-            this.itemGroup.add(may_image);
-            this.itemGroup.add(may_bio);
+            this.itemGroup.add(mayImage);
+            this.itemGroup.add(mayName);
+            this.itemGroup.add(mayBio);
 
-            this.itemGroup.add(linh_image);
-            this.itemGroup.add(linh_bio);
+            this.itemGroup.add(linhImage);
+            this.itemGroup.add(linhName);
+            this.itemGroup.add(linhBio);
 
-            this.itemGroup.add(josh_image);
-            this.itemGroup.add(josh_bio);
+            this.itemGroup.add(joshImage);
+            this.itemGroup.add(joshName);
+            this.itemGroup.add(joshBio);
 
 
             this.pageSelectors[k] = this.add.sprite(this.canvasGame.width / 2 + (k - Math.floor(colors.length / 2) + 0.5 * (1 - colors.length % 2)) * 40, this.canvasGame.height - 40, "levelpages");
@@ -207,8 +254,8 @@ class AboutScene extends Phaser.Scene{
             }
         }, this);
 
-        this.exitbutton = this.add.text(this.canvasGame.width - 100, 100, " X ", textStyle);
-        this.exitbutton.setInteractive();
+        this.exitbutton = this.add.image(this.canvasGame.width * 0.9, this.canvasGame.height * 0.07, 'quit');
+        this.exitbutton.setInteractive().setScale(0.3);
         this.exitbutton.on("pointerdown", function() {
             this.scene.start("BootScene");
         }, this);

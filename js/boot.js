@@ -16,23 +16,24 @@ class BootScene extends Phaser.Scene {
 
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
-
-
-        this.load.audio('bgm','./assets/bgm.mp3');
-
+        this.load.audio('bgm','./assets/sounds/bgm.mp3');
+        this.load.audio('sfxButton','./assets/sounds/button.wav');
+        this.load.audio('sfxCard','./assets/sounds/card.mp3');
+        this.load.audio('sfxTick','./assets/sounds/tick.wav');
 
         this.load.image("about", "./assets/images/button/About_button.png");
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
         this.load.image("logout", "./assets/images/button/logout_button.png");
-
-
     }
 
 
     create() {
-
-        this.bgm = this.sound.play('bgm', config);
+        if (!this.bgm) {
+            this.sound.pauseOnBlur = false;
+            this.bgm = this.sound.add('bgm', config);
+            this.bgm.play();
+        }
 
         initializeEvents(); // Read and initialize events.json
         initializeEndings(); // Read and initialize endings.json
@@ -57,6 +58,7 @@ class BootScene extends Phaser.Scene {
             "tutorial");
         this.tutorial.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.tutorial.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             this.scene.start("PlayTutorial");
         }, this);
 
@@ -66,32 +68,43 @@ class BootScene extends Phaser.Scene {
 
 
         this.about.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             this.scene.start("AboutScene");
         }, this);
 
-        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
-        this.unmute.setInteractive().setOrigin(0.5, 0);
-        this.unmute.on("pointerdown", function(){
+
+
+        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        this.mute.setInteractive().setOrigin(0.5, 0);
+        this.mute.on("pointerdown", function(){
             game.sound.mute = false;
         });
 
-        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
         // this.mute.visible = false;
-        this.mute.setInteractive().setOrigin(0.5, 0);
-        this.mute.on("pointerdown",function(){
+        this.unmute.setInteractive().setOrigin(0.5, 0);
+        this.unmute.on("pointerdown",function(){
             game.sound.mute = true;
-            }
-            );
+        });
     }
 
 
     firebaseLogin() {
         console.log("called firebaseLogin");
+        this.sound.play('sfxButton');
         this.login = function (provider) {
             if (!firebase.auth().currentUser) {
                 provider = new firebase.auth.GoogleAuthProvider();
                 provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-                firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
+                if (navigator.userAgent.indexOf("Chrome") != -1 )
+                {
+                    firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
+
+                }
+                else if(navigator.userAgent.indexOf("Safari") != -1)
+                {
+                    firebase.auth().signInWithRedirect(provider).then(this.start_game.bind(this));
+                }
             } else {
                 firebase.database().ref("/users/" + firebase.auth().currentUser.uid).once("value").then(this.start_game.bind(this));
             }
@@ -105,6 +118,7 @@ class BootScene extends Phaser.Scene {
 
 
     firebaseLogout(){
+        this.sound.play('sfxButton');
         firebase.auth().signOut();
         console.log("restart scene");
         this.scene.restart();
@@ -169,9 +183,9 @@ class BootScene extends Phaser.Scene {
         }
 
         if (game.sound.mute == true){
-            this.mute.visible = false;
+            this.unmute.visible = false;
         } else {
-            this.mute.visible = true;
+            this.unmute.visible = true;
             game.sound.mute = false;
         }
     }

@@ -69,19 +69,22 @@ class BootScene extends Phaser.Scene {
             this.scene.start("AboutScene");
         }, this);
 
-        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
-        this.unmute.setInteractive().setOrigin(0.5, 0);
-        this.unmute.on("pointerdown", function(){
+
+
+        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        this.mute.setInteractive().setOrigin(0.5, 0);
+        this.mute.on("pointerdown", function(){
             game.sound.mute = false;
         });
 
-        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
         // this.mute.visible = false;
-        this.mute.setInteractive().setOrigin(0.5, 0);
-        this.mute.on("pointerdown",function(){
-            game.sound.mute = true;
+        this.unmute.setInteractive().setOrigin(0.5, 0);
+        this.unmute.on("pointerdown",function(){
+                game.sound.mute = true;
             }
-            );
+        );
+
     }
 
 
@@ -169,9 +172,9 @@ class BootScene extends Phaser.Scene {
         }
 
         if (game.sound.mute == true){
-            this.mute.visible = false;
+            this.unmute.visible = false;
         } else {
-            this.mute.visible = true;
+            this.unmute.visible = true;
             game.sound.mute = false;
         }
     }

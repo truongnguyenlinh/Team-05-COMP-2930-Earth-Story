@@ -94,7 +94,15 @@ class BootScene extends Phaser.Scene {
             if (!firebase.auth().currentUser) {
                 provider = new firebase.auth.GoogleAuthProvider();
                 provider.addScope("https://www.googleapis.com/auth/userinfo.email");
-                firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
+                if (navigator.userAgent.indexOf("Chrome") != -1 )
+                {
+                    firebase.auth().signInWithPopup(provider).then(this.start_game.bind(this));
+
+                }
+                else if(navigator.userAgent.indexOf("Safari") != -1)
+                {
+                    firebase.auth().signInWithRedirect(provider).then(this.start_game.bind(this));
+                }
             } else {
                 firebase.database().ref("/users/" + firebase.auth().currentUser.uid).once("value").then(this.start_game.bind(this));
             }

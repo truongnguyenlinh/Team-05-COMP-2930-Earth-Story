@@ -17,21 +17,18 @@ class BootScene extends Phaser.Scene {
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
 
-
         this.load.audio('bgm','./assets/bgm.mp3');
-
 
         this.load.image("about", "./assets/images/button/About_button.png");
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
         this.load.image("logout", "./assets/images/button/logout_button.png");
-
-
+        this.load.image("loading", "./assets/images/loading.png");
     }
 
 
     create() {
-
+        this.sound.pauseOnBlur = false;
         this.bgm = this.sound.play('bgm', config);
 
         initializeEvents(); // Read and initialize events.json
@@ -47,7 +44,6 @@ class BootScene extends Phaser.Scene {
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
 
-        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
         this.start = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.65,
             "start");
         this.start.setInteractive().setOrigin(0.5, 0).setScale(0.25);
@@ -69,19 +65,17 @@ class BootScene extends Phaser.Scene {
             this.scene.start("AboutScene");
         }, this);
 
-        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
+        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
         this.unmute.setInteractive().setOrigin(0.5, 0);
         this.unmute.on("pointerdown", function(){
             game.sound.mute = false;
         });
 
-        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
-        // this.mute.visible = false;
+        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
         this.mute.setInteractive().setOrigin(0.5, 0);
         this.mute.on("pointerdown",function(){
             game.sound.mute = true;
-            }
-            );
+        });
     }
 
 
@@ -159,7 +153,6 @@ class BootScene extends Phaser.Scene {
 
 
     update() {
-
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
             this.logout = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.86,
@@ -168,7 +161,7 @@ class BootScene extends Phaser.Scene {
             this.logout.on("pointerdown", this.firebaseLogout.bind(this), this);
         }
 
-        if (game.sound.mute == true){
+        if (game.sound.mute === true){
             this.mute.visible = false;
         } else {
             this.mute.visible = true;

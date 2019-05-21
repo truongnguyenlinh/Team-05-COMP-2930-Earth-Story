@@ -58,7 +58,7 @@ class BootScene extends Phaser.Scene {
             "tutorial");
         this.tutorial.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.tutorial.on("pointerdown", function() {
-            this.bgm = this.sound.play('sfxButton');
+            this.sound.play('sfxButton');
             this.scene.start("PlayTutorial");
         }, this);
 
@@ -68,7 +68,7 @@ class BootScene extends Phaser.Scene {
 
 
         this.about.on("pointerdown", function() {
-            this.bgm = this.sound.play('sfxButton');
+            this.sound.play('sfxButton');
             this.scene.start("AboutScene");
         }, this);
 
@@ -84,16 +84,14 @@ class BootScene extends Phaser.Scene {
         // this.mute.visible = false;
         this.unmute.setInteractive().setOrigin(0.5, 0);
         this.unmute.on("pointerdown",function(){
-                game.sound.mute = true;
-            }
-        );
-
+            game.sound.mute = true;
+        });
     }
 
 
     firebaseLogin() {
         console.log("called firebaseLogin");
-        this.bgm = this.sound.play('sfxButton');
+        this.sound.play('sfxButton');
         this.login = function (provider) {
             if (!firebase.auth().currentUser) {
                 provider = new firebase.auth.GoogleAuthProvider();
@@ -112,7 +110,7 @@ class BootScene extends Phaser.Scene {
 
 
     firebaseLogout(){
-        this.bgm = this.sound.play('sfxButton');
+        this.sound.play('sfxButton');
         firebase.auth().signOut();
         console.log("restart scene");
         this.scene.restart();

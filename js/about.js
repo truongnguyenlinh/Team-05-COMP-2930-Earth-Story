@@ -256,7 +256,7 @@ class AboutScene extends Phaser.Scene{
         this.exitbutton = this.add.image(this.canvasGame.width * 0.9, this.canvasGame.height * 0.07, 'quit');
         this.exitbutton.setInteractive().setScale(0.3);
         this.exitbutton.on("pointerdown", function() {
-            this.bgm = this.sound.play('sfxButton');
+            this.sound.play('sfxButton');
             this.scene.start("BootScene");
         }, this);
     }
@@ -264,6 +264,9 @@ class AboutScene extends Phaser.Scene{
     
     // handles how swipe looks, from moving one page to another
     changePage(page){
+        if (!this.canMove) {
+            this.sound.play('sfxTick');
+        }
         // changes the size of the squares at the bottom of the page
         this.currentPage += page;
         for (let k = 0; k < colors.length; k++){

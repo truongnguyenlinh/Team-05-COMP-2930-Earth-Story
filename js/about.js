@@ -42,7 +42,6 @@ class AboutScene extends Phaser.Scene{
         this.load.image("suhee", "./assets/images/about/suhee.png");
         this.load.image("linh", "./assets/images/about/linh.png");
         this.load.image("quit", "./assets/images/button/quit_button.png");
-
     }
 
 
@@ -257,6 +256,7 @@ class AboutScene extends Phaser.Scene{
         this.exitbutton = this.add.image(this.canvasGame.width * 0.9, this.canvasGame.height * 0.07, 'quit');
         this.exitbutton.setInteractive().setScale(0.3);
         this.exitbutton.on("pointerdown", function() {
+            this.bgm = this.sound.play('sfxButton');
             this.scene.start("BootScene");
         }, this);
     }

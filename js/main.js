@@ -30,11 +30,11 @@ class PlayGame extends Phaser.Scene {
         });
         this.loadingText.setOrigin(0.5);
 
-        this.load.on("progress", function () {
+        this.load.on("progress", function() {
             loader.rotation += 0.01;
         });
 
-        this.load.on("complete", function (value) {
+        this.load.on("complete", function(value) {
             console.log(value);
             loader.destroy();
         });
@@ -138,19 +138,19 @@ class PlayGame extends Phaser.Scene {
 
         this.earth_land = this.add.image(0, 0, "earth_land");
 
-        this.earth_dirty_land_1 = this.add.image(0, 0, "earth_dirty_land_1");
+        this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
         this.earth_dirty_land_1.alpha = 0;
         this.earth_dirty_land_2.alpha = 0;
         this.earth_dirty_land_3.alpha = 0;
 
-        this.default_mt = this.add.image(0, 0, "default_mt");
-        this.clean_clouds = this.add.image(0, 0, "clean_clouds");
+        this.default_mt = this.add.image(0,0, "default_mt");
+        this.clean_clouds = this.add.image(0,0, "clean_clouds");
 
-        this.clean_mt = this.add.image(0, 0, "clean_mt");
-        this.dirty_mt = this.add.image(0, 0, "dirty_mt");
-        this.dirty_clouds = this.add.image(0, 0, "dirty_clouds");
+        this.clean_mt = this.add.image(0,0, "clean_mt");
+        this.dirty_mt = this.add.image(0,0, "dirty_mt");
+        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
         this.clean_mt.alpha = 0;
         this.dirty_mt.alpha = 0;
         this.dirty_clouds.alpha = 0;
@@ -190,7 +190,7 @@ class PlayGame extends Phaser.Scene {
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
         this.shrimp_2.alpha = 0;
 
-        this.factory_1 = this.add.image(0, 0, "factory_1");
+        this.factory_1= this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
         this.factory_1.alpha = 0;
         this.factory_2.alpha = 0;
@@ -299,12 +299,12 @@ class PlayGame extends Phaser.Scene {
 
 
     tweenLayer(layer, alphaValue) {
-        this.tweens.add({
-            targets: layer,
-            alpha: alphaValue,
-            ease: 'Linear',
-            duration: 600
-        });
+         this.tweens.add({
+                targets: layer,
+                alpha: alphaValue,
+                ease: 'Linear',
+                duration: 600
+         });
     }
 
 
@@ -314,8 +314,8 @@ class PlayGame extends Phaser.Scene {
         this.card.alpha = 0.7;
 
         let textStyle = {
-            color: '#000000',
-            align: "center",
+            color:'#000000',
+            align:"center",
             boundsAlignH: "center",
             fontFamily: 'Abel',
             fontSize: '6em',
@@ -337,15 +337,15 @@ class PlayGame extends Phaser.Scene {
 
 
     moveStar() {
-        this.star.x += this.progressBar.width / 30;
+        this.star.x  += this.progressBar.width / 30;
         if (Math.ceil(this.star.x) > this.progressBar.width / 2) {
             this.endGame = true;
         }
     }
 
 
-    flipCard() {
-        this.card.on('pointerup', function () {
+    flipCard(){
+        this.card.on('pointerup', function(){
             this.tweens.add({
                 targets: this.card,
                 scaleY: 2.9,
@@ -362,8 +362,8 @@ class PlayGame extends Phaser.Scene {
                 duration: 200,
             });
 
-            this.time.delayedCall(200, function () {
-                if (this.question.visible) {
+            this.time.delayedCall(200, function(){
+                if (this.question.visible){
                     this.info.visible = true;
                     this.question.visible = false;
                 } else {
@@ -403,7 +403,7 @@ class PlayGame extends Phaser.Scene {
                 this.hasSwiped = true;
                 $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
                 this.time.delayedCall(500, function () {
-                    if (this.container.x === this.canvasGame.width + 1500) {
+                    if (this.container.x === this.canvasGame.width + 1500){
                         this.container.destroy();
                         this.updateEarth();
 
@@ -422,7 +422,7 @@ class PlayGame extends Phaser.Scene {
                 this.hasSwiped = true;
                 $(this.container).animate({x: -1500, speed: 500});
                 this.time.delayedCall(500, function () {
-                    if (this.container.x === -1500) {
+                    if (this.container.x === -1500){
                         this.container.destroy();
                         this.updateEarth();
 
@@ -500,17 +500,5 @@ class PlayGame extends Phaser.Scene {
 
     triggerEndGame() {
         this.endGame = true;
-    }
-
-
-    flashStatus(target) {
-        target.alpha = 1;
-        this.tweens.add({
-            targets: target,
-            alpha: 0.6,
-            ease: 'Sine.easeInOut',
-            duration: 400,
-            yoyo: true
-        });
     }
 }

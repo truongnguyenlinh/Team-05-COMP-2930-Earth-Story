@@ -157,6 +157,8 @@ class PlayTutorial extends Phaser.Scene {
                 this.tutorial_text.setTexture('tutorial_text_down');
             }
 
+            this.bgm = this.sound.play('sfxCard');
+
             this.tweens.add({
                 targets: this.card,
                 scaleY: 2.9,
@@ -212,40 +214,47 @@ class PlayTutorial extends Phaser.Scene {
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
         if (this.tutorialStatus) {
+            this.bgm = this.sound.play('sfxTick');
             this.env.setDepth(1);
             this.envMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_environment');
             this.tutorialStatus = false;
             this.tutorialEnvironment = true;
         } else if (this.tutorialEnvironment) {
+            this.bgm = this.sound.play('sfxTick');
             this.soc.setDepth(1);
             this.socMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_society');
             this.tutorialEnvironment = false;
             this.tutorialSociety = true;
         } else if (this.tutorialSociety) {
+            this.bgm = this.sound.play('sfxTick');
             this.eco.setDepth(1);
             this.ecoMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_economy');
             this.tutorialSociety = false;
             this.tutorialEconomy = true;
         } else if (this.tutorialEconomy) {
+            this.bgm = this.sound.play('sfxTick');
             this.res.setDepth(1);
             this.resMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_resources');
             this.tutorialEconomy = false;
             this.tutorialResources = true;
         } else if (this.tutorialResources) {
+            this.bgm = this.sound.play('sfxTick');
             this.progressBar.setDepth(1);
             this.tutorial_text.setTexture('tutorial_progress');
             this.tutorial_text.y = this.canvasGame.height / 1.2;
             this.tutorialResources = false;
             this.tutorialProgress = true;
         } else if (this.tutorialProgress) {
+            this.bgm = this.sound.play('sfxTick');
             this.tutorial_text.setTexture('tutorial_text_exit');
             this.tutorialProgress = false;
             this.tutorialEnd = true;
         } else if (this.tutorialEnd) {
+            this.bgm = this.sound.play('sfxTick');
             this.scene.start("BootScene");
         }
 
@@ -260,8 +269,8 @@ class PlayTutorial extends Phaser.Scene {
                     this.tutorial_text.setTexture('tutorial_text_left');
                 }
 
+                this.bgm = this.sound.play('sfxCard');
                 this.hasSwiped = true;
-
                 $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
                 this.time.delayedCall(500, function (container) {
                     if (this.container.x === this.canvasGame.width + 1500){
@@ -285,6 +294,7 @@ class PlayTutorial extends Phaser.Scene {
                     this.tutorial_text.setTexture('tutorial_earth_status');
                 }
 
+                this.bgm = this.sound.play('sfxCard');
                 this.hasSwiped = true;
                 $(this.container).animate({x: -1500, speed: 500});
                 this.time.delayedCall(500, function (container) {
@@ -307,6 +317,7 @@ class PlayTutorial extends Phaser.Scene {
                     this.tutorial_text.setTexture('tutorial_text_up');
                 }
 
+                this.bgm = this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
             }
@@ -320,6 +331,7 @@ class PlayTutorial extends Phaser.Scene {
                     this.tutorial_text.setTexture('tutorial_text_right');
                 }
 
+                this.bgm = this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
             }

@@ -16,23 +16,24 @@ class BootScene extends Phaser.Scene {
 
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
-
-
-        this.load.audio('bgm','./assets/bgm.mp3');
-
+        this.load.audio('bgm','./assets/sounds/bgm.mp3');
+        this.load.audio('sfxButton','./assets/sounds/button.wav');
+        this.load.audio('sfxCard','./assets/sounds/card.mp3');
+        this.load.audio('sfxTick','./assets/sounds/tick.wav');
 
         this.load.image("about", "./assets/images/button/About_button.png");
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
         this.load.image("logout", "./assets/images/button/logout_button.png");
-
-
     }
 
 
     create() {
-
-        this.bgm = this.sound.play('bgm', config);
+        if (!this.bgm) {
+            this.sound.pauseOnBlur = false;
+            this.bgm = this.sound.add('bgm', config);
+            this.bgm.play();
+        }
 
         initializeEvents(); // Read and initialize events.json
         initializeEndings(); // Read and initialize endings.json
@@ -57,6 +58,7 @@ class BootScene extends Phaser.Scene {
             "tutorial");
         this.tutorial.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.tutorial.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             this.scene.start("PlayTutorial");
         }, this);
 
@@ -66,6 +68,7 @@ class BootScene extends Phaser.Scene {
 
 
         this.about.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             this.scene.start("AboutScene");
         }, this);
 
@@ -81,15 +84,14 @@ class BootScene extends Phaser.Scene {
         // this.mute.visible = false;
         this.unmute.setInteractive().setOrigin(0.5, 0);
         this.unmute.on("pointerdown",function(){
-                game.sound.mute = true;
-            }
-        );
-
+            game.sound.mute = true;
+        });
     }
 
 
     firebaseLogin() {
         console.log("called firebaseLogin");
+        this.sound.play('sfxButton');
         this.login = function (provider) {
             if (!firebase.auth().currentUser) {
                 provider = new firebase.auth.GoogleAuthProvider();
@@ -108,6 +110,7 @@ class BootScene extends Phaser.Scene {
 
 
     firebaseLogout(){
+        this.sound.play('sfxButton');
         firebase.auth().signOut();
         console.log("restart scene");
         this.scene.restart();

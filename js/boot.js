@@ -16,23 +16,20 @@ class BootScene extends Phaser.Scene {
 
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
-
-
-        this.load.audio('bgm','./assets/bgm.mp3');
-
+        this.load.audio('bgm','./assets/sounds/bgm.mp3');
 
         this.load.image("about", "./assets/images/button/About_button.png");
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
         this.load.image("logout", "./assets/images/button/logout_button.png");
-
-
     }
 
 
     create() {
-
-        this.bgm = this.sound.play('bgm', config);
+        if (!this.bgm) {
+            this.bgm = this.sound.add('bgm', config);
+            this.bgm.play();
+        }
 
         initializeEvents(); // Read and initialize events.json
         initializeEndings(); // Read and initialize endings.json

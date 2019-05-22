@@ -48,7 +48,8 @@ class BootScene extends Phaser.Scene {
         this.logo.setInteractive();
         this.logo.on("pointerdown", this.spinEarth, this);
 
-        let style = { fill: "#FFFFFF", fontSize: "3em", fontFamily: 'Abel'};
+        this.startGame = false;
+
         this.start = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.65,
             "start");
         this.start.setInteractive().setOrigin(0.5, 0).setScale(0.25);
@@ -111,7 +112,10 @@ class BootScene extends Phaser.Scene {
         };
 
         this.start_game = function () {
-            this.scene.start("PlayGame");
+            if (this.startGame === false){
+                this.startGame = true;
+                this.scene.start("PlayGame");
+            }
         };
         this.login();
     }

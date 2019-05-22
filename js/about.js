@@ -144,7 +144,7 @@ class AboutScene extends Phaser.Scene{
         let linhName = this.make.text({
             x: (3 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.4,
-            text: "LINH TROUNG",
+            text: "LINH TRUONG",
             style: nameStyle});
         linhName.setOrigin(0.5);
         let linhBio = this.make.text({

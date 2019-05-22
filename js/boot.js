@@ -133,6 +133,7 @@ class BootScene extends Phaser.Scene {
 
     spinEarth() {
         if (this.canSpin) {
+            this.sound.play('sfxTick');
             this.canSpin = false;
             this.tweens.add({
                 targets: [this.logo],

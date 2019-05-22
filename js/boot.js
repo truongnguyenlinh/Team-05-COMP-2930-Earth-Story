@@ -18,7 +18,6 @@ class BootScene extends Phaser.Scene {
         this.load.image("mute", "./assets/images/mute.png");
 
         this.load.audio('bgm','./assets/sounds/bgm.mp3');
-        this.load.audio('bgm','./assets/sounds/bgm.mp3');
         this.load.audio('sfxButton','./assets/sounds/button.wav');
         this.load.audio('sfxCard','./assets/sounds/card.mp3');
         this.load.audio('sfxTick','./assets/sounds/tick.wav');
@@ -77,13 +76,13 @@ class BootScene extends Phaser.Scene {
         }, this);
 
 
-        this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
+        this.mute = this.add.image(this.canvasGame.width/ 1.06 , this.canvasGame.height / 55, "mute").setScale(1);
         this.mute.setInteractive().setOrigin(0.5, 0);
         this.mute.on("pointerdown", function(){
             game.sound.mute = false;
         });
 
-        this.unmute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "unmute").setScale(0.75);
+        this.unmute = this.add.image(this.canvasGame.width/ 1.06 , this.canvasGame.height / 55, "unmute").setScale(1);
         // this.mute.visible = false;
         this.unmute.setInteractive().setOrigin(0.5, 0);
         this.unmute.on("pointerdown",function(){

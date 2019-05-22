@@ -1,5 +1,7 @@
 let config = {
-    type: Phaser.AUTO,
+    width: window.innerWidth * window.devicePixelRatio,
+    height: window.innerHeight * window.devicePixelRatio,
+    type: Phaser.CANVAS,
     backgroundColor:"#FFFFFF",
     physics: {
         default: 'arcade',

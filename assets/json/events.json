@@ -1,6 +1,6 @@
 [
   {
-    "question": "It is a hot summer day at the beach. Do you want to grab an ice cream?",
+    "question": "It is a hot summer day at the beach. Do you want to grab an ice-cream?",
     "info": "Dairy production accounts for almost 4% of global carbon emissions.",
     "yes": {
       "economy": 5,
@@ -16,7 +16,7 @@
     }
   },
   {
-    "question": "You got yourself ice black coffee. Do you want to use straw?",
+    "question": "You got yourself iced black coffee. Do you want to use a straw?",
     "info": "Plastic straws make up 4% of plastic trash by piece.",
     "yes": {
       "economy": 5,
@@ -32,7 +32,7 @@
     }
   },
   {
-    "question": "You need to buy a t-shirt. Do you choose to go to the thrift store? If not, you can can go to shopping mall.",
+    "question": "You need to buy a t-shirt. Do you choose to go to the thrift store?",
     "info": "It takes 2700 litres of water to produce one t-shirt.",
     "yes": {
       "economy": -5,
@@ -64,8 +64,8 @@
     }
   },
   {
-    "question": "Should we phase out traditional energy (oil, coal) and introduce alternative energy (wind, solar)?",
-    "info": "The main forms of renewable energy are: solar, wind, hydro, biofuel and geothermal and these sources are all continually replenished.",
+    "question": "Would you phase out traditional energy (oil, coal) and introduce alternative energy (wind, solar)?",
+    "info": "The main forms of renewable energy are: solar, wind, hydro, bio-fuel and geothermal. These resources are all continually replenished.",
     "yes": {
       "economy": -10,
       "society": 0,
@@ -80,8 +80,8 @@
     }
   },
   {
-    "question": "You are in the market and cashier is asking if you need plastic bags for your groceries. Do you have your own shopping bag?",
-    "info": "Plastic bags often end up in our landfills or in our oceans causing an ecosystem disruption.",
+    "question": "You are at the supermarket and the cashier is asking if you need plastic bags for your groceries. Do you have your own shopping bag?",
+    "info": "Plastic bags often end up in our landfills or in our oceans, causing an ecosystem disruption.",
     "yes": {
       "economy": -5,
       "society": 5,
@@ -96,7 +96,7 @@
     }
   },
   {
-    "question": "It was an exhausting day after work, and you want to spend time to relax. Do you want to take a bath?",
+    "question": "It was an exhausting day after work, and you want to wind down. Do you want to take a bath?",
     "info": "Water conservation helps prevent water pollution in nearby lakes, rivers, and local watersheds.",
     "yes": {
       "economy": 0,
@@ -112,7 +112,7 @@
     }
   },
   {
-    "question": "You can get to work by walking, biking or transiting. Are you driving today?",
+    "question": "You can get to work by walking, biking or transiting. Do you want to drive instead?",
     "info": "Motor vehicles collectively cause 75 percent of carbon monoxide pollution in the U.S.",
     "yes": {
       "economy": 5,
@@ -144,7 +144,7 @@
     }
   },
   {
-    "question": "Do you mind losing 5 minutes of your regular shower time?",
+    "question": "Would you lose 5 minutes of your regular shower time?",
     "info": "You use around 10 litres of water per minute while showering.",
     "yes": {
       "economy": 0,
@@ -208,7 +208,7 @@
     }
   },
   {
-    "question": "You recently moved into a new house and you found that your room wall colour is white. Do you want to paint your room with your favourite colour?",
+    "question": "You recently moved into a new house and found that your room wall colour is white. Do you want to paint your room with your favourite colour?",
     "info": "Wall painting supplies emit toxic chemicals in the air and cause air pollution.",
     "yes": {
       "economy": 5,
@@ -225,7 +225,7 @@
   },
   {
     "question": "You won a million dollars from the lottery! Do you want a new car and house?",
-    "info": "During the process of mining, dust and chemicals are released in the air causing massive air pollution.",
+    "info": "The production of cars leaves a giant footprint on the environment, due to materials like steel, paints and rubber that must be created beforehand.",
     "yes": {
       "economy": 5,
       "society": 5,
@@ -241,7 +241,7 @@
   },
   {
     "question": "A recent deposit of coal was discovered in a remote area. Would you approve mining?",
-    "info": "Allowing permission for mining would increase the amount of jobs in the area. However, coal contributes to largest amount of greenhouse gases for energy production.",
+    "info": "During the process of mining, dust and chemicals are released in the air causing massive air pollution.",
     "yes": {
       "economy": 15,
       "society": 10,
@@ -257,7 +257,7 @@
   },
   {
     "question": "As Director of the City Planning Department, would you mandate more zero emission buildings?",
-    "info": "This will cause each building to cost 8% more and housing prices to increase.",
+    "info": "This will cause each building to cost 8% more and housing prices to increase, but will limit the use of traditional energy (oil, coal).",
     "yes": {
       "economy": -5,
       "society": -5,
@@ -272,8 +272,8 @@
     }
   },
   {
-    "question": "Should we build a nuclear power plant?",
-    "info": "Nuclear power plants do not emit greenhouse gases while generating electricity, but radioactive waste is difficult to safely dispose.",
+    "question": "Would you build a nuclear power plant?",
+    "info": "Nuclear power plants do not emit greenhouse gases while generating electricity; however, radioactive waste is difficult to safely dispose.",
     "yes": {
       "economy": 5,
       "society": -15,
@@ -288,8 +288,8 @@
     }
   },
   {
-    "question": "You are in charge of a farming company. Should you implement crop rotation?",
-    "info": "Crop rotation prevents soil and nutrient loss, but will reduce farming output.",
+    "question": "You are in charge of a farming company. Would you implement crop rotation?",
+    "info": "Crop rotation prevents soil and nutrient loss, but will reduce farming production output.",
     "yes": {
       "economy": -5,
       "society": 0,
@@ -320,8 +320,8 @@
     }
   },
   {
-    "question": "Do you open and close fridge multiple times a day?",
-    "info": "Careless with opening and closing your fridge door wastes 50 to 120kWh a year.",
+    "question": "Do you open and close the fridge multiple times a day?",
+    "info": "Carelessness when opening and closing your fridge door wastes 50 to 120kWh a year.",
     "yes": {
       "economy": 5,
       "society": 0,
@@ -336,8 +336,8 @@
     }
   },
   {
-    "question": "As a director of city plan, would you build bike lanes?",
-    "info": "To help reduce congestion in the city, space-efficient means of moving people such as walking, cycling and public transport should be prioritised over low-occupancy car transport.",
+    "question": "As Director of the City Planning Department, would you build bike lanes?",
+    "info": "To help reduce congestion in the city, space-efficient means of moving people such as cycling and public transport should be prioritised over low-occupancy car transport.",
     "yes": {
       "economy": 5,
       "society": 5,
@@ -352,7 +352,7 @@
     }
   },
   {
-    "question": "Should we invest in vertical farming?",
+    "question": "Would you invest in vertical farming?",
     "info": "Vertical farming prevents nutrient loss and saves up to 97% of water.",
     "yes": {
       "economy": 0,
@@ -368,8 +368,8 @@
     }
   },
   {
-    "question": "Should we invest in lab grown meat?",
-    "info": "Clean meat produces 78 - 96% less greenhouse gas emissions, uses 99% less land and between 82 - 92% less water.",
+    "question": "Would you invest in lab grown meat?",
+    "info": "Clean meat produces 78 - 96% less greenhouse gas emissions, uses 99% less land and 82 - 92% less water.",
     "yes": {
       "economy": 5,
       "society": 10,
@@ -385,7 +385,7 @@
   },
   {
     "question": "You are thinking to buy your favourite novel. Do you want to get a paper book? If not, you can get E-Book.",
-    "info": "Pulp and paper is the third largest industrial polluter to air, water, and land in both Canada and the United States, and releases well over 100 million kg of toxic pollution each year.",
+    "info": "Pulp and paper is the third largest industrial polluter to air, water, and land in both Canada and the United States. It releases well over 100 million kg of toxic pollution each year.",
     "yes": {
       "economy": 0,
       "society": 0,
@@ -400,7 +400,7 @@
     }
   },
   {
-    "question": "Did you have your own water bottle with you today?",
+    "question": "Did you bring your own water bottle today?",
     "info": "Plastic water bottles can take between 400 and 1,000 years to decompose.",
     "yes": {
       "economy": 0,
@@ -416,8 +416,8 @@
     }
   },
   {
-    "question": "Did you use disposable container today?",
-    "info": "An estimated 17.6 billion pounds of plastic enters into the marine environment from land- based sources every year – roughly equivalent to dumping a garbage truck full of plastic into the oceans every minute.",
+    "question": "Did you use a disposable container today?",
+    "info": "An estimated 17.6 billion pounds of plastic enters into the marine environment from land-based sources every year – roughly equivalent to dumping a garbage truck full of plastic into the oceans every minute.",
     "yes": {
       "economy": 10,
       "society": 5,
@@ -464,7 +464,7 @@
     }
   },
   {
-    "question": "It’s Christmas! Do you want to buy an artificial Christmas tree instead of real Evergreen tree?",
+    "question": "It’s Christmas! Do you want to buy an artificial Christmas tree instead of an Evergreen tree?",
     "info": "Fake Christmas trees can be reused for couple of years but cannot be recycled.",
     "yes": {
       "economy": 5,
@@ -481,7 +481,7 @@
   },
   {
     "question": "Do you have a compost bin at home?",
-    "info": "Composting transforms waste into valuable soil nutrient and saves space in landfills",
+    "info": "Composting transforms waste into valuable soil nutrients and saves space in landfills",
     "yes": {
       "economy": 0,
       "society": 5,

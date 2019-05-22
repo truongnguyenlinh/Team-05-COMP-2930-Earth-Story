@@ -17,7 +17,7 @@ class BootScene extends Phaser.Scene {
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
 
-        this.load.audio('bgm','./assets/bgm.mp3');
+        this.load.audio('bgm','./assets/sounds/bgm.mp3');
         this.load.audio('bgm','./assets/sounds/bgm.mp3');
         this.load.audio('sfxButton','./assets/sounds/button.wav');
         this.load.audio('sfxCard','./assets/sounds/card.mp3');

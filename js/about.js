@@ -42,7 +42,6 @@ class AboutScene extends Phaser.Scene{
         this.load.image("suhee", "./assets/images/about/suhee.png");
         this.load.image("linh", "./assets/images/about/linh.png");
         this.load.image("quit", "./assets/images/button/quit_button.png");
-
     }
 
 
@@ -88,8 +87,7 @@ class AboutScene extends Phaser.Scene{
         let gordonBio = this.make.text({
             x: this.canvasGame.width / 2,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the leng jai, is the genius behind the nyan cat. " +
-                "He loves everything about cats. His favourite shirt is the " +
+            text: "Aka the leng jai, loves everything about cats. His favourite shirt is the " +
                 "'if I fit, I sit' cat shirt. He believes that the world would " +
                 "be a better place if it is ruled by cats.\n\n" +
                 "His love of cats continuously pushes him to do more about creating a better earth for cats. " +
@@ -108,12 +106,11 @@ class AboutScene extends Phaser.Scene{
         let suheeBio = this.make.text({
             x: this.canvasGame.width * 1.063 + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the magnae, is a professional graphic designer." +
-                " She did all the beautiful artwork of the app. " +
-                "Her photoshop skills bring a lot of fun, fun, fun to the group. \n\n" +
-                "She loves getting starbucks coffee and she asks for a straw every time. " +
-                "One day, she had an epiphany that she has to stop " +
-                "and start protecting the environment.",
+            text: "Aka the magnae, loves bubble tea and graphic design. Her favourite things are " +
+                "getting the OG bubble tea and photoshopping people's faces on random places, " +
+                "which brings a lot of fun, fun, fun to the group. \n\n" +
+                "Bubble tea is also her biggest struggle because of the waste generated would upset Gordon and his kin. " +
+                "That's why she is trying to promote no straws for life through the app.",
             style: bioStyle
 
         });
@@ -129,8 +126,11 @@ class AboutScene extends Phaser.Scene{
         let mayBio = this.make.text({
             x: (2 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the entertainer, makes sure the daily pose picture is up to standard. She also makes sure everyone has lunch so they all have strength to work cause coding takes LOTS OF ENERGY.\n\n" +
-                "Working at a restaurant made her realize how wasteful human beings are. Time to teach people a lesson!",
+            text: "Aka the leng mui, makes sure the daily pose picture is up to standard" +
+                " and that everyone has lunch so they all have strength to work " +
+                "cause coding takes LOTS OF ENERGY.\n\n" +
+                "Working at a restaurant makes her realize how wasteful human beings are. Come on people, " +
+                "food belongs in our stomach, not the trash can!",
             style: bioStyle
         });
         mayBio.setOrigin(0.5, 0);
@@ -148,7 +148,8 @@ class AboutScene extends Phaser.Scene{
             text: "Aka the dep, is the fashion icon and game expert. " +
                 "Her years of experience in the gaming industry is a great asset to the project. " +
                 "She spends a lot of time doing her research even when she is not working with the team.\n\n" +
-                "As a vegetarian, she hopes to tell people the consequences of eating animal.",
+                "Her favourite lunch is veggie roll. Filling and healthy and does not pollute the environment " +
+                "as much as eating meat. ",
             style: bioStyle
         });
         linhBio.setOrigin(0.5, 0);
@@ -252,6 +253,7 @@ class AboutScene extends Phaser.Scene{
         this.exitbutton = this.add.image(this.canvasGame.width * 0.9, this.canvasGame.height * 0.07, 'quit');
         this.exitbutton.setInteractive().setScale(0.3);
         this.exitbutton.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             this.scene.start("BootScene");
         }, this);
     }
@@ -259,6 +261,9 @@ class AboutScene extends Phaser.Scene{
     
     // handles how swipe looks, from moving one page to another
     changePage(page){
+        if (!this.canMove) {
+            this.sound.play('sfxTick');
+        }
         // changes the size of the squares at the bottom of the page
         this.currentPage += page;
         for (let k = 0; k < colors.length; k++){

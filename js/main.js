@@ -22,11 +22,11 @@ class PlayGame extends Phaser.Scene {
         this.loadingText.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.loadingText.setOrigin(0.5);
 
-        this.load.on("progress", function() {
+        this.load.on("progress", function () {
             loader.rotation += 0.01;
         });
 
-        this.load.on("complete", function(value) {
+        this.load.on("complete", function (value) {
             console.log(value);
             loader.destroy();
         });
@@ -124,27 +124,31 @@ class PlayGame extends Phaser.Scene {
         this.earth_dirty_water_1 = this.add.image(0, 0, "earth_dirty_water_1");
         this.earth_dirty_water_2 = this.add.image(0, 0, "earth_dirty_water_2");
         this.earth_dirty_water_3 = this.add.image(0, 0, "earth_dirty_water_3");
-        this.earth_dirty_water_1.alpha = 0;
+        this.earth_water.alpha = 1;
+        this.earth_dirty_water_1.alpha = 1;
         this.earth_dirty_water_2.alpha = 0;
         this.earth_dirty_water_3.alpha = 0;
 
         this.earth_land = this.add.image(0, 0, "earth_land");
 
-        this.earth_dirty_land_1 = this.add.image(0,0, "earth_dirty_land_1");
+        this.earth_dirty_land_1 = this.add.image(0, 0, "earth_dirty_land_1");
         this.earth_dirty_land_2 = this.add.image(0, 0, "earth_dirty_land_2");
         this.earth_dirty_land_3 = this.add.image(0, 0, "earth_dirty_land_3");
-        this.earth_dirty_land_1.alpha = 0;
+
+        this.earth_land.alpha = 1;
+        this.earth_dirty_land_1.alpha = 1;
         this.earth_dirty_land_2.alpha = 0;
         this.earth_dirty_land_3.alpha = 0;
 
-        this.default_mt = this.add.image(0,0, "default_mt");
-        this.clean_clouds = this.add.image(0,0, "clean_clouds");
-
         this.clean_mt = this.add.image(0,0, "clean_mt");
+        this.default_mt = this.add.image(0,0, "default_mt");
         this.dirty_mt = this.add.image(0,0, "dirty_mt");
-        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
+
         this.clean_mt.alpha = 0;
         this.dirty_mt.alpha = 0;
+
+        this.clean_clouds = this.add.image(0,0, "clean_clouds");
+        this.dirty_clouds = this.add.image(0,0, "dirty_clouds");
         this.dirty_clouds.alpha = 0;
 
         // Visible layers
@@ -182,7 +186,7 @@ class PlayGame extends Phaser.Scene {
         this.shrimp_2 = this.add.image(0, 0, "shrimp_2");
         this.shrimp_2.alpha = 0;
 
-        this.factory_1= this.add.image(0, 0, "factory_1");
+        this.factory_1 = this.add.image(0, 0, "factory_1");
         this.factory_2 = this.add.image(0, 0, "factory_2");
         this.factory_1.alpha = 0;
         this.factory_2.alpha = 0;
@@ -215,36 +219,52 @@ class PlayGame extends Phaser.Scene {
 
 
     updateEarth() {
-        if (getEnvironment() < 50) {
+        if (getEnvironment() < 25) {
             this.tweenLayer(this.earth_dirty_water_3, 1);
             this.tweenLayer(this.earth_dirty_land_3, 1);
             this.tweenLayer(this.dirty_mt, 1);
-            this.tweenLayer(this.dirty_clouds, 1);
-            console.log("environment < 50 = bad earth");
         }
 
-        if (getEnvironment() > 50) {
+        if (getEnvironment() >= 25 && getEnvironment() < 50){
+            this.tweenLayer(this.earth_dirty_water_2, 1);
+            this.tweenLayer(this.earth_dirty_land_2, 1);
+            this.tweenLayer(this.default_mt, 1);
+            this.tweenLayer(this.dirty_clouds, 1);
+
+            // remove layers
+            this.tweenLayer(this.clean_clouds, 0);
             this.tweenLayer(this.earth_dirty_water_3, 0);
             this.tweenLayer(this.earth_dirty_land_3, 0);
-            this.tweenLayer(this.dirty_clouds, 0);
             this.tweenLayer(this.dirty_mt, 0);
+
+
+
+
+        }
+
+        if (getEnvironment() >= 50 && getEnvironment() < 75){
+            this.tweenLayer(this.earth_dirty_water_1, 1);
+            this.tweenLayer(this.earth_dirty_land_1, 1);
+            this.tweenLayer(this.clean_clouds, 1);
+
+            // remove layers
+            this.tweenLayer(this.earth_dirty_water_2, 0);
+            this.tweenLayer(this.earth_dirty_land_2, 0);
+            this.tweenLayer(this.dirty_clouds, 0);
+
+        }
+
+        if (getEnvironment() >= 75) {
             this.tweenLayer(this.clean_mt, 1);
-            console.log("environment > 50 = good earth");
+
+            // remove layer
+            this.tweenLayer(this.earth_dirty_water_1, 0);
+            this.tweenLayer(this.earth_dirty_land_1, 0);
+            this.tweenLayer(this.dirty_clouds, 0);
         }
 
-        if (getResources() > 50) {
-            this.tweenLayer(this.tree_3, 1);
-            this.tweenLayer(this.tree_4, 1);
-            this.tweenLayer(this.fish_2, 1);
-            this.tweenLayer(this.salmon_2, 1);
-            this.tweenLayer(this.tuna_2, 1);
-            this.tweenLayer(this.cow_2, 1);
-            this.tweenLayer(this.pig_2, 1);
-            this.tweenLayer(this.shrimp_2, 1);
-            console.log("resource > 50 = add all trees and fisheries");
-        }
-
-        if (getResources() < 50) {
+        if (getResources() < 25) {
+            // remove layers
             this.tweenLayer(this.tree_1, 0);
             this.tweenLayer(this.tree_2, 0);
             this.tweenLayer(this.tree_3, 0);
@@ -261,42 +281,115 @@ class PlayGame extends Phaser.Scene {
             this.tweenLayer(this.cow_1, 0);
             this.tweenLayer(this.pig_1, 0);
             this.tweenLayer(this.shrimp_1, 0);
-            console.log("resource < 50 = remove all trees and fisheries");
         }
 
-        if (getEconomy() > 50) {
-            this.tweenLayer(this.factory_1, 1);
-            this.tweenLayer(this.factory_2, 1);
-            this.tweenLayer(this.wind_turbines_1, 1);
-            console.log("economy > 50 = add factories");
+        if (getResources() >= 25 && getResources() < 50) {
+            this.tweenLayer(this.tree_4, 1);
+            this.tweenLayer(this.fish_2, 1);
+            this.tweenLayer(this.cow_2, 1);
+            this.tweenLayer(this.pig_2, 1);
+            this.tweenLayer(this.shrimp_2, 1);
+
+            //remove layers
+            this.tweenLayer(this.tree_2, 0);
+            this.tweenLayer(this.tree_3, 0);
+            this.tweenLayer(this.salmon_2, 0);
+            this.tweenLayer(this.tuna_2, 0);
+            this.tweenLayer(this.cow_1, 0);
+            this.tweenLayer(this.pig_1, 0);
+            this.tweenLayer(this.shrimp_1, 0);
+
         }
 
-        if (getEconomy() < 50) {
-            this.tweenLayer(this.factory_1, 0);
+        if (getResources() >= 50 && getResources() < 75) {
+            this.tweenLayer(this.tree_3, 1);
+            this.tweenLayer(this.tree_2, 1);
+            this.tweenLayer(this.fish_2, 1);
+            this.tweenLayer(this.salmon_2, 1);
+            this.tweenLayer(this.tuna_2, 1);
+            this.tweenLayer(this.whale_2, 1);
+            this.tweenLayer(this.cow_1, 1);
+            this.tweenLayer(this.pig_1, 1);
+            this.tweenLayer(this.shrimp_1, 1);
+
+            //remove layers
+            this.tweenLayer(this.tree_1, 0);
+            this.tweenLayer(this.salmon_1, 0);
+            this.tweenLayer(this.tuna_1, 0);
+            this.tweenLayer(this.fish_1, 0);
+            this.tweenLayer(this.whale_1, 0);
+
+        }
+
+        if (getResources() >= 75) {
+            this.tweenLayer(this.tree_1, 1);
+            this.tweenLayer(this.fish_1, 1);
+            this.tweenLayer(this.salmon_1, 1);
+            this.tweenLayer(this.tuna_1, 1);
+            this.tweenLayer(this.whale_1, 1);
+        }
+
+        if (getEconomy() < 25) {
             this.tweenLayer(this.factory_2, 0);
-            console.log("economy < 50 = remove factories");
+
+            // remove layers
+            this.tweenLayer(this.wind_turbines_3, 0);
         }
 
-        if (getSociety() > 50) {
-            this.tweenLayer(this.house_2, 1);
-            console.log("society > 50 = add houses");
+        if (getEconomy() >= 25 && getEconomy() < 50) {
+            this.tweenLayer(this.factory_2, 1);
+
+            // remove layers
+            this.tweenLayer(this.factory_1, 0);
+            this.tweenLayer(this.wind_turbines_2, 0);
+            this.tweenLayer(this.wind_turbines_3, 0);
+
         }
 
-        if (getSociety() < 50) {
-            this.tweenLayer(this.house_1, 0);
+        if (getEconomy() >= 50 && getEconomy() < 75) {
+            this.tweenLayer(this.factory_1, 1);
+            this.tweenLayer(this.wind_turbines_3, 1);
+
+            // remove layers
+            this.tweenLayer(this.wind_turbines_1, 0);
+            this.tweenLayer(this.wind_turbines_2, 0);
+        }
+
+        if (getEconomy() >= 75) {
+            this.tweenLayer(this.wind_turbines_1, 1);
+            this.tweenLayer(this.wind_turbines_2, 1);
+        }
+
+        if (getSociety() < 33){
+            // remove layers
             this.tweenLayer(this.house_2, 0);
+            this.tweenLayer(this.bush_2, 0);
+        }
+
+        if (getSociety() >= 33 && getSociety() < 66) {
+            // remove layers
+            this.tweenLayer(this.house_1, 0);
+            this.tweenLayer(this.bush_1, 0);
+        }
+
+        if (getSociety() > 66) {
+            this.tweenLayer(this.house_1, 1);
+            this.tweenLayer(this.bush_1, 1);
+            this.tweenLayer(this.house_2, 1);
+            this.tweenLayer(this.bush_2, 1);
             console.log("society < 50 = remove all houses");
         }
+
     }
 
 
     tweenLayer(layer, alphaValue) {
-         this.tweens.add({
-                targets: layer,
-                alpha: alphaValue,
-                ease: 'Linear',
-                duration: 600
-         });
+        this.tweens.add({
+            targets: layer,
+            alpha: alphaValue,
+            ease: 'Linear',
+            duration: 600
+        });
     }
 
 
@@ -306,8 +399,8 @@ class PlayGame extends Phaser.Scene {
         this.card.alpha = 0.7;
 
         let textStyle = {
-            color:'#000000',
-            align:"center",
+            color: '#000000',
+            align: "center",
             boundsAlignH: "center",
             fontFamily: 'Abel',
             fontSize: '6em',
@@ -336,8 +429,10 @@ class PlayGame extends Phaser.Scene {
     }
 
 
-    flipCard(){
-        this.card.on('pointerup', function(){
+    flipCard() {
+        this.card.on('pointerup', function () {
+            this.bgm = this.sound.play('sfxCard');
+
             this.tweens.add({
                 targets: this.card,
                 scaleY: 2.9,
@@ -354,8 +449,8 @@ class PlayGame extends Phaser.Scene {
                 duration: 200,
             });
 
-            this.time.delayedCall(200, function(){
-                if (this.question.visible){
+            this.time.delayedCall(200, function () {
+                if (this.question.visible) {
                     this.info.visible = true;
                     this.question.visible = false;
                 } else {
@@ -392,10 +487,11 @@ class PlayGame extends Phaser.Scene {
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
                 // right
+                this.bgm = this.sound.play('sfxCard');
                 this.hasSwiped = true;
                 $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
                 this.time.delayedCall(500, function () {
-                    if (this.container.x === this.canvasGame.width + 1500){
+                    if (this.container.x === this.canvasGame.width + 1500) {
                         this.container.destroy();
                         this.updateEarth();
                     }
@@ -409,10 +505,11 @@ class PlayGame extends Phaser.Scene {
 
             if (swipeNormal.x < -0.8 && this.hasSwiped === false) {
                 // left
+                this.bgm = this.sound.play('sfxCard');
                 this.hasSwiped = true;
                 $(this.container).animate({x: -1500, speed: 500});
                 this.time.delayedCall(500, function () {
-                    if (this.container.x === -1500){
+                    if (this.container.x === -1500) {
                         this.container.destroy();
                         this.updateEarth();
                     }
@@ -426,12 +523,14 @@ class PlayGame extends Phaser.Scene {
 
             if (swipeNormal.y > 0.8) {
                 // down
+                this.bgm = this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
             }
 
             if (swipeNormal.y < -0.8) {
                 // up
+                this.bgm = this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
             }
@@ -488,5 +587,17 @@ class PlayGame extends Phaser.Scene {
 
     triggerEndGame() {
         this.endGame = true;
+    }
+
+
+    flashStatus(target) {
+        target.alpha = 1;
+        this.tweens.add({
+            targets: target,
+            alpha: 0.6,
+            ease: 'Sine.easeInOut',
+            duration: 400,
+            yoyo: true
+        });
     }
 }

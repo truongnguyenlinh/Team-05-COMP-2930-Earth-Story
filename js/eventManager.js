@@ -20,10 +20,18 @@ function getRandomEvent() {
 
 
 function applyConsequence(consequence) {
-    modifyEnvironment(consequence["environment"]);
-    modifySociety(consequence["society"]);
-    modifyEconomy(consequence["economy"]);
-    modifyResources(consequence["resources"]);
+    if (consequence["environment"]) {
+        modifyEnvironment(consequence["environment"]);
+    }
+    if (consequence["society"]) {
+        modifySociety(consequence["society"]);
+    }
+    if (consequence["economy"]) {
+        modifyEconomy(consequence["economy"]);
+    }
+    if (consequence["resources"]) {
+        modifyResources(consequence["resources"]);
+    }
 }
 
 

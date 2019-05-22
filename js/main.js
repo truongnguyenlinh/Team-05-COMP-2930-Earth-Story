@@ -431,7 +431,7 @@ class PlayGame extends Phaser.Scene {
 
     flipCard() {
         this.card.on('pointerup', function () {
-            this.bgm = this.sound.play('sfxCard');
+            this.sound.play('sfxCard');
 
             this.tweens.add({
                 targets: this.card,
@@ -487,7 +487,7 @@ class PlayGame extends Phaser.Scene {
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
                 // right
-                this.bgm = this.sound.play('sfxCard');
+                this.sound.play('sfxCard');
                 this.hasSwiped = true;
                 $(this.container).animate({x: this.canvasGame.width + 1500, speed: 500});
                 this.time.delayedCall(500, function () {
@@ -505,7 +505,7 @@ class PlayGame extends Phaser.Scene {
 
             if (swipeNormal.x < -0.8 && this.hasSwiped === false) {
                 // left
-                this.bgm = this.sound.play('sfxCard');
+                this.sound.play('sfxCard');
                 this.hasSwiped = true;
                 $(this.container).animate({x: -1500, speed: 500});
                 this.time.delayedCall(500, function () {
@@ -523,14 +523,14 @@ class PlayGame extends Phaser.Scene {
 
             if (swipeNormal.y > 0.8) {
                 // down
-                this.bgm = this.sound.play('sfxCard');
+                this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
             }
 
             if (swipeNormal.y < -0.8) {
                 // up
-                this.bgm = this.sound.play('sfxCard');
+                this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
             }

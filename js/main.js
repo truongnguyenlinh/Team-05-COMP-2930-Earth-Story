@@ -18,16 +18,8 @@ class PlayGame extends Phaser.Scene {
         loader.displayWidth = this.canvasGame.width * 0.8;
         loader.displayHeight = loader.displayWidth;
 
-        this.loadingText = this.make.text({
-            x: this.canvasGame.width / 2,
-            y: this.canvasGame.height - 200,
-            text: 'Loading...',
-            style: {
-                fill: '#ffffff',
-                fontSize: "3em",
-                fontFamily: 'Abel'
-            }
-        });
+        this.loadingText = this.add.image(this.canvasGame.width / 2, this.canvasGame.height - 200, "loading");
+        this.loadingText.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.loadingText.setOrigin(0.5);
 
         this.load.on("progress", function () {
@@ -502,13 +494,11 @@ class PlayGame extends Phaser.Scene {
                     if (this.container.x === this.canvasGame.width + 1500) {
                         this.container.destroy();
                         this.updateEarth();
-
                     }
                 }, this.container, this);
 
                 this.time.delayedCall(1200, function () {
                     this.hasSwiped = false;
-
                     this.swipeX("yes");
                 }, this.swipeX, this);
             }
@@ -522,8 +512,6 @@ class PlayGame extends Phaser.Scene {
                     if (this.container.x === -1500) {
                         this.container.destroy();
                         this.updateEarth();
-
-
                     }
                 }, this.container, this);
 

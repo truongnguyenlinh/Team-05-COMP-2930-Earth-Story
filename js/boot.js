@@ -16,6 +16,8 @@ class BootScene extends Phaser.Scene {
 
         this.load.image("unmute", "./assets/images/unmute.png");
         this.load.image("mute", "./assets/images/mute.png");
+
+        this.load.audio('bgm','./assets/bgm.mp3');
         this.load.audio('bgm','./assets/sounds/bgm.mp3');
         this.load.audio('sfxButton','./assets/sounds/button.wav');
         this.load.audio('sfxCard','./assets/sounds/card.mp3');
@@ -25,6 +27,7 @@ class BootScene extends Phaser.Scene {
         this.load.image("start", "./assets/images/button/Start_button.png");
         this.load.image("tutorial", "./assets/images/button/tutorial_button.png");
         this.load.image("logout", "./assets/images/button/logout_button.png");
+        this.load.image("loading", "./assets/images/loading.png");
     }
 
 
@@ -49,7 +52,7 @@ class BootScene extends Phaser.Scene {
         this.logo.on("pointerdown", this.spinEarth, this);
 
         this.startGame = false;
-
+      
         this.start = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.65,
             "start");
         this.start.setInteractive().setOrigin(0.5, 0).setScale(0.25);
@@ -72,7 +75,6 @@ class BootScene extends Phaser.Scene {
             this.sound.play('sfxButton');
             this.scene.start("AboutScene");
         }, this);
-
 
 
         this.mute = this.add.image(this.canvasGame.width/ 1.05 , this.canvasGame.height / 55, "mute").setScale(0.75);
@@ -177,7 +179,6 @@ class BootScene extends Phaser.Scene {
 
 
     update() {
-
         // Display log out button if user logged in
         if (firebase.auth().currentUser) {
             this.logout = this.add.image(this.canvasGame.width / 2, this.canvasGame.height * 0.86,

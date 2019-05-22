@@ -50,11 +50,6 @@ class AboutScene extends Phaser.Scene{
         this.container[0] = 0;
         this.canMove = true;
         this.itemGroup = this.add.group();
-        for (let l = 1; l < colors.length; l++){
-            this.container[l] = -1;
-        }
-
-
 
         this.scrollingMap = this.add.tileSprite(0, 0, colors.length * this.canvasGame.width, this.canvasGame.height, "transp");
         this.scrollingMap.setInteractive();

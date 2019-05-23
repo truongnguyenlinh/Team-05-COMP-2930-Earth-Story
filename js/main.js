@@ -1,8 +1,10 @@
 /* Initialize Main scene */
 
+let gameInstance = null;
 class PlayGame extends Phaser.Scene {
     constructor() {
         super("PlayGame");
+        gameInstance = this;
     }
 
 

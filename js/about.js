@@ -148,8 +148,7 @@ class AboutScene extends Phaser.Scene{
             text: "Aka the dep, is the fashion icon and game expert. " +
                 "Her years of experience in the gaming industry is a great asset to the project. " +
                 "She spends a lot of time doing her research even when she is not working with the team.\n\n" +
-                "Her favourite lunch is veggie roll. Filling and healthy and does not pollute the environment " +
-                "as much as eating meat. ",
+                "As a vegetarian, she hopes to tell people the consequences of eating animal.",
             style: bioStyle
         });
         linhBio.setOrigin(0.5, 0);

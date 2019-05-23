@@ -5,10 +5,8 @@ let rawEndings;
 
 // Async call to endings.json - data is written onto the global variable rawEnding
 function initializeEndings() {
-    console.log("LOADING ENDINGS");
     $.getJSON("./assets/json/endings.json", function(json) {
         rawEndings = json;
-        console.log("LOADED ENDINGS SUCCESSFULLY!");
     });
 }
 

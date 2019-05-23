@@ -28,6 +28,7 @@ class EndScene extends Phaser.Scene {
             "leaderboard");
         this.leaderboard.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.leaderboard.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             if (this.showLeader === false) {
                 this.hideScore();
 
@@ -45,6 +46,7 @@ class EndScene extends Phaser.Scene {
             "menu");
         this.restart.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.restart.on("pointerdown", function(){
+            this.sound.play('sfxButton');
             restartStat();
             this.scene.start("BootScene");
         }, this);

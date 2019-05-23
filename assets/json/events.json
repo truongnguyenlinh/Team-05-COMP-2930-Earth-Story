@@ -1,6 +1,6 @@
 [
   {
-    "question": "It is a hot summer day at the beach. Do you want to grab an ice-cream?",
+    "question": "It's a hot summer day at the beach. Do you want to grab an ice cream?",
     "info": "Dairy production accounts for almost 4% of global carbon emissions.",
     "yes": {
       "economy": 5,
@@ -16,7 +16,7 @@
     }
   },
   {
-    "question": "You got yourself iced black coffee. Do you want to use a straw?",
+    "question": "You got yourself an iced black coffee. Do you want to use a straw?",
     "info": "Plastic straws make up 4% of plastic trash by piece.",
     "yes": {
       "economy": 5,
@@ -81,7 +81,7 @@
   },
   {
     "question": "You are at the supermarket and the cashier is asking if you need plastic bags for your groceries. Do you have your own shopping bag?",
-    "info": "Plastic bags often end up in our landfills or in our oceans, causing an ecosystem disruption.",
+    "info": "Plastic bags often end up in our landfills or in our oceans, disrupting the ecosystem.",
     "yes": {
       "economy": -5,
       "society": 5,
@@ -96,7 +96,7 @@
     }
   },
   {
-    "question": "It was an exhausting day after work, and you want to wind down. Do you want to take a bath?",
+    "question": "You had an exhausting day, and you want to wind down. Do you want to take a bath?",
     "info": "Water conservation helps prevent water pollution in nearby lakes, rivers, and local watersheds.",
     "yes": {
       "economy": 0,
@@ -113,7 +113,7 @@
   },
   {
     "question": "You can get to work by walking, biking or transiting. Do you want to drive instead?",
-    "info": "Motor vehicles collectively cause 75 percent of carbon monoxide pollution in the U.S.",
+    "info": "Motor vehicles collectively cause 75% of carbon monoxide pollution in the U.S.",
     "yes": {
       "economy": 5,
       "society": 0,
@@ -129,7 +129,7 @@
   },
   {
     "question": "You have a perfectly functional phone. Do you want to buy the newest iPhone on 20% discount?",
-    "info": "More than 20 million tons of e-waste are produced every year. Electronics are packed with toxic chemicals.",
+    "info": "More than 20 million tons of e-waste are produced every year and electronics are packed with toxic chemicals.",
     "yes": {
       "economy": 5,
       "society": 5,
@@ -144,7 +144,7 @@
     }
   },
   {
-    "question": "Would you lose 5 minutes of your regular shower time?",
+    "question": "Can you reduce 5 minutes from your regular shower time?",
     "info": "You use around 10 litres of water per minute while showering.",
     "yes": {
       "economy": 0,
@@ -176,8 +176,8 @@
     }
   },
   {
-    "question": "Population is growing, and people need more residential area. Do you want to build houses?",
-    "info": "Building construction is responsible for a huge percentage of the greenhouse gas emissions that affects climate change.",
+    "question": "Population is growing, and people need more residential area. Do you want to build more houses?",
+    "info": "Construction is responsible for a huge percentage of the greenhouse gas emissions that affects climate change.",
     "yes": {
       "economy": 10,
       "society": 20,
@@ -208,7 +208,7 @@
     }
   },
   {
-    "question": "You recently moved into a new house and found that your room wall colour is white. Do you want to paint your room with your favourite colour?",
+    "question": "Do you want to paint your room with your favourite colour?",
     "info": "Wall painting supplies emit toxic chemicals in the air and cause air pollution.",
     "yes": {
       "economy": 5,
@@ -224,8 +224,8 @@
     }
   },
   {
-    "question": "You won a million dollars from the lottery! Do you want a new car and house?",
-    "info": "The production of cars leaves a giant footprint on the environment, due to materials like steel, paints and rubber that must be created beforehand.",
+    "question": "You have a perfectly functional car. Do you want to buy a new car?",
+    "info": "The production of cars leaves a giant footprint on the environment, due to materials like steel, paints and rubber that must be produced.",
     "yes": {
       "economy": 5,
       "society": 5,
@@ -240,7 +240,7 @@
     }
   },
   {
-    "question": "A recent deposit of coal was discovered in a remote area. Would you approve mining?",
+    "question": "A deposit of coal was discovered. Would you approve mining?",
     "info": "During the process of mining, dust and chemicals are released in the air causing massive air pollution.",
     "yes": {
       "economy": 15,
@@ -273,7 +273,7 @@
   },
   {
     "question": "Would you build a nuclear power plant?",
-    "info": "Nuclear power plants do not emit greenhouse gases while generating electricity; however, radioactive waste is difficult to safely dispose.",
+    "info": "Nuclear power plants do not emit greenhouse gases while generating electricity. However, radioactive waste is difficult to safely dispose.",
     "yes": {
       "economy": 5,
       "society": -15,
@@ -336,7 +336,7 @@
     }
   },
   {
-    "question": "As Director of the City Planning Department, would you build bike lanes?",
+    "question": "As Director of the City Planning Department, would you build more bike lanes?",
     "info": "To help reduce congestion in the city, space-efficient means of moving people such as cycling and public transport should be prioritised over low-occupancy car transport.",
     "yes": {
       "economy": 5,
@@ -369,7 +369,7 @@
   },
   {
     "question": "Would you invest in lab grown meat?",
-    "info": "Clean meat produces 78 - 96% less greenhouse gas emissions, uses 99% less land and 82 - 92% less water.",
+    "info": "Lab grown meat produces up to 96% less greenhouse gas emissions, uses 99% less land and 92% less water.",
     "yes": {
       "economy": 5,
       "society": 10,
@@ -384,7 +384,7 @@
     }
   },
   {
-    "question": "You are thinking to buy your favourite novel. Do you want to get a paper book? If not, you can get E-Book.",
+    "question": "You are thinking about buying your favourite novel. Do you want to get a paperback? If not, you can get E-Book.",
     "info": "Pulp and paper is the third largest industrial polluter to air, water, and land in both Canada and the United States. It releases well over 100 million kg of toxic pollution each year.",
     "yes": {
       "economy": 0,
@@ -405,13 +405,13 @@
     "yes": {
       "economy": 0,
       "society": 5,
-      "environment": 10,
+      "environment": 5,
       "resources": 0
     },
     "no": {
       "economy": 0,
       "society": -5,
-      "environment": -10,
+      "environment": -5,
       "resources": 0
     }
   },
@@ -432,8 +432,8 @@
     }
   },
   {
-    "question": "Do you want to hang your laundry instead of using dryer?",
-    "info": "Laundry dried on the line produces 0.7 kg of carbon vs 2.4 kg of carbon when tumble-dried in a vented dryer.",
+    "question": "Do you want to hang your laundry instead of using the dryer?",
+    "info": "Laundry dried on the line produces 0.7kg of carbon vs 2.4kg of carbon when tumble-dried in a vented dryer.",
     "yes": {
       "economy": -5,
       "society": -5,
@@ -464,17 +464,17 @@
     }
   },
   {
-    "question": "It’s Christmas! Do you want to buy an artificial Christmas tree instead of an Evergreen tree?",
-    "info": "Fake Christmas trees can be reused for couple of years but cannot be recycled.",
+    "question": "Do you often have grocery going bad in your fridge?",
+    "info": "One third of all food produced globally goes in the garbage.",
     "yes": {
-      "economy": 5,
-      "society": 5,
+      "economy": 0,
+      "society": -5,
       "environment": -5,
-      "resources": -5
+      "resources": 0
     },
     "no": {
-      "economy": -5,
-      "society": -5,
+      "economy": 0,
+      "society": 5,
       "environment": 5,
       "resources": 0
     }

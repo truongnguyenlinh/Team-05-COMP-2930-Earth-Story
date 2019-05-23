@@ -3,8 +3,8 @@ let height = "100%";
 let width = "100%";
 let center = Phaser.Scale.CENTER_BOTH;
 if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
-    height = "99%";
-    width = "99%";
+    height = "99.9%";
+    width = "100%";
 
 }
 

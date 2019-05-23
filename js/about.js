@@ -1,10 +1,11 @@
 let colors = ["0xffffff", "0xffffff", "0xffffff", "0xffffff", "0xffffff"];
 
-
+let aboutInstance;
 
 class AboutScene extends Phaser.Scene{
     constructor(){
         super("AboutScene");
+        aboutInstance = this;
     }
 
 
@@ -25,7 +26,7 @@ class AboutScene extends Phaser.Scene{
                 fill: "#FFFFFF",
                 fontSize: "5em",
                 fontFamily: 'Abel',
-        }});
+            }});
         this.loadingText.setOrigin(0.5);
 
         this.load.on("progress", function() {
@@ -46,6 +47,7 @@ class AboutScene extends Phaser.Scene{
 
 
     create(){
+        this.moving = false;
         this.container = [];
         this.container[0] = 0;
         this.canMove = true;
@@ -215,11 +217,17 @@ class AboutScene extends Phaser.Scene{
         }
 
         this.input.on("dragstart", function(pointer, gameObject){
+            if (this.moving) {
+                return;
+            }
             gameObject.startPosition = gameObject.x;
             gameObject.currentPosition = gameObject.x;
         });
 
         this.input.on("drag", function(pointer, gameObject, dragX){
+            if (this.moving) {
+                return;
+            }
             if (dragX <= 10 && dragX >= -gameObject.width + game.config.width - 10){
                 gameObject.x = dragX;
                 let delta = gameObject.x - gameObject.currentPosition;
@@ -231,6 +239,9 @@ class AboutScene extends Phaser.Scene{
         }, this);
 
         this.input.on("dragend", function(pointer, gameObject){
+            if (this.moving) {
+                return;
+            }
             this.canMove = false;
             let delta = gameObject.startPosition - gameObject.x;
             if (delta === 0){
@@ -257,12 +268,14 @@ class AboutScene extends Phaser.Scene{
         }, this);
     }
 
-    
+
     // handles how swipe looks, from moving one page to another
     changePage(page){
         if (!this.canMove) {
             this.sound.play('sfxTick');
+            this.moving = true;
         }
+
         // changes the size of the squares at the bottom of the page
         this.currentPage += page;
         for (let k = 0; k < colors.length; k++){
@@ -292,5 +305,9 @@ class AboutScene extends Phaser.Scene{
                 this.canMove = true;
             }
         });
+
+        this.time.delayedCall(400, function () {
+            this.moving = false;
+        }, this.canvasGame, this);
     }
 }

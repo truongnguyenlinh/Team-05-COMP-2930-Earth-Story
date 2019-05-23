@@ -17,15 +17,8 @@ class PlayTutorial extends Phaser.Scene {
         loader.displayWidth = this.canvasGame.width * 0.8;
         loader.displayHeight = loader.displayWidth;
 
-        this.loadingText = this.make.text({
-            x: this.canvasGame.width / 2,
-            y: this.canvasGame.height - 200,
-            text: 'Loading...',
-            style: {
-                fill: '#ffffff',
-                fontSize: "3em"
-            }
-        });
+        this.loadingText = this.add.image(this.canvasGame.width / 2, this.canvasGame.height - 200, "loading");
+        this.loadingText.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.loadingText.setOrigin(0.5);
 
         this.load.on("progress", function() {
@@ -187,7 +180,6 @@ class PlayTutorial extends Phaser.Scene {
                 yoyo: false,
                 duration: 200,
             });
-
 
             this.time.delayedCall(200, function(card){
                 if (this.question.visible){

@@ -4,6 +4,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Preload assets
     preload() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -15,8 +16,8 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Create assets on canvas
     create() {
-
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
@@ -28,6 +29,7 @@ class EndScene extends Phaser.Scene {
             "leaderboard");
         this.leaderboard.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.leaderboard.on("pointerdown", function() {
+            this.sound.play('sfxButton');
             if (this.showLeader === false) {
                 this.hideScore();
 
@@ -45,17 +47,18 @@ class EndScene extends Phaser.Scene {
             "menu");
         this.restart.setInteractive().setOrigin(0.5, 0).setScale(0.25);
         this.restart.on("pointerdown", function(){
+            this.sound.play('sfxButton');
             restartStat();
             this.scene.start("BootScene");
         }, this);
     }
 
+    // Read data from firebase
     readDatabase() {
         const playerRoot = firebase.database().ref().child("players/");
         var count = 0;
         playerRoot.once('value').then((snapshot) => {
             let list = snapshot.val();
-            console.log(list);
             for (this.x in list) {
                 count += 1;
             }
@@ -65,6 +68,7 @@ class EndScene extends Phaser.Scene {
 
     }
 
+    // Read data of each leader from firebase
     getLeader(){
         const playerRoot = firebase.database().ref().child("players/");
         var leaders = [];
@@ -77,14 +81,13 @@ class EndScene extends Phaser.Scene {
                 leaders.push(playersInfo)
             }
             leaders.sort(function(a, b) { return b[1] - a[1]});
-            console.log(leaders);
             this.displayLeaders(leaders);
         })
     }
 
 
+    // Display leader board on canvas
     displayLeaders(leaders){
-        // console.log(leaders[0]);
         var style = { fill: "#000000", fontSize: "5em", fontFamily: 'Abel', tabs: 300,};
         this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
         this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
@@ -114,17 +117,19 @@ class EndScene extends Phaser.Scene {
                 this.leaderName.text += leaders[i][0]+"\n";
                 this.leaderScore.text += leaders[i][1]+"\n";
             }
-
         }
         this.container.add([this.leaderRank, this.leaderName, this.leaderScore]);
     }
 
 
+    // Hide the existing info on the card
     hideScore(){
         this.question.visible = false;
         this.info.visible = false;
     }
 
+
+    // Display result of the game
     gameOver(){
         if (getAverage() > 300){
             this.createCard(getGoodEnding(), getEndingBack());
@@ -136,6 +141,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Add earth layers on the canvas
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
@@ -233,51 +239,44 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update the earth appearance based on earth statistics
     updateEarth() {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
             this.earth_dirty_land_3.visible = true;
-            console.log("environment < 50 = bad earth");
         }
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
             this.earth_dirty_land_3.visible = false;
-            console.log("environment > 50 = good earth");
         }
         if (getResources() > 50) {
             this.tree_3.visible = true;
             this.tree_4.visible = true;
-            console.log("resource > 50 = add trees");
         }
         if (getResources() < 50) {
             this.tree_3.visible = false;
             this.tree_4.visible = false;
-            console.log("resource < 50 = remove trees");
         }
         if (getEconomy() > 50) {
             this.factory_2.visible = true;
-            console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
             this.factory_2.visible = false;
-            console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
             this.house_2.visible = true;
-            console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
             this.house_2.visible = false;
-            console.log("society < 50 = remove houses");
         }
     }
 
 
+    // Add card to canvas
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
         this.card.alpha = 0.7;
-        // this.currentEvent = getRandomEvent();
 
         let textStyle = {
             color:'#000000',
@@ -302,9 +301,8 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Allow card flipping by detecting user's pointer
     flipCard(){
-
-
         this.card.on('pointerup', function(){
             if (this.showLeader){
                 this.leaderRankTitle.visible = false;
@@ -359,6 +357,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Add earth statistics icons to canvas
     setupIcons() {
         // Under icons
         this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -380,6 +379,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update earth statistics icons
     updateIcons() {
         this.cropIcon(this.envMask, getEnvironment());
         this.cropIcon(this.socMask, getSociety());
@@ -388,6 +388,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update mask on earth statistics icons based on earth statistics
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }

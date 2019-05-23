@@ -24,22 +24,21 @@ The score will reflect the choices you make.
 # Instructions
 Please install the following programs in the listed order:
 ### 1. Phaser 3 using npm  
-#### Installation
+  #### Installation:
     npm install phaser@3.17.0
 
 or from directly from https://phaser.io/download/stable
 
 ### 2. NodeJS
-#### Installation  
+  #### Installation:  
 
 https://nodejs.org/en/download/
 
 ### 3. Live Server (if running in command line)  
-    
-   #### Installation:  
+  #### Installation:  
     npm install http-server -g  
    or directly from https://www.npmjs.com/package/http-server  
-   #### Usage:  
+  #### Usage:  
     http-server [path] [options]
 
  

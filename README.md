@@ -30,7 +30,7 @@ Please install the following programs in the listed order:
 or from directly from https://phaser.io/download/stable
 
 ### 2. NodeJS
-####Installation  
+#### Installation  
 
 https://nodejs.org/en/download/
 

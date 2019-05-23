@@ -1,3 +1,4 @@
+// Update firebase with user's information from authentication and user's score
 function addPlayer(numOfPlayers){
     let playerId = numOfPlayers + 1;
     console.log("playerid:" + playerId);

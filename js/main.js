@@ -431,7 +431,11 @@ class PlayGame extends Phaser.Scene {
 
     flipCard() {
         this.card.on('pointerup', function () {
+            if (this.flipping || this.hidden) {
+                return;
+            }
             this.sound.play('sfxCard');
+            this.flipping = true;
 
             this.tweens.add({
                 targets: this.card,
@@ -474,6 +478,10 @@ class PlayGame extends Phaser.Scene {
                     duration: 200,
                 });
             }, this.card, this);
+
+            this.time.delayedCall(350, function () {
+                this.flipping = false;
+            }, this.card, this);
         }, this);
     }
 
@@ -485,6 +493,9 @@ class PlayGame extends Phaser.Scene {
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
+            if (this.flipping) {
+                return;
+            }
             if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
                 // right
                 this.sound.play('sfxCard');
@@ -521,18 +532,20 @@ class PlayGame extends Phaser.Scene {
                 }, this.swipeX, this);
             }
 
-            if (swipeNormal.y > 0.8) {
+            if (swipeNormal.y > 0.8 && !this.hidden) {
                 // down
                 this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height * 1.16});
                 this.hasSwiped = true;
+                this.hidden = true;
             }
 
-            if (swipeNormal.y < -0.8) {
+            if (swipeNormal.y < -0.8 && this.hidden) {
                 // up
                 this.sound.play('sfxCard');
                 $(this.container).animate({y: this.canvasGame.height / 2});
                 this.hasSwiped = false;
+                this.hidden = false;
             }
         }
     }

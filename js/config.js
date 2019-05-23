@@ -14,12 +14,10 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            // gravity: { y: 0 },
             debug: false
         }},
     scale: {
         mode: Phaser.Scale.RESIZE,
-        // autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     canvasStyle: 'height:' + height + ';' + 'width:' + width + ';' + '; position: 0;',
 

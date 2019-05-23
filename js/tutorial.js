@@ -1,9 +1,12 @@
+/* Initialize Boot scene */
+
 class PlayTutorial extends Phaser.Scene {
     constructor() {
         super("PlayTutorial");
     }
 
 
+    // Preload assets
     preload() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -64,6 +67,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Create assets on canvas
     create() {
         this.loadingText.destroy();
 
@@ -86,6 +90,7 @@ class PlayTutorial extends Phaser.Scene {
         this.flipCard();
         this.input.on("pointerup", this.endSwipe, this);
 
+        // Tutorial status
         this.tutorialFlip = true;
         this.tutorialDown = false;
         this.tutorialUp = false;
@@ -99,11 +104,13 @@ class PlayTutorial extends Phaser.Scene {
         this.tutorialResources = false;
         this.tutorialProgress = false;
 
+        // Tutorial status message
         this.tutorial_text = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 1.2, "tutorial_text_click");
         this.tutorial_text.setScale(2);
     }
 
 
+    // Add earth layers on the canvas
     createEarth() {
         this.earth_water = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "earth_water");
         this.earth_land = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "earth_land");
@@ -112,6 +119,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Add card to canvas
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
@@ -139,6 +147,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Move progress bar after user answers a question
     moveStar() {
         this.star.x  += this.progressBar.width / 30;
         if (Math.ceil(this.star.x) > this.progressBar.width / 2) {
@@ -147,8 +156,10 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Allow card flipping by detecting user's pointer
     flipCard(){
         this.card.on('pointerup', function(pointer, localX, localY, event){
+            // Lock flip cards unless tutorial is at flip card status
             if (!this.tutorialFlip) {
                 return;
             } else {
@@ -207,53 +218,55 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Detect how user swipes the card
     endSwipe(e) {
         let swipeTime = e.upTime - e.downTime;
         let swipe = new Phaser.Geom.Point(e.upX - e.downX, e.upY - e.downY);
         let swipeMagnitude = Phaser.Geom.Point.GetMagnitude(swipe);
         let swipeNormal = new Phaser.Geom.Point(swipe.x / swipeMagnitude, swipe.y / swipeMagnitude);
 
-        if (this.tutorialStatus) {
+        // Demonstrate four status
+        if (this.tutorialStatus) {  // Point to four statuses
             this.sound.play('sfxTick');
             this.env.setDepth(1);
             this.envMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_environment');
             this.tutorialStatus = false;
             this.tutorialEnvironment = true;
-        } else if (this.tutorialEnvironment) {
+        } else if (this.tutorialEnvironment) {  // Demonstrate environment status
             this.sound.play('sfxTick');
             this.soc.setDepth(1);
             this.socMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_society');
             this.tutorialEnvironment = false;
             this.tutorialSociety = true;
-        } else if (this.tutorialSociety) {
+        } else if (this.tutorialSociety) {  // Demonstrate society status
             this.sound.play('sfxTick');
             this.eco.setDepth(1);
             this.ecoMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_economy');
             this.tutorialSociety = false;
             this.tutorialEconomy = true;
-        } else if (this.tutorialEconomy) {
+        } else if (this.tutorialEconomy) {  // Demonstrate economy status
             this.sound.play('sfxTick');
             this.res.setDepth(1);
             this.resMask.setDepth(1);
             this.tutorial_text.setTexture('tutorial_resources');
             this.tutorialEconomy = false;
             this.tutorialResources = true;
-        } else if (this.tutorialResources) {
+        } else if (this.tutorialResources) {  // Demonstrate resources status
             this.sound.play('sfxTick');
             this.progressBar.setDepth(1);
             this.tutorial_text.setTexture('tutorial_progress');
             this.tutorial_text.y = this.canvasGame.height / 1.2;
             this.tutorialResources = false;
             this.tutorialProgress = true;
-        } else if (this.tutorialProgress) {
+        } else if (this.tutorialProgress) {  // Demonstrate progress bar
             this.sound.play('sfxTick');
             this.tutorial_text.setTexture('tutorial_text_exit');
             this.tutorialProgress = false;
             this.tutorialEnd = true;
-        } else if (this.tutorialEnd) {
+        } else if (this.tutorialEnd) {  // End the tutorial
             this.sound.play('sfxTick');
             this.scene.start("BootScene");
         }
@@ -261,6 +274,8 @@ class PlayTutorial extends Phaser.Scene {
         if (swipeMagnitude > 20 && swipeTime < 1000 && (Math.abs(swipeNormal.y) > 0.8 || Math.abs(swipeNormal.x) > 0.8)) {
             if (swipeNormal.x > 0.8 && this.hasSwiped === false) {
                 // right
+
+                // Lock swipe right unless tutorial is at swipe right status
                 if (!this.tutorialRight) {
                     return;
                 }  else {
@@ -285,6 +300,8 @@ class PlayTutorial extends Phaser.Scene {
             }
             if (swipeNormal.x < -0.8 && this.hasSwiped === false) {
                 // left
+
+                // Lock swipe left unless tutorial is at swipe left status
                 if (!this.tutorialLeft) {
                     return;
                 }  else {
@@ -309,6 +326,8 @@ class PlayTutorial extends Phaser.Scene {
             }
             if (swipeNormal.y > 0.8) {
                 // down
+
+                // Lock swipe down unless tutorial is at swipe down status
                 if (!this.tutorialDown) {
                     return;
                 } else {
@@ -323,6 +342,8 @@ class PlayTutorial extends Phaser.Scene {
             }
             if (swipeNormal.y < -0.8) {
                 // up
+
+                // Lock swipe up unless tutorial is at swipe up status
                 if (!this.tutorialUp) {
                     return;
                 }  else {
@@ -338,13 +359,14 @@ class PlayTutorial extends Phaser.Scene {
         }
     }
 
-
+    // Move progress bar and create new card after user has swiped
     swipeX(direction) {
         this.moveStar();
         this.createCard("Choices we make, shape our world!", "Welcome to the tutorial!");
     }
 
 
+    // Add earth statistics icons to canvas
     setupIcons() {
         // Under icons
         this.env = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -366,6 +388,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Update earth statistics icons
     updateIcons() {
         this.cropIcon(this.envMask, 50);
         this.cropIcon(this.socMask, 50);
@@ -374,6 +397,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Update mask on earth statistics icons based on earth statistics
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }

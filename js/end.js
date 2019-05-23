@@ -369,7 +369,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
-    // Add icon of earth statistics to canvas
+    // Add earth statistics icons to canvas
     setupIcons() {
         // Under icons
         this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -391,7 +391,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
-    // Update icons of earth statistics based on earth statistics
+    // Update earth statistics icons
     updateIcons() {
         this.cropIcon(this.envMask, getEnvironment());
         this.cropIcon(this.socMask, getSociety());
@@ -400,7 +400,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
-    // Update mask of icon of earth statistics based on earth statistics
+    // Update mask on earth statistics icons based on earth statistics
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }

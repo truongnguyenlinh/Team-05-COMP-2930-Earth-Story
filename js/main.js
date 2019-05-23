@@ -621,7 +621,7 @@ class PlayGame extends Phaser.Scene {
         target.alpha = 1;
         this.tweens.add({
             targets: target,
-            alpha: 0.6,
+            alpha: 0.4,
             ease: 'Sine.easeInOut',
             duration: 400,
             yoyo: true

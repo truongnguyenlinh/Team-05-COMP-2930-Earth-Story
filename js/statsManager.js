@@ -18,6 +18,7 @@ function modifyEnvironment(amount) {
     if (!stats.environment) {                                                   // End game if 0
         gameInstance.triggerEndGame();
     }
+    gameInstance.flashStatus(gameInstance.envMask);
 }
 
 
@@ -34,6 +35,7 @@ function modifyResources(amount) {
     if (!stats.resources) {
         gameInstance.triggerEndGame();
     }
+    gameInstance.flashStatus(gameInstance.resMask);
 }
 
 
@@ -50,6 +52,7 @@ function modifyEconomy(amount) {
     if (!stats.economy) {
         gameInstance.triggerEndGame();
     }
+    gameInstance.flashStatus(gameInstance.ecoMask);
 }
 
 
@@ -66,6 +69,7 @@ function modifySociety(amount) {
     if (!stats.society) {
         gameInstance.triggerEndGame();
     }
+    gameInstance.flashStatus(gameInstance.socMask);
 }
 
 

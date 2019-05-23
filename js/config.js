@@ -1,3 +1,13 @@
+let userAgent = window.navigator.userAgent;
+let height = "100%";
+let width = "100%";
+let center = Phaser.Scale.CENTER_BOTH;
+if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+    height = "95%";
+
+}
+
+
 let config = {
     type: Phaser.AUTO,
     backgroundColor:"#FFFFFF",
@@ -9,8 +19,9 @@ let config = {
         }},
     scale: {
         mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
+        // autoCenter: Phaser.Scale.CENTER_BOTH,
     },
+    canvasStyle: 'height:' + height + ';' + 'width:' + width + ';' + '; position: 0;',
 
     mute: false,
     loop: true,

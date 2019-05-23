@@ -5,10 +5,8 @@ let rawEvents;
 
 // Async call to events.json - data is written onto the global variable rawEvent
 function initializeEvents() {
-    console.log("LOADING EVENTS");
     $.getJSON("./assets/json/events.json", function(json) {
         rawEvents = json;
-        console.log("LOADED EVENTS SUCCESSFULLY!");
     });
 }
 

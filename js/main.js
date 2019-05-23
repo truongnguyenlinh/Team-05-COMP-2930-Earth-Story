@@ -497,7 +497,7 @@ class PlayGame extends Phaser.Scene {
                     }
                 }, this.container, this);
 
-                this.time.delayedCall(1200, function () {
+                this.time.delayedCall(1410, function () {
                     this.hasSwiped = false;
                     this.swipeX("yes");
                 }, this.swipeX, this);
@@ -515,7 +515,7 @@ class PlayGame extends Phaser.Scene {
                     }
                 }, this.container, this);
 
-                this.time.delayedCall(1200, function () {
+                this.time.delayedCall(1410, function () {
                     this.hasSwiped = false;
                     this.swipeX("no");
                 }, this.swipeX, this);

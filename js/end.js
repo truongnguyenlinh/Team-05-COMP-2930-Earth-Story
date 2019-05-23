@@ -59,7 +59,6 @@ class EndScene extends Phaser.Scene {
         var count = 0;
         playerRoot.once('value').then((snapshot) => {
             let list = snapshot.val();
-            console.log(list);
             for (this.x in list) {
                 count += 1;
             }
@@ -82,7 +81,6 @@ class EndScene extends Phaser.Scene {
                 leaders.push(playersInfo)
             }
             leaders.sort(function(a, b) { return b[1] - a[1]});
-            console.log(leaders);
             this.displayLeaders(leaders);
         })
     }
@@ -90,7 +88,6 @@ class EndScene extends Phaser.Scene {
 
     // Display leader board on canvas
     displayLeaders(leaders){
-        // console.log(leaders[0]);
         var style = { fill: "#000000", fontSize: "5em", fontFamily: 'Abel', tabs: 300,};
         this.leaderRankTitle = this.add.text(-this.container.width*2.75 / 4 , -this.container.height / 1.5, "Rank", style).setOrigin(0.5, 0);
         this.leaderNameTitle = this.add.text(0 , -this.container.height / 1.5, "Name", style).setOrigin(0.5, 0);
@@ -247,38 +244,30 @@ class EndScene extends Phaser.Scene {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
             this.earth_dirty_land_3.visible = true;
-            console.log("environment < 50 = bad earth");
         }
         if (getEnvironment() > 50) {
             this.earth_dirty_water_3.visible = false;
             this.earth_dirty_land_3.visible = false;
-            console.log("environment > 50 = good earth");
         }
         if (getResources() > 50) {
             this.tree_3.visible = true;
             this.tree_4.visible = true;
-            console.log("resource > 50 = add trees");
         }
         if (getResources() < 50) {
             this.tree_3.visible = false;
             this.tree_4.visible = false;
-            console.log("resource < 50 = remove trees");
         }
         if (getEconomy() > 50) {
             this.factory_2.visible = true;
-            console.log("economy > 50 = add factories");
         }
         if (getEconomy() < 50) {
             this.factory_2.visible = false;
-            console.log("economy < 50 = remove factories");
         }
         if (getSociety() > 50) {
             this.house_2.visible = true;
-            console.log("society > 50 = add houses");
         }
         if (getSociety() < 50) {
             this.house_2.visible = false;
-            console.log("society < 50 = remove houses");
         }
     }
 
@@ -288,7 +277,6 @@ class EndScene extends Phaser.Scene {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
         this.card.alpha = 0.7;
-        // this.currentEvent = getRandomEvent();
 
         let textStyle = {
             color:'#000000',

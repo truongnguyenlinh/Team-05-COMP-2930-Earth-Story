@@ -26,7 +26,6 @@ class PlayTutorial extends Phaser.Scene {
         });
 
         this.load.on("complete", function(value) {
-            console.log(value);
             loader.destroy();
         });
 

@@ -31,7 +31,6 @@ class PlayGame extends Phaser.Scene {
 
         // Destory the loading screen when assets are finished preloading
         this.load.on("complete", function (value) {
-            console.log(value);
             loader.destroy();
         });
 
@@ -368,9 +367,7 @@ class PlayGame extends Phaser.Scene {
             this.tweenLayer(this.bush_1, 1);
             this.tweenLayer(this.house_2, 1);
             this.tweenLayer(this.bush_2, 1);
-            console.log("society < 50 = remove all houses");
         }
-
     }
 
 

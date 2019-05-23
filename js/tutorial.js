@@ -4,6 +4,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Preload assets
     preload() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -64,6 +65,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Create assets on canvas
     create() {
         this.loadingText.destroy();
 
@@ -104,6 +106,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Add earth layers on the canvas
     createEarth() {
         this.earth_water = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "earth_water");
         this.earth_land = this.add.image(this.canvasGame.width / 2, this.canvasGame.height / 2, "earth_land");
@@ -112,6 +115,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Add card to canvas
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
@@ -139,6 +143,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Move progress bar after user answers a question
     moveStar() {
         this.star.x  += this.progressBar.width / 30;
         if (Math.ceil(this.star.x) > this.progressBar.width / 2) {
@@ -147,6 +152,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Allow card flipping by detecting user's pointer
     flipCard(){
         this.card.on('pointerup', function(pointer, localX, localY, event){
             if (!this.tutorialFlip) {
@@ -207,6 +213,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Detect how user swipes the card
     endSwipe(e) {
         let swipeTime = e.upTime - e.downTime;
         let swipe = new Phaser.Geom.Point(e.upX - e.downX, e.upY - e.downY);
@@ -338,13 +345,14 @@ class PlayTutorial extends Phaser.Scene {
         }
     }
 
-
+    // Move progress bar and create new card after user has swiped
     swipeX(direction) {
         this.moveStar();
         this.createCard("Choices we make, shape our world!", "Welcome to the tutorial!");
     }
 
 
+    // Add earth statistics icons to canvas
     setupIcons() {
         // Under icons
         this.env = this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -366,6 +374,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Update earth statistics icons
     updateIcons() {
         this.cropIcon(this.envMask, 50);
         this.cropIcon(this.socMask, 50);
@@ -374,6 +383,7 @@ class PlayTutorial extends Phaser.Scene {
     }
 
 
+    // Update mask on earth statistics icons based on earth statistics
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }

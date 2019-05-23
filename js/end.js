@@ -4,6 +4,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Preload assets
     preload() {
         this.canvas1 = document.getElementsByTagName("canvas");
         this.canvas1[0].setAttribute("id", "canvasGame");
@@ -15,8 +16,8 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Create assets on canvas
     create() {
-
         this.setupIcons();
         this.createEarth();
         this.updateEarth();
@@ -52,6 +53,7 @@ class EndScene extends Phaser.Scene {
         }, this);
     }
 
+    // Read data from firebase
     readDatabase() {
         const playerRoot = firebase.database().ref().child("players/");
         var count = 0;
@@ -67,6 +69,7 @@ class EndScene extends Phaser.Scene {
 
     }
 
+    // Read data of each leader from firebase
     getLeader(){
         const playerRoot = firebase.database().ref().child("players/");
         var leaders = [];
@@ -85,6 +88,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Display leader board on canvas
     displayLeaders(leaders){
         // console.log(leaders[0]);
         var style = { fill: "#000000", fontSize: "5em", fontFamily: 'Abel', tabs: 300,};
@@ -116,17 +120,19 @@ class EndScene extends Phaser.Scene {
                 this.leaderName.text += leaders[i][0]+"\n";
                 this.leaderScore.text += leaders[i][1]+"\n";
             }
-
         }
         this.container.add([this.leaderRank, this.leaderName, this.leaderScore]);
     }
 
 
+    // Hide the existing info on the card
     hideScore(){
         this.question.visible = false;
         this.info.visible = false;
     }
 
+
+    // Display result of the game
     gameOver(){
         if (getAverage() > 300){
             this.createCard(getGoodEnding(), getEndingBack());
@@ -138,6 +144,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Add earth layers on the canvas
     createEarth() {
         this.earthContainer = this.add.container(this.canvasGame.width / 2, this.canvasGame.height / 2);
         this.earth_water = this.add.image(0, 0, "earth_water");
@@ -235,6 +242,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update the earth appearance based on earth statistics
     updateEarth() {
         if (getEnvironment() < 50) {
             this.earth_dirty_water_3.visible = true;
@@ -275,6 +283,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Add card to canvas
     createCard(textFront, textBack) {
         this.card = this.add.image(0, 0, "card").setInteractive();
         this.card.setScale(2.75);
@@ -304,9 +313,8 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Allow card flipping by detecting user's pointer
     flipCard(){
-
-
         this.card.on('pointerup', function(){
             if (this.showLeader){
                 this.leaderRankTitle.visible = false;
@@ -361,6 +369,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Add icon of earth statistics to canvas
     setupIcons() {
         // Under icons
         this.add.image(this.canvasGame.width / 2 - 330, 150, 'env').setScale(0.4);
@@ -382,6 +391,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update icons of earth statistics based on earth statistics
     updateIcons() {
         this.cropIcon(this.envMask, getEnvironment());
         this.cropIcon(this.socMask, getSociety());
@@ -390,6 +400,7 @@ class EndScene extends Phaser.Scene {
     }
 
 
+    // Update mask of icon of earth statistics based on earth statistics
     cropIcon(icon, percent) {
         icon.setCrop(0, icon.height - icon.height * (percent / 100), 1000, 1000);
     }

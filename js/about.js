@@ -109,8 +109,8 @@ class AboutScene extends Phaser.Scene{
             text: "Aka the magnae, loves bubble tea and graphic design. Her favourite things are " +
                 "getting the OG bubble tea and photoshopping people's faces on random places, " +
                 "which brings a lot of fun, fun, fun to the group. \n\n" +
-                "Bubble tea is also her biggest struggle because of the waste generated would upset Gordon and his kin. " +
-                "That's why she is trying to promote no straws for life through the app.",
+                "Bubble tea is also her biggest struggle because of the waste generated. " +
+                "That's why she's trying to promote no straws for life through the app.",
             style: bioStyle
 
         });

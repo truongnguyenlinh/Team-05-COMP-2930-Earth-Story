@@ -95,11 +95,8 @@ class AboutScene extends Phaser.Scene{
         let gordonBio = this.make.text({
             x: this.canvasGame.width / 2,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the leng jai, loves everything about cats. His favourite shirt is the " +
-                "'if I fit, I sit' cat shirt. He believes that the world would " +
-                "be a better place if it is ruled by cats.\n\n" +
-                "His love of cats continuously pushes him to do more about creating a better earth for cats. " +
-                "As an environmental scientist, he is also really upset about fish chewing on plastic in the sea.",
+            text: "A recent BCIT Computer Systems Technology graduate; focused on the Earth image layering" + 
+            "and progress bar slider.",
             style: bioStyle
         });
         gordonBio.setOrigin(0.5, 0);
@@ -114,11 +111,8 @@ class AboutScene extends Phaser.Scene{
         let suheeBio = this.make.text({
             x: this.canvasGame.width * 1.063 + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the magnae, loves bubble tea and graphic design. Her favourite things are " +
-                "getting the OG bubble tea and photoshopping people's faces on random places, " +
-                "which brings a lot of fun, fun, fun to the group. \n\n" +
-                "Bubble tea is also her biggest struggle because of the waste generated. " +
-                "That's why she's trying to promote no straws for life through the app.",
+            text: "A BFA in Visual Design; focused on creating all assets " + 
+            "and producing Earth Story's pitch video.",
             style: bioStyle
 
         });
@@ -134,11 +128,9 @@ class AboutScene extends Phaser.Scene{
         let mayBio = this.make.text({
             x: (2 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the leng mui, makes sure the daily pose picture is up to standard" +
-                " and that everyone has lunch so they all have strength to work " +
-                "cause coding takes LOTS OF ENERGY.\n\n" +
-                "Working at a restaurant makes her realize how wasteful human beings are. Come on people, " +
-                "food belongs in our stomach, not the trash can!",
+            text: "A current Junior Software Engineer at Netskirt Systems and " + 
+            "BCIT Computer Systems Technology student; " + 
+            "focused on the card swipe feature. ",
             style: bioStyle
         });
         mayBio.setOrigin(0.5, 0);
@@ -153,10 +145,8 @@ class AboutScene extends Phaser.Scene{
         let linhBio = this.make.text({
             x: (3 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the dep, is the fashion icon and game expert. " +
-                "Her years of experience in the gaming industry is a great asset to the project. " +
-                "She spends a lot of time doing her research even when she is not working with the team.\n\n" +
-                "As a vegetarian, she hopes to tell people the consequences of eating animal.",
+            text: "A current BCIT Computer Systems Technology student; " + 
+            "focused on navigating through the Phaser 3 framework and documentation. ",
             style: bioStyle
         });
         linhBio.setOrigin(0.5, 0);
@@ -171,11 +161,8 @@ class AboutScene extends Phaser.Scene{
         let joshBio = this.make.text({
             x: (4 * this.canvasGame.width * 1.063) + leftMargin,
             y: this.canvasGame.height * 0.45,
-            text: "Aka the oppa, wants to be jacked. " +
-                "He has a poster of his head attached to Arnold's body in his room. " +
-                "That's his life goal. He would love to share the poster. Just ask!\n\n" +
-                "His friends at the gym always take hot baths after working out. " +
-                "Josh feels like it's time to let his friends know taking hot bath is a No No to the planet!",
+            text: "A current BCIT Computer Systems Technology student; " +
+            "focused on the status icon functionality, which determines the user's progress.",
             style: bioStyle
         });
         joshBio.setOrigin(0.5, 0);

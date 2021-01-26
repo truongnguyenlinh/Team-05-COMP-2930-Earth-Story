@@ -1,4 +1,4 @@
-[![Logo](assets/images/logo.png)](https://joshuashin.github.io/Team-05-COMP-2930-Earth-Story)
+[![Logo](assets/images/logo.png)](https://playearthstory.netlify.app/)
 
 # Team Members
 Joshua Shin  
